@@ -164,11 +164,13 @@ function App(){
  useEffect(()=>{const onHash=()=>{setRoute(window.location.hash);if(window.location.hash.startsWith('#/products'))window.scrollTo(0,0);else if(window.location.hash==='#/contacts')requestAnimationFrame(()=>document.getElementById('contacts')?.scrollIntoView())};window.addEventListener('hashchange',onHash);return()=>window.removeEventListener('hashchange',onHash)},[]);
  useEffect(()=>{
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduced)return;
-  const observer=new IntersectionObserver(entries=>{
+  const observer=(!reduced&&'IntersectionObserver' in window)?new IntersectionObserver(entries=>{
    for(const entry of entries)if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}
-  },{threshold:.12,rootMargin:'0px 0px -25px 0px'});
-  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  },{threshold:.12,rootMargin:'0px 0px -25px 0px'}):null;
+  document.querySelectorAll('.site:not(.product-page) .reveal').forEach(el=>{
+   if(observer)observer.observe(el);
+   else el.classList.add('is-visible');
+  });
   let raf=0;
   const update=()=>{
    raf=0;
@@ -177,8 +179,8 @@ function App(){
   };
   const onScroll=()=>{if(!raf)raf=requestAnimationFrame(update)};
   addEventListener('scroll',onScroll,{passive:true});update();
-  return()=>{observer.disconnect();removeEventListener('scroll',onScroll);cancelAnimationFrame(raf)};
- },[]);
+  return()=>{observer?.disconnect();removeEventListener('scroll',onScroll);cancelAnimationFrame(raf)};
+ },[route]);
  useEffect(()=>{if(route==='#/contacts')requestAnimationFrame(()=>document.getElementById('contacts')?.scrollIntoView())},[route]);
  const copyAddress=async()=>{
   const address='Алтайский край, Завьяловский район, село Светлое';
