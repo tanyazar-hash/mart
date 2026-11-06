@@ -2,7 +2,7 @@ import sharp from 'sharp';
 import {readdir,stat,mkdir,rm} from 'node:fs/promises';
 import path from 'node:path';
 const folder=path.resolve('public/images');
-const files=(await readdir(folder)).filter(name=>/\.(png|jpe?g)$/i.test(name));
+const files=process.argv.includes('--clean-dist')?[]:(await readdir(folder)).filter(name=>/\.(png|jpe?g)$/i.test(name));
 await Promise.all(files.map(async name=>{
  const source=path.join(folder,name),base=name.replace(/\.(png|jpe?g)$/i,'');
  const info=await sharp(source).metadata();
