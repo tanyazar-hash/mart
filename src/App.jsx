@@ -1,6 +1,10 @@
 import React,{useEffect,useRef,useState} from 'react';
 import{ArrowUpRight,ArrowRight,MapPin,Menu,X}from'lucide-react';
-const crops=[{name:'Пшеница',desc:'Выращивание зерновых культур',image:'https://images.unsplash.com/photo-1501436513145-30f24e19fcc4?auto=format&fit=crop&w=1000&q=85'},{name:'Подсолнечник',desc:'Масличная культура',image:'https://images.unsplash.com/photo-1597848212624-e6e3b7a12d78?auto=format&fit=crop&w=1000&q=85'},{name:'Лён',desc:'Масличная культура',image:'https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1000&q=85'}];
+const crops=[
+{name:'Пшеница',desc:'Выращивание зерновых культур',image:import.meta.env.BASE_URL+'images/wheat-card.png'},
+{name:'Подсолнечник',desc:'Масличная культура',image:import.meta.env.BASE_URL+'images/sunflower-card.png'},
+{name:'Лён',desc:'Масличная культура',image:import.meta.env.BASE_URL+'images/flax-card.png'}
+];
 function Seeds(){
  const host=useRef(null);
  useEffect(()=>{
