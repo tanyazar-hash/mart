@@ -41,16 +41,16 @@ function Seeds(){
    function tick(){
     if(dead)return;
     const t=clock.getElapsedTime(),max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
-    const progress=Math.min(1.65,Math.max(0,(scroll-14)/Math.min(1100,Math.max(500,max*.65))));
+    const progress=Math.min(1.35,Math.max(0,(scroll-14)/Math.min(2300,Math.max(1300,max*.82))));
     const h=2*Math.tan(T.MathUtils.degToRad(camera.fov/2))*camera.position.z,w=h*camera.aspect;
     for(const p of items){
-     const f=Math.max(0,(progress-p.delay)*1.18),e=.18*f+.82*f*f;
+     const f=Math.max(0,(progress-p.delay)*.94),e=.28*f+.72*f*f;
      const x=w*(1.07+p.start*.17)-w*(.20+p.drift*.52)*Math.min(1,f*1.65)+Math.sin(t*.75+p.turn*7)*w*.012*f;
-     const y=h*(.52+p.start*.24)-h*(1.45+p.depth*.58)*e;
+     const y=h*(.52+p.start*.24)-h*(1.18+p.depth*.43)*e;
      p.mesh.position.set(x-w*.5,y-h*.5,p.depth*1.3-.6);
      p.mesh.rotation.set(p.turn*4+f*7,t*.15+p.turn*5+f*8,p.start*3+f*5);
      p.mesh.scale.setScalar((.17+p.size*.19)*(innerWidth<720?.85:1));
-     p.mesh.visible=scroll>14&&f>0&&y>-.55*h;
+     p.mesh.visible=scroll>14&&f>0&&y>-.65*h;
     }
     if(scroll>12&&innerWidth>=480)renderer.render(scene,camera);else renderer.clear();
     raf=requestAnimationFrame(tick);
@@ -77,7 +77,7 @@ function App(){const[menu,setMenu]=useState(false);return <div className="site">
 <clipPath id="wave-c" clipPathUnits="objectBoundingBox"><path d="M0,.12 C.20,.015 .40,.07 .57,.04 C.74,-.015 .87,-.02 1,.055 L1,1 L0,1 Z"/></clipPath>
 <clipPath id="wave-d" clipPathUnits="objectBoundingBox"><path d="M0,.08 C.17,.16 .37,.02 .55,.06 C.72,.11 .87,.20 1,.095 L1,1 L0,1 Z"/></clipPath>
 </defs></svg><Seeds/><header className="top"><a href="#home" className="brand"><span className="mark">✳</span><span>КФХ Март</span></a><span className="location"><MapPin size={13}/> Алтайский край, Завьяловский район, с. Светлое</span><nav className={menu?'active':''}><a href="#home" onClick={()=>setMenu(false)}>Главная</a><a href="#about" onClick={()=>setMenu(false)}>О хозяйстве</a><a href="#products" onClick={()=>setMenu(false)}>Продукция</a><a href="#contacts" onClick={()=>setMenu(false)}>Контакты</a></nav><a className="contact-link" href="#contacts">Связаться <ArrowUpRight size={15}/></a><button className="hamburger" onClick={()=>setMenu(!menu)} aria-label="Открыть меню">{menu?<X/>:<Menu/>}</button></header>
-<main><section id="home" className="hero"><div className="hero-shade"/><div className="hero-copy"><div className="eyebrow">РАСТЕНИЕВОДЧЕСКОЕ ХОЗЯЙСТВО</div><h1>МАРТ</h1><p className="tagline">Земля. Труд. Урожай.</p><p className="lead">Выращиваем пшеницу, подсолнечник<br/> и лён в Алтайском крае.</p><div className="actions"><a className="btn primary" href="#products">Наша продукция <ArrowRight size={16}/></a><a className="btn ghost" href="#about">О хозяйстве</a></div></div><div className="scroll-hint">ЛИСТАЙТЕ ВНИЗ <span>↓</span></div></section>
+<main><section id="home" className="hero"><div className="hero-shade"/><div className="hero-copy"><div className="eyebrow">РАСТЕНИЕВОДЧЕСКОЕ ХОЗЯЙСТВО</div><h1>МАРТ</h1><p className="tagline">Земля. Труд. Урожай.</p><p className="lead">Выращиваем пшеницу, подсолнечник<br/> и лён в Алтайском крае.</p><div className="actions"><a className="btn primary" href="#products">Наша продукция <ArrowRight size={16}/></a><a className="btn ghost" href="#about">О хозяйстве</a></div><div className="scroll-hint">ЛИСТАЙТЕ ВНИЗ <span>↓</span></div></div></section>
 <section id="about" className="about"><WaveGlow shape="a"/><div className="about-photo"/><div className="about-copy"><div className="eyebrow dark">О НАС</div><h2>О хозяйстве</h2><p>КФХ Март — сельскохозяйственное хозяйство в Завьяловском районе Алтайского края, село Светлое.</p><p>Выращиваем зерновые и масличные культуры, работаем на земле и развиваем производство.</p><a className="text-link" href="#products">Что мы выращиваем <ArrowRight size={18}/></a></div></section>
 <section id="products" className="products"><WaveGlow shape="b"/><div className="section-head"><div><div className="eyebrow dark">НАША ДЕЯТЕЛЬНОСТЬ</div><h2>Что мы выращиваем</h2></div><p>Три культуры — одно отношение<br/>к качеству и работе.</p></div><div className="crop-grid">{crops.map(c=><article className="crop" key={c.name} style={{backgroundImage:`linear-gradient(0deg,rgba(34,29,19,.79),transparent 65%),url("${c.image}")`}}><div className="crop-info"><h3>{c.name}</h3><p>{c.desc}</p></div><span className="crop-arrow"><ArrowUpRight size={22}/></span></article>)}</div></section>
 <section className="land"><WaveGlow shape="c"/><div className="land-inner"><div className="eyebrow">НАШ ПОДХОД</div><h2>Забота о земле.<br/>Уважение к труду.</h2><p>Каждый сезон начинается с большой работы. Мы ценим опыт, надёжную технику и результат, который приносит земля.</p></div></section>
