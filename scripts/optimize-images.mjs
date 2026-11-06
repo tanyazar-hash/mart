@@ -12,7 +12,7 @@ for(let offset=0;offset<files.length;offset+=2){
  const source=path.join(folder,name),base=name.replace(/\.(png|jpe?g)$/i,'');
  const desktop=path.join(folder,base+'.webp'),mobile=path.join(folder,base+'-mobile.webp');
  if(!process.argv.includes('--force')&&!refresh){
-  try{await Promise.all([access(desktop),access(mobile)]);const [original,large,small]=await Promise.all([stat(source),stat(desktop),stat(mobile)]);if(large.mtimeMs>=original.mtimeMs&&small.mtimeMs>=original.mtimeMs&&large.size>0&&small.size>0{console.log('Cached',name);return}}catch{}
+  try{await Promise.all([access(desktop),access(mobile)]);const [original,large,small]=await Promise.all([stat(source),stat(desktop),stat(mobile)]);if(large.mtimeMs>=original.mtimeMs&&small.mtimeMs>=original.mtimeMs&&large.size>0&&small.size>0){console.log('Cached',name);return}}catch{}
  }
  const info=await sharp(source).metadata();
  const width=Math.min(info.width||1600,1600);
