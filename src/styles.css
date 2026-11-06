@@ -438,3 +438,12 @@
 .product-story.flax .has-photo{background-position:50% center}
 .product-art-detail.has-photo{min-height:530px}
 @media(max-width:700px){.product-art.has-photo{min-height:380px}.product-art-detail.has-photo{min-height:340px}}
+
+/* Keep the product detail back link clickable above the absolute header.
+   Playwright caught the mobile nav intercepting this link. */
+.product-detail-inner{position:relative;z-index:16}
+.product-back{position:relative;z-index:17}
+@media(max-width:700px){
+ .product-detail-hero{padding-top:165px}
+ .product-back{margin-bottom:45px}
+}
