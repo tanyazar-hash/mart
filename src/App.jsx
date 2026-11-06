@@ -30,7 +30,7 @@ function Seeds(){
    const count=innerWidth<720?13:30;
    items=Array.from({length:count},(_,i)=>{
     const r=n=>{const v=Math.sin((i+1)*n*19.417)*43758.5453;return v-Math.floor(v)};
-    const mesh=model?model.clone(true):new T.Mesh(geometry,material);scene.add(mesh);
+    const mesh=new T.Group();mesh.add(model?model.clone(true):new T.Mesh(geometry,material));scene.add(mesh);
     return {mesh,delay:r(1.13)*.22,drift:r(2.57),start:r(3.91),depth:r(4.27),turn:r(5.73),size:r(6.49)};
    });
    const clock=new T.Clock();
