@@ -109,7 +109,7 @@ test('products is a separate responsive page with graphic-only first two section
   for (const [slug, file] of [['wheat','psen1.png'],['sunflower','sem2.png'],['flax','len2.png']]) {
     const art=page.locator('#culture-'+slug+' .product-art');
     await expect(art).toHaveCSS('background-image',new RegExp(file.replace('.','\\.')));
-    const response=await page.request.get('/'+file);
+    const response=await page.request.get('/images/'+file);
     expect(response.ok()).toBeTruthy();
   }
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
