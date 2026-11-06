@@ -47,8 +47,11 @@ function ProductPage({slug}){
  useLayoutEffect(()=>{window.scrollTo({top:0,left:0,behavior:'instant'});const id=requestAnimationFrame(()=>window.scrollTo(0,0));return()=>cancelAnimationFrame(id)},[slug]);
  const current=productStories.find(item=>item.slug===slug);
  useEffect(()=>{
-  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:.08});
-  document.querySelectorAll('.product-page .reveal').forEach(el=>observer.observe(el));
+  const elements=document.querySelectorAll('.product-page .reveal');
+  const reduced=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  if(reduced||!('IntersectionObserver' in window)){elements.forEach(el=>el.classList.add('is-visible'));return}
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:.06,rootMargin:'0px 0px 80px 0px'});
+  elements.forEach(el=>observer.observe(el));
   return()=>observer.disconnect();
  },[slug]);
  if(current)return <div className="site product-page product-detail-page">{productHeader}<main><section className={'product-detail-hero '+current.tone}><div className="product-detail-inner reveal"><a className="product-back" href="#/products">← К продукции</a><div className="eyebrow">{current.type} / {current.number}</div><h1>{current.name}</h1><p>{current.desc}</p><a className="btn ghost" href="#/contacts">Обсудить сотрудничество <ArrowUpRight size={16}/></a></div><div className="product-art product-art-detail has-photo" style={{backgroundImage:`linear-gradient(0deg,rgba(29,29,28,.25),rgba(29,29,28,.05)),url("${current.photo}")`}} role="img" aria-label={"Фотография культуры: "+current.name}/><svg className="reference-wave reference-wave-hero" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path className="detail-wave-fill" d="M0 38 C170 92 290 66 420 56 C560 40 640 104 795 59 C895 27 942 15 1000 18 L1000 100 L0 100 Z"/><path className="reference-wave-halo" d="M0 38 C170 92 290 66 420 56 C560 40 640 104 795 59 C895 27 942 15 1000 18"/><path className="reference-wave-line" d="M0 38 C170 92 290 66 420 56 C560 40 640 104 795 59 C895 27 942 15 1000 18"/></svg></section><section className="product-detail-bottom"><div className="eyebrow dark">КФХ «МАРТ»</div><h2>Земля. Труд. Урожай.</h2><p>Алтайский край, Завьяловский район, село Светлое.</p><a href="#/products">← Вернуться к продукции</a></section></main><div className="bottom"><span>© {new Date().getFullYear()} КФХ Март</span><span>Сайт в разработке</span></div></div>;
