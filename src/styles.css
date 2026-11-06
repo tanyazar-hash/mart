@@ -706,3 +706,14 @@
  .wave-glow,.reference-wave-halo{animation:none!important}
  .product-detail-page .product-detail-hero .btn,.product-reference .product-story-link,.product-detail-page .contact-link{transition:none!important}
 }
+
+/* Identical mobile hamburger dropdown on products and crop details. */
+@media(max-width:900px){
+ .site.product-page .product-reference-header .hamburger{display:flex;align-items:center;justify-content:center;margin-left:auto;min-width:44px;min-height:44px;cursor:pointer;z-index:82}
+ .site.product-page .product-reference-header .product-nav{display:none;position:absolute;top:70px;left:0;right:0;width:100%;margin:0;padding:22px 6% 28px;background:rgba(32,31,30,.97);flex-direction:column;align-items:flex-start;gap:24px;z-index:80;box-shadow:none}
+ .site.product-page .product-reference-header .product-nav.active{display:flex}
+ .site.product-page .product-reference-header .product-nav a{display:block;font-size:14px;color:#f2eeeb}
+ .site.product-page .product-reference-header .product-nav a.active:after{bottom:-7px}
+ .site.product-page .product-reference-header .contact-link{margin-left:auto}
+}
+@media(max-width:500px){.site.product-page .product-reference-header .contact-link{display:none}}
