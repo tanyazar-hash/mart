@@ -19,79 +19,6 @@ function LazyBackground({src,className='',children,style={},gradient='',...props
  },[]);
  return <div ref={ref} className={className} style={{...style,...(visible?{backgroundImage:gradient?gradient+',url("'+imageSrc+'")':'url("'+imageSrc+'")'}:{})}} {...props}>{children}</div>;
 }
-function Seeds(){
- const host=useRef(null);
- useEffect(()=>{
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches||matchMedia('(max-width: 700px)').matches||navigator.connection?.saveData)return;
-  if(!('WebGLRenderingContext' in window))return;
-  let dead=false,raf=0,renderer,scene,camera,items=[],scroll=window.scrollY,geometry,material;
-  const resize=()=>{if(!renderer)return;renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()};
-  const onScroll=()=>scroll=window.scrollY;
-  async function init(){
-   const T=await import('three');if(dead)return;
-   scene=new T.Scene();camera=new T.PerspectiveCamera(36,innerWidth/innerHeight,.1,100);camera.position.z=14;
-   renderer=new T.WebGLRenderer({alpha:true,antialias:true,powerPreference:'low-power'});
-   renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));renderer.setClearColor(0,0);renderer.outputColorSpace=T.SRGBColorSpace;
-   host.current.appendChild(renderer.domElement);resize();
-   scene.add(new T.HemisphereLight(0xffc887,0x584335,1.65));
-   const sun=new T.DirectionalLight(0xffd9a2,1.55);sun.position.set(-4,7,8);scene.add(sun);
-   let model=null;
-   try{
-    const {GLTFLoader}=await import('three/addons/loaders/GLTFLoader.js');
-    const gltf=await new GLTFLoader().loadAsync(import.meta.env.BASE_URL+'models/wheat-seed.glb');
-    if(dead)return;
-    const raw=gltf.scene,bounds=new T.Box3().setFromObject(raw),size=new T.Vector3(),center=new T.Vector3();
-    bounds.getSize(size);bounds.getCenter(center);
-    raw.position.sub(center);
-    model=new T.Group();model.scale.setScalar(1/(Math.max(size.x,size.y,size.z)||1));model.add(raw);
-   }catch(err){console.warn('Wheat GLB could not load',err)}
-   if(!model){geometry=new T.SphereGeometry(1,12,9);geometry.scale(.22,.46,.19);material=new T.MeshStandardMaterial({color:0xc7a16a,roughness:.82})}
-   const count=innerWidth<720?16:32;
-   items=Array.from({length:count},(_,i)=>{
-    const r=n=>{const v=Math.sin((i+1)*n*19.417)*43758.5453;return v-Math.floor(v)};
-    const mesh=new T.Group();mesh.add(model?model.clone(true):new T.Mesh(geometry,material));scene.add(mesh);
-    return {mesh,delay:r(1.13)*.19,drift:r(2.57),start:r(3.91),depth:r(4.27),turn:r(5.73),size:r(6.49),spread:r(7.83),speed:r(8.21)};
-   });
-   const clock=new T.Clock();
-   function tick(){
-    if(dead)return;
-    const t=clock.getElapsedTime(),max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
-    // A small handful enters from the upper-right. Staggered, gravity-led
-    // trajectories keep the grains together at first, then disperse slowly.
-    const travel=Math.max(1800,Math.min(3400,max*.94));
-    const progress=Math.max(0,Math.min(1.42,(scroll-18)/travel));
-    // Fade the falling grains out before the contacts/footer area.
-    // Never leave floating grains over the final screen.
-    const contactsTop=document.getElementById('contacts')?.offsetTop??max;
-    const fadeStart=contactsTop-innerHeight*1.5;
-    const fadeEnd=contactsTop-innerHeight*.72;
-    const fade=Math.max(0,Math.min(1,(fadeEnd-scroll)/Math.max(1,fadeEnd-fadeStart)));
-    renderer.domElement.style.opacity=String(fade);
-    const h=2*Math.tan(T.MathUtils.degToRad(camera.fov/2))*camera.position.z,w=h*camera.aspect;
-    for(const p of items){
-     const f=Math.max(0,progress-p.delay);
-     const gravity=.53*f*f;
-     const scatter=(p.drift-.5)*(.045+.38*Math.min(f,1.2));
-     const x=w*(1.035+p.start*.035-.20*f+scatter)+Math.sin(t*.65+p.turn*6)*w*.006*Math.min(f,1);
-     const y=h*(.74+p.spread*.075-.12*f-gravity*(1.18+p.speed*.42));
-     p.mesh.position.set(x-w*.5,y-h*.5,(p.depth-.5)*2.5);
-     p.mesh.rotation.set(p.turn*5+f*(3+p.speed*4),t*.12+p.turn*5+f*4,p.start*3+f*2);
-     p.mesh.scale.setScalar((.16+p.size*.14)*(innerWidth<720?.78:1));
-     p.mesh.visible=scroll>18&&f>0&&y>-.22*h&&x>-.15*w;
-    }
-    if(document.visibilityState==='visible'&&scroll>18&&fade>0)renderer.render(scene,camera);else renderer.clear();
-    raf=requestAnimationFrame(tick);
-   }
-   tick();
-  }
-  let idleId=0,delayId=0;
-  const schedule3D=()=>{if(dead)return;removeEventListener('scroll',schedule3D);if('requestIdleCallback' in window)idleId=window.requestIdleCallback(()=>{if(!dead)init()},{timeout:4000});else delayId=setTimeout(()=>{if(!dead)init()},1800)};
-  addEventListener('scroll',schedule3D,{passive:true,once:true});
-  addEventListener('resize',resize);addEventListener('scroll',onScroll,{passive:true});
-  return()=>{dead=true;if(idleId)window.cancelIdleCallback?.(idleId);clearTimeout(delayId);removeEventListener('scroll',schedule3D);cancelAnimationFrame(raf);removeEventListener('resize',resize);removeEventListener('scroll',onScroll);renderer?.dispose();renderer?.domElement.remove();geometry?.dispose();material?.dispose()};
- },[]);
- return <div ref={host} className="seeds" aria-hidden="true"/>;
-}
 function WaveGlow({shape}) {
  const curves={
   a:"M0 105 C160 -40 330 200 550 170 C730 150 850 35 1000 55",
@@ -197,7 +124,7 @@ function App(){
 <clipPath id="wave-b-mobile" clipPathUnits="objectBoundingBox"><path d="M0,.040 C.17,.058 .36,.066 .54,.047 C.73,.028 .86,.032 1,.051 L1,1 L0,1 Z"/></clipPath>
 <clipPath id="wave-c-mobile" clipPathUnits="objectBoundingBox"><path d="M0,.049 C.17,.029 .33,.031 .51,.048 C.69,.065 .83,.058 1,.039 L1,1 L0,1 Z"/></clipPath>
 <clipPath id="wave-d-mobile" clipPathUnits="objectBoundingBox"><path d="M0,.041 C.19,.061 .33,.058 .51,.043 C.69,.028 .85,.039 1,.054 L1,1 L0,1 Z"/></clipPath>
-</defs></svg><Seeds/><header className="top"><a href="#home" className="brand"><span className="mark">✳</span><span>КФХ Март</span></a><span className="location"><MapPin size={13}/> Алтайский край, Завьяловский район, с. Светлое</span><nav className={menu?'active':''}><a href="#home" onClick={()=>setMenu(false)}>Главная</a><a href="#about" onClick={()=>setMenu(false)}>О хозяйстве</a><a href="#/products" onClick={()=>setMenu(false)}>Продукция</a><a href="#contacts" onClick={()=>setMenu(false)}>Контакты</a></nav><a className="contact-link" href="#contacts">Связаться <ArrowUpRight size={15}/></a><button className="hamburger" onClick={()=>setMenu(!menu)} aria-label="Открыть меню">{menu?<X/>:<Menu/>}</button></header>
+</defs></svg><header className="top"><a href="#home" className="brand"><span className="mark">✳</span><span>КФХ Март</span></a><span className="location"><MapPin size={13}/> Алтайский край, Завьяловский район, с. Светлое</span><nav className={menu?'active':''}><a href="#home" onClick={()=>setMenu(false)}>Главная</a><a href="#about" onClick={()=>setMenu(false)}>О хозяйстве</a><a href="#/products" onClick={()=>setMenu(false)}>Продукция</a><a href="#contacts" onClick={()=>setMenu(false)}>Контакты</a></nav><a className="contact-link" href="#contacts">Связаться <ArrowUpRight size={15}/></a><button className="hamburger" onClick={()=>setMenu(!menu)} aria-label="Открыть меню">{menu?<X/>:<Menu/>}</button></header>
 <main><section id="home" className="hero"><div className="hero-shade"/><div className="hero-dust" aria-hidden="true"/><div className="hero-copy reveal"><div className="eyebrow">РАСТЕНИЕВОДЧЕСКОЕ ХОЗЯЙСТВО</div><h1>МАРТ</h1><p className="tagline">Земля. Труд. Урожай.</p><p className="lead">Выращиваем пшеницу, подсолнечник<br/> и лён в Алтайском крае.</p><div className="actions"><a className="btn primary" href="#/products">Наша продукция <ArrowRight size={16}/></a><a className="btn ghost" href="#about">О хозяйстве</a></div><div className="scroll-hint">ЛИСТАЙТЕ ВНИЗ <span>↓</span></div></div></section>
 <section id="about" className="about"><WaveGlow shape="a"/><div className="about-photo"/><div className="about-copy reveal"><div className="eyebrow dark">О НАС</div><h2>О хозяйстве</h2><p>КФХ Март — сельскохозяйственное хозяйство в Завьяловском районе Алтайского края, село Светлое.</p><p>Выращиваем зерновые и масличные культуры, работаем на земле и развиваем производство.</p><a className="text-link" href="#/products">Что мы выращиваем <ArrowRight size={18}/></a></div></section>
 <section id="products" className="products"><WaveGlow shape="b"/><div className="section-head reveal"><div><div className="eyebrow dark">НАША ДЕЯТЕЛЬНОСТЬ</div><h2>Что мы выращиваем</h2></div><p>Три культуры — одно отношение<br/>к качеству и работе.</p></div><div className="crop-grid">{crops.map((c,i)=><LazyBackground className="crop reveal" key={c.name} src={c.image} gradient="linear-gradient(0deg,rgba(34,29,19,.82),transparent 67%)" style={{transitionDelay:(i*80)+'ms'}}><div className="crop-info"><h3 className="crop-title">{c.name}</h3><p className="crop-desc">{c.desc}</p></div><span className="crop-arrow" aria-hidden="true"><ArrowUpRight size={22}/></span></LazyBackground>)}</div></section>
