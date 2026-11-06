@@ -659,3 +659,9 @@
 .product-detail-page .product-detail-bottom .eyebrow{color:#e9bd78}
 @media(max-width:900px){.product-detail-page .product-nav{gap:14px}.product-detail-page .product-nav a{font-size:11px}}
 @media(max-width:700px){.product-detail-page .product-reference-header{padding:0 5%;gap:10px}.product-detail-page .product-nav{gap:10px}.product-detail-page .product-nav a{font-size:10px}.product-detail-page .product-nav a:nth-child(3),.product-detail-page .product-nav a:nth-child(4),.product-detail-page .product-nav a:nth-child(5){display:none}.product-detail-page .product-reference-header .contact-link{padding:9px 12px}.product-detail-page .product-detail-bottom{padding:65px 18px}}
+
+/* Keep crop header accessible and prevent oversized blank wave transition. */
+.product-detail-page .product-reference-header{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(180deg,rgba(29,29,29,.96),rgba(29,29,29,.75) 75%,transparent)}
+.product-detail-page .product-detail-hero{overflow:visible;min-height:100svh}
+.product-detail-page .reference-wave{bottom:-40px;height:80px}
+.product-detail-page .product-detail-bottom{padding-top:65px}
