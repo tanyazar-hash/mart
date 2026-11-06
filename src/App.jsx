@@ -5,10 +5,24 @@ const crops=[
 {name:'Подсолнечник',desc:'Масличная культура • семена подсолнечника',image:import.meta.env.BASE_URL+'images/sunflower-card.png'},
 {name:'Лён',desc:'Масличная культура • семена льна',image:import.meta.env.BASE_URL+'images/flax-card.png'}
 ];
+/* Defer offscreen background images; load them before they scroll into view. */
+function LazyBackground({src,className='',children,style={},gradient='',...props}){
+ const ref=useRef(null);
+ const [visible,setVisible]=useState(false);
+ useEffect(()=>{
+  const el=ref.current;
+  if(!el||!('IntersectionObserver' in window)){setVisible(true);return}
+  const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){setVisible(true);observer.disconnect()}},{rootMargin:'700px 0px'});
+  observer.observe(el);
+  return()=>observer.disconnect();
+ },[]);
+ return <div ref={ref} className={className} style={{...style,...(visible?{backgroundImage:gradient?gradient+',url("'+src+'")':'url("'+src+'")'}:{})}} {...props}>{children}</div>;
+}
 function Seeds(){
  const host=useRef(null);
  useEffect(()=>{
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||matchMedia('(max-width: 700px)').matches||navigator.connection?.saveData)return;
+  if(!('WebGLRenderingContext' in window))return;
   let dead=false,raf=0,renderer,scene,camera,items=[],scroll=window.scrollY,geometry,material;
   const resize=()=>{if(!renderer)return;renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()};
   const onScroll=()=>scroll=window.scrollY;
@@ -69,8 +83,11 @@ function Seeds(){
    }
    tick();
   }
-  init();addEventListener('resize',resize);addEventListener('scroll',onScroll,{passive:true});
-  return()=>{dead=true;cancelAnimationFrame(raf);removeEventListener('resize',resize);removeEventListener('scroll',onScroll);renderer?.dispose();renderer?.domElement.remove();geometry?.dispose();material?.dispose()};
+  let idleId=0,delayId=0;
+  if('requestIdleCallback' in window)idleId=window.requestIdleCallback(()=>{if(!dead)init()},{timeout:2500});
+  else delayId=setTimeout(()=>{if(!dead)init()},1200);
+  addEventListener('resize',resize);addEventListener('scroll',onScroll,{passive:true});
+  return()=>{dead=true;if(idleId)window.cancelIdleCallback?.(idleId);clearTimeout(delayId);cancelAnimationFrame(raf);removeEventListener('resize',resize);removeEventListener('scroll',onScroll);renderer?.dispose();renderer?.domElement.remove();geometry?.dispose();material?.dispose()};
  },[]);
  return <div ref={host} className="seeds" aria-hidden="true"/>;
 }
@@ -124,7 +141,7 @@ function ProductPage({slug}){
    <svg className="reference-wave reference-wave-hero" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path className="reference-wave-halo" d="M0 38 C170 92 290 66 420 56 C560 40 640 104 795 59 C895 27 942 15 1000 18"/><path className="reference-wave-line" d="M0 38 C170 92 290 66 420 56 C560 40 640 104 795 59 C895 27 942 15 1000 18"/></svg>
   </section>
   {productStories.map((item,i)=><section key={item.slug} className={'product-story reference-story '+item.tone+(i%2?' reverse':'')} id={'culture-'+item.slug}>
-   <div className="reference-story-photo" style={{backgroundImage:`url("${item.photo}")`}} role="img" aria-label={"Фотография культуры: "+item.name}/>
+   <LazyBackground className="reference-story-photo" src={item.photo} role="img" aria-label={"Фотография культуры: "+item.name}/>
    <div className="reference-story-shade" aria-hidden="true"/>
    <div className="reference-story-inner reveal">
     <div className="product-story-index">{item.number} / {item.name.toUpperCase()}</div>
@@ -180,7 +197,7 @@ function App(){
 </defs></svg><Seeds/><header className="top"><a href="#home" className="brand"><span className="mark">✳</span><span>КФХ Март</span></a><span className="location"><MapPin size={13}/> Алтайский край, Завьяловский район, с. Светлое</span><nav className={menu?'active':''}><a href="#home" onClick={()=>setMenu(false)}>Главная</a><a href="#about" onClick={()=>setMenu(false)}>О хозяйстве</a><a href="#/products" onClick={()=>setMenu(false)}>Продукция</a><a href="#contacts" onClick={()=>setMenu(false)}>Контакты</a></nav><a className="contact-link" href="#contacts">Связаться <ArrowUpRight size={15}/></a><button className="hamburger" onClick={()=>setMenu(!menu)} aria-label="Открыть меню">{menu?<X/>:<Menu/>}</button></header>
 <main><section id="home" className="hero"><div className="hero-shade"/><div className="hero-dust" aria-hidden="true"/><div className="hero-copy reveal"><div className="eyebrow">РАСТЕНИЕВОДЧЕСКОЕ ХОЗЯЙСТВО</div><h1>МАРТ</h1><p className="tagline">Земля. Труд. Урожай.</p><p className="lead">Выращиваем пшеницу, подсолнечник<br/> и лён в Алтайском крае.</p><div className="actions"><a className="btn primary" href="#/products">Наша продукция <ArrowRight size={16}/></a><a className="btn ghost" href="#about">О хозяйстве</a></div><div className="scroll-hint">ЛИСТАЙТЕ ВНИЗ <span>↓</span></div></div></section>
 <section id="about" className="about"><WaveGlow shape="a"/><div className="about-photo"/><div className="about-copy reveal"><div className="eyebrow dark">О НАС</div><h2>О хозяйстве</h2><p>КФХ Март — сельскохозяйственное хозяйство в Завьяловском районе Алтайского края, село Светлое.</p><p>Выращиваем зерновые и масличные культуры, работаем на земле и развиваем производство.</p><a className="text-link" href="#/products">Что мы выращиваем <ArrowRight size={18}/></a></div></section>
-<section id="products" className="products"><WaveGlow shape="b"/><div className="section-head reveal"><div><div className="eyebrow dark">НАША ДЕЯТЕЛЬНОСТЬ</div><h2>Что мы выращиваем</h2></div><p>Три культуры — одно отношение<br/>к качеству и работе.</p></div><div className="crop-grid">{crops.map((c,i)=><article className="crop reveal" key={c.name} style={{backgroundImage:`linear-gradient(0deg,rgba(34,29,19,.82),transparent 67%),url("${c.image}")`,transitionDelay:(i*80)+'ms'}}><div className="crop-info"><h3 className="crop-title">{c.name}</h3><p className="crop-desc">{c.desc}</p></div><span className="crop-arrow" aria-hidden="true"><ArrowUpRight size={22}/></span></article>)}</div></section>
+<section id="products" className="products"><WaveGlow shape="b"/><div className="section-head reveal"><div><div className="eyebrow dark">НАША ДЕЯТЕЛЬНОСТЬ</div><h2>Что мы выращиваем</h2></div><p>Три культуры — одно отношение<br/>к качеству и работе.</p></div><div className="crop-grid">{crops.map((c,i)=><LazyBackground className="crop reveal" key={c.name} src={c.image} gradient="linear-gradient(0deg,rgba(34,29,19,.82),transparent 67%)" style={{transitionDelay:(i*80)+'ms'}}><div className="crop-info"><h3 className="crop-title">{c.name}</h3><p className="crop-desc">{c.desc}</p></div><span className="crop-arrow" aria-hidden="true"><ArrowUpRight size={22}/></span></LazyBackground>)}</div></section>
 <section className="land"><div className="land-art" aria-hidden="true"/><WaveGlow shape="c"/><div className="land-inner reveal"><div className="eyebrow">НАШ ПОДХОД</div><h2>Забота о земле.<br/>Уважение к труду.</h2><p>Каждый сезон начинается с большой работы. Мы ценим опыт, надёжную технику и результат, который приносит земля.</p></div></section>
 <section id="contacts" className="footer"><WaveGlow shape="d"/><div className="reveal"><div className="eyebrow dark">СОТРУДНИЧЕСТВО</div><h2>Давайте работать<br/>вместе</h2><p>По вопросам покупки сельхозпродукции и сотрудничества свяжитесь с хозяйством.</p><p className="address"><MapPin size={18}/> Алтайский край, Завьяловский район, село Светлое</p><button type="button" className="copy-address" onClick={copyAddress}>{copied?"Адрес скопирован":"Скопировать адрес"} <ArrowUpRight size={15}/></button></div><div className="contact-note reveal"><span className="contact-note-label">КОНТАКТЫ ХОЗЯЙСТВА</span><p>Телефон и реквизиты появятся после согласования с хозяйством.</p><div className="contact-remark">Контакты уточняются</div></div></section></main><div className="bottom"><span>© {new Date().getFullYear()} КФХ Март</span><span>Сайт в разработке</span></div></div>}
 export default App;
