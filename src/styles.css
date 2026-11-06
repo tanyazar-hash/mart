@@ -270,3 +270,32 @@
  .hero-copy.reveal,.hero-dust{animation:none!important}
  .hero{will-change:auto}
 }
+
+/* Mobile-only transition geometry: shallow, smooth waves that never cover headings. */
+.wave-mobile{display:none}
+@media(max-width:700px){
+ .wave-desktop{display:none}
+ .wave-mobile{display:block}
+ .about{clip-path:url(#wave-a-mobile)!important}
+ .products{clip-path:url(#wave-b-mobile)!important}
+ .land{clip-path:url(#wave-c-mobile)!important}
+ .footer{clip-path:url(#wave-d-mobile)!important}
+ .about,.products,.land,.footer{margin-top:-56px!important}
+ .about{min-height:640px}
+ .about-copy{padding-top:125px;padding-bottom:125px}
+ .products{padding-top:118px!important;padding-bottom:125px}
+ .land{min-height:580px;padding-top:120px!important;padding-bottom:110px}
+ .footer{padding-top:125px!important;padding-bottom:95px}
+ .wave-glow{height:100%;width:100%}
+ .wave-halo{stroke-width:8px;opacity:.58}
+ .wave-line{stroke-width:1.35px;opacity:.95}
+ .about-copy,.section-head,.land-inner,.footer>div{max-width:100%}
+ .section-head h2,.land h2,.footer h2{overflow-wrap:normal;hyphens:auto}
+}
+@media(max-width:380px){
+ .about-copy{padding-top:110px}
+ .products{padding-top:108px!important}
+ .land{padding-top:112px!important}
+ .footer{padding-top:112px!important}
+ .wave-halo{stroke-width:6px}
+}
