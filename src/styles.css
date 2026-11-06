@@ -598,3 +598,10 @@
 /* Compact cooperation CTA: ~30% less vertical space, preserve wave mask. */
 @media(min-width:701px){.product-reference .product-end{padding-top:130px;padding-bottom:72px}}
 @media(max-width:700px){.product-reference .product-end{padding-top:125px;padding-bottom:65px}}
+
+/* Header-safe hero layout: undo moving the entire content (breadcrumb overlapped nav).
+   Reserve space below the header; keep the scroll CTA readable above the wave. */
+.product-reference .reference-hero-inner{transform:none!important;margin-top:76px}
+.product-reference .reference-hero{min-height:660px;height:660px}
+.product-reference .reference-hero .product-breadcrumb{margin-bottom:30px}
+@media(max-width:700px){.product-reference .reference-hero{min-height:690px;height:690px}.product-reference .reference-hero-inner{margin-top:105px}.product-reference .reference-hero .product-breadcrumb{margin-bottom:25px}}
