@@ -183,3 +183,30 @@
  .footer>.contact-note{order:2;max-width:570px;width:100%;padding-top:24px;margin:0}
  .footer>div:first-child{order:1;width:100%;max-width:570px;margin:0}
 }
+
+/* Final contact alignment: collaboration copy pinned to right-hand edge */
+@media(min-width:901px){
+ #contacts.footer{
+  display:grid!important;
+  grid-template-columns:minmax(220px,1fr) minmax(0,640px)!important;
+  column-gap:clamp(36px,5vw,100px);
+  align-items:start;
+ }
+ #contacts.footer>div:first-child{
+  grid-column:2!important;
+  grid-row:1!important;
+  justify-self:end!important;
+  width:100%!important;
+  max-width:640px!important;
+  margin:0!important;
+  padding-left:0;
+ }
+ #contacts.footer>.contact-note{
+  grid-column:1!important;
+  grid-row:1!important;
+  justify-self:start!important;
+  width:min(100%,320px)!important;
+  margin:0!important;
+  padding-top:125px;
+ }
+}
