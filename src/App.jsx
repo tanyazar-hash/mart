@@ -2,88 +2,61 @@ import React,{useEffect,useRef,useState} from 'react';
 import{ArrowUpRight,ArrowRight,MapPin,Menu,X}from'lucide-react';
 const crops=[{name:'Пшеница',desc:'Выращивание зерновых культур',image:'https://images.unsplash.com/photo-1501436513145-30f24e19fcc4?auto=format&fit=crop&w=1000&q=85'},{name:'Подсолнечник',desc:'Масличная культура',image:'https://images.unsplash.com/photo-1597848212624-e6e3b7a12d78?auto=format&fit=crop&w=1000&q=85'},{name:'Лён',desc:'Масличная культура',image:'https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1000&q=85'}];
 function Seeds(){
-  const host=useRef(null);
-  useEffect(()=>{
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    let disposed=false,raf=0,renderer,scene,camera,root,geometry,material;
-    const container=host.current;
-    let scroll=window.scrollY;
-    const onScroll=()=>{scroll=window.scrollY};
-    const onResize=()=>{if(!renderer)return;const w=window.innerWidth,h=window.innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()};
-    const start=async()=>{
-      const THREE=await import('three');
-      if(disposed)return;
-      scene=new THREE.Scene();
-      camera=new THREE.PerspectiveCamera(36,window.innerWidth/window.innerHeight,.1,100);
-      camera.position.z=12;
-      renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'low-power'});
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));
-      renderer.setClearColor(0,0);
-      renderer.domElement.setAttribute('aria-hidden','true');
-      container.appendChild(renderer.domElement);
-      onResize();
-      root=new THREE.Group();scene.add(root);
-      // Lightweight 3D wheat-kernel fallback until the supplied GLB is added to public/models.
-      geometry=new THREE.SphereGeometry(1,12,9);
-      geometry.scale(.23,.48,.19);
-      material=new THREE.MeshStandardMaterial({color:0xc99b54,roughness:.72,metalness:0});
-      scene.add(new THREE.HemisphereLight(0xffe7ba,0x6e5439,2.4));
-      const light=new THREE.DirectionalLight(0xffdb9a,2.2);light.position.set(-3,6,8);scene.add(light);
-      const seeds=Array.from({length:14},(_,i)=>{
-        const mesh=new THREE.Mesh(geometry,material);
-        const seed={mesh,i,phase:(i*0.61803398875)%1,speed:.62+(i%5)*.095,depth:(i%4)*.17};
-        root.add(mesh);return seed;
-      });
-      const clock=new THREE.Clock();
-      const animate=()=>{
-        if(disposed)return;
-        const t=clock.getElapsedTime();
-        const visible=window.innerWidth>=720;
-        renderer.domElement.style.display=visible?'block':'none';
-        if(visible){
-          const pageProgress=Math.min(1,scroll/Math.max(1,document.documentElement.scrollHeight-window.innerHeight));
-          const viewHeight=2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*camera.position.z;
-          const viewWidth=viewHeight*camera.aspect;
-          seeds.forEach(s=>{
-            const p=(s.phase+pageProgress*(.6+s.speed*.3))%1.2;
-            const y=(.65-p)*viewHeight;
-            const x=viewWidth*(.33+(s.i%5)*.025)+Math.sin(t*.4+s.i)*.13;
-            s.mesh.position.set(x,y,-s.depth);
-            s.mesh.rotation.set(t*.24*s.speed+s.i,t*.42*s.speed+s.i*.8,t*.19+s.i);
-            const scale=.55+(s.i%4)*.16;
-            s.mesh.scale.setScalar(scale);
-            s.mesh.visible=p<1.05;
-          });
-          renderer.render(scene,camera);
-        }
-        raf=requestAnimationFrame(animate);
-      };
-      animate();
-      // Prefer the actual wheat model when uploaded to public/models/wheat-seed.glb.
-      try{
-        const {GLTFLoader}=await import('three/addons/loaders/GLTFLoader.js');
-        const gltf=await new GLTFLoader().loadAsync(import.meta.env.BASE_URL+'models/wheat-seed.glb');
-        if(disposed)return;
-        const model=gltf.scene;
-        const box=new THREE.Box3().setFromObject(model);
-        const size=new THREE.Vector3();box.getSize(size);
-        const max=Math.max(size.x,size.y,size.z)||1;
-        const center=new THREE.Vector3();box.getCenter(center);
-        seeds.forEach(s=>{
-          const copy=model.clone(true);
-          copy.position.sub(center);
-          copy.scale.setScalar(.75/max);
-          s.mesh.material=new THREE.MeshBasicMaterial({visible:false});
-          s.mesh.add(copy);
-        });
-        }catch{ /* GLB not yet in repository: use procedural kernels. */ }
-    };
-    start();
-    window.addEventListener('resize',onResize);
-    window.addEventListener('scroll',onScroll,{passive:true});
-    return()=>{disposed=true;cancelAnimationFrame(raf);window.removeEventListener('resize',onResize);window.removeEventListener('scroll',onScroll);renderer?.dispose();renderer?.domElement.remove();geometry?.dispose();material?.dispose()};
-  },[]);
-  return <div ref={host} className="seeds" aria-hidden="true"/>;
+ const host=useRef(null);
+ useEffect(()=>{
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  let dead=false,raf=0,renderer,scene,camera,items=[],scroll=window.scrollY,geometry,material;
+  const resize=()=>{if(!renderer)return;renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()};
+  const onScroll=()=>scroll=window.scrollY;
+  async function init(){
+   const T=await import('three');if(dead)return;
+   scene=new T.Scene();camera=new T.PerspectiveCamera(36,innerWidth/innerHeight,.1,100);camera.position.z=14;
+   renderer=new T.WebGLRenderer({alpha:true,antialias:true,powerPreference:'low-power'});
+   renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));renderer.setClearColor(0,0);renderer.outputColorSpace=T.SRGBColorSpace;
+   host.current.appendChild(renderer.domElement);resize();
+   scene.add(new T.HemisphereLight(0xffe6c5,0x655a4d,2.4));
+   const sun=new T.DirectionalLight(0xffd9a4,2.4);sun.position.set(-4,7,8);scene.add(sun);
+   let model=null;
+   try{
+    const {GLTFLoader}=await import('three/addons/loaders/GLTFLoader.js');
+    const gltf=await new GLTFLoader().loadAsync(import.meta.env.BASE_URL+'models/wheat-seed.glb');
+    if(dead)return;
+    const raw=gltf.scene,bounds=new T.Box3().setFromObject(raw),size=new T.Vector3(),center=new T.Vector3();
+    bounds.getSize(size);bounds.getCenter(center);
+    raw.position.sub(center);raw.scale.setScalar(1/(Math.max(size.x,size.y,size.z)||1));
+    model=new T.Group();model.add(raw);
+   }catch(err){console.warn('Wheat GLB could not load',err)}
+   if(!model){geometry=new T.SphereGeometry(1,12,9);geometry.scale(.22,.46,.19);material=new T.MeshStandardMaterial({color:0xc7a16a,roughness:.82})}
+   const count=innerWidth<720?13:30;
+   items=Array.from({length:count},(_,i)=>{
+    const r=n=>{const v=Math.sin((i+1)*n*19.417)*43758.5453;return v-Math.floor(v)};
+    const mesh=model?model.clone(true):new T.Mesh(geometry,material);scene.add(mesh);
+    return {mesh,delay:r(1.13)*.22,drift:r(2.57),start:r(3.91),depth:r(4.27),turn:r(5.73),size:r(6.49)};
+   });
+   const clock=new T.Clock();
+   function tick(){
+    if(dead)return;
+    const t=clock.getElapsedTime(),max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
+    const progress=Math.min(1,Math.max(0,(scroll-12)/Math.max(1,max-12)));
+    const h=2*Math.tan(T.MathUtils.degToRad(camera.fov/2))*camera.position.z,w=h*camera.aspect;
+    for(const p of items){
+     const f=Math.max(0,(progress-p.delay)/(1-p.delay)),e=f*f*(3-2*f);
+     const x=w*(.55+p.start*.17)-w*(.24+p.drift*.54)*(1-Math.exp(-f*5))+Math.sin(t*.55+p.turn*7)*w*.006*f;
+     const y=h*(.62+p.start*.13)-h*(1.85+p.depth*.52)*e;
+     p.mesh.position.set(x-w*.5,y-h*.5,p.depth*1.3-.6);
+     p.mesh.rotation.set(p.turn*4+f*7,t*.15+p.turn*5+f*8,p.start*3+f*5);
+     p.mesh.scale.setScalar((.27+p.size*.27)*(innerWidth<720?.8:1));
+     p.mesh.visible=scroll>12&&f>0&&y>-.35*h;
+    }
+    if(scroll>12&&innerWidth>=480)renderer.render(scene,camera);else renderer.clear();
+    raf=requestAnimationFrame(tick);
+   }
+   tick();
+  }
+  init();addEventListener('resize',resize);addEventListener('scroll',onScroll,{passive:true});
+  return()=>{dead=true;cancelAnimationFrame(raf);removeEventListener('resize',resize);removeEventListener('scroll',onScroll);renderer?.dispose();renderer?.domElement.remove();geometry?.dispose();material?.dispose()};
+ },[]);
+ return <div ref={host} className="seeds" aria-hidden="true"/>;
 }
 function App(){const[menu,setMenu]=useState(false);return <div className="site"><Seeds/><header className="top"><a href="#home" className="brand"><span className="mark">✳</span><span>КФХ Мартынова</span></a><span className="location"><MapPin size={13}/> Алтайский край, Завьяловский район, с. Светлое</span><nav className={menu?'active':''}><a href="#home" onClick={()=>setMenu(false)}>Главная</a><a href="#about" onClick={()=>setMenu(false)}>О хозяйстве</a><a href="#products" onClick={()=>setMenu(false)}>Продукция</a><a href="#contacts" onClick={()=>setMenu(false)}>Контакты</a></nav><a className="contact-link" href="#contacts">Связаться <ArrowUpRight size={15}/></a><button className="hamburger" onClick={()=>setMenu(!menu)} aria-label="Открыть меню">{menu?<X/>:<Menu/>}</button></header>
 <main><section id="home" className="hero"><div className="hero-shade"/><div className="hero-copy"><div className="eyebrow">РАСТЕНИЕВОДЧЕСКОЕ ХОЗЯЙСТВО</div><h1>МАРТЫНОВ</h1><p className="tagline">Земля. Труд. Урожай.</p><p className="lead">Выращиваем пшеницу, подсолнечник<br/> и лён в Алтайском крае.</p><div className="actions"><a className="btn primary" href="#products">Наша продукция <ArrowRight size={16}/></a><a className="btn ghost" href="#about">О хозяйстве</a></div></div><div className="scroll-hint">ЛИСТАЙТЕ ВНИЗ <span>↓</span></div></section>
