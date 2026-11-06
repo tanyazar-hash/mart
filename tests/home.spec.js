@@ -97,3 +97,24 @@ test('mobile about landscape extends behind the full products wave', async ({ pa
   });
   expect(geometry.overlap).toBeGreaterThan(geometry.required);
 });
+
+
+test('products is a separate responsive page with graphic-only first two sections', async ({ page }) => {
+  await page.goto('/#/products');
+  await expect(page.getByRole('heading',{name:/Выращено/})).toBeVisible();
+  await expect(page.locator('.product-hero img, .product-intro img')).toHaveCount(0);
+  await expect(page.locator('.product-story')).toHaveCount(3);
+  await expect(page.locator('.product-art')).toHaveCount(3);
+  await expect(page.locator('.product-story img')).toHaveCount(0);
+  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
+  expect(overflow).toBeLessThanOrEqual(2);
+});
+test('culture details open as pages and navigate back', async ({ page }) => {
+  await page.goto('/#/products');
+  await page.locator('#culture-wheat .product-story-link').click();
+  await expect(page).toHaveURL(/#\/products\/wheat$/);
+  await expect(page.getByRole('heading',{name:'Пшеница',exact:true})).toBeVisible();
+  await page.getByRole('link',{name:/К продукции/}).click();
+  await expect(page).toHaveURL(/#\/products$/);
+  await expect(page.locator('.product-story')).toHaveCount(3);
+});
