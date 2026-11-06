@@ -640,3 +640,22 @@
 @media(max-width:500px){.home-reference-header .contact-link{display:none}.home-reference-header .product-brand-text{font-size:22px}}
 /* The removed decorative hero emblem must not leave layout artifacts. */
 .product-reference .reference-hero-aside{display:none!important}
+
+/* Crop detail pages: same navigation, luminous wave and compact ending. */
+.product-detail-page .product-reference-header{position:absolute;z-index:60;left:0;right:0;top:0;width:100%;height:70px;padding:0 6.2%;display:flex;align-items:center;background:linear-gradient(180deg,rgba(25,24,23,.55),rgba(25,24,23,0))}
+.product-detail-page .product-reference-header .brand{display:flex;align-items:center;gap:10px}
+.product-detail-page .product-nav{display:flex;gap:clamp(20px,3.1vw,54px);align-items:center;margin:0 auto}
+.product-detail-page .product-nav a{position:relative;color:#f2eeeb;font-size:13px;white-space:nowrap}
+.product-detail-page .product-nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-15px;height:1px;background:#e2bc8c;box-shadow:0 0 12px 2px rgba(255,220,174,.65)}
+.product-detail-page .product-reference-header .contact-link{padding:10px 20px;border:1px solid rgba(255,255,255,.55);border-radius:28px;color:#fff;font-size:12px}
+.product-detail-page .product-detail-hero{position:relative;isolation:isolate}
+.product-detail-page .reference-wave{position:absolute;left:0;bottom:-55px;width:100%;height:110px;z-index:12;pointer-events:none;overflow:visible}
+.product-detail-page .reference-wave path{fill:none;stroke:#f8f5ef;vector-effect:non-scaling-stroke}
+.product-detail-page .reference-wave-halo{stroke-width:13px;opacity:.38;filter:blur(9px)}
+.product-detail-page .reference-wave-line{stroke-width:1.5px;opacity:.97;filter:drop-shadow(0 0 6px #fff)}
+.product-detail-page .product-detail-bottom{position:relative;padding:78px 20px;background:radial-gradient(ellipse at 50% 10%,#69635d,#373532 78%);color:#f3f0e9}
+.product-detail-page .product-detail-bottom h2{font-size:clamp(34px,4.2vw,58px);margin:20px 0}
+.product-detail-page .product-detail-bottom p{margin-bottom:22px}
+.product-detail-page .product-detail-bottom .eyebrow{color:#e9bd78}
+@media(max-width:900px){.product-detail-page .product-nav{gap:14px}.product-detail-page .product-nav a{font-size:11px}}
+@media(max-width:700px){.product-detail-page .product-reference-header{padding:0 5%;gap:10px}.product-detail-page .product-nav{gap:10px}.product-detail-page .product-nav a{font-size:10px}.product-detail-page .product-nav a:nth-child(3),.product-detail-page .product-nav a:nth-child(4),.product-detail-page .product-nav a:nth-child(5){display:none}.product-detail-page .product-reference-header .contact-link{padding:9px 12px}.product-detail-page .product-detail-bottom{padding:65px 18px}}
