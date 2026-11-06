@@ -114,7 +114,7 @@ function App(){
  const[menu,setMenu]=useState(false);
  const[route,setRoute]=useState(()=>window.location.hash);
  const[copied,setCopied]=useState(false);
- useEffect(()=>{const onHash=()=>{setRoute(window.location.hash);if(window.location.hash.startsWith('#/'))window.scrollTo(0,0)};window.addEventListener('hashchange',onHash);return()=>window.removeEventListener('hashchange',onHash)},[]);
+ useEffect(()=>{const onHash=()=>{setRoute(window.location.hash);if(window.location.hash.startsWith('#/products'))window.scrollTo(0,0);else if(window.location.hash==='#/contacts')requestAnimationFrame(()=>document.getElementById('contacts')?.scrollIntoView())};window.addEventListener('hashchange',onHash);return()=>window.removeEventListener('hashchange',onHash)},[]);
  useEffect(()=>{
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(reduced)return;
@@ -132,6 +132,7 @@ function App(){
   addEventListener('scroll',onScroll,{passive:true});update();
   return()=>{observer.disconnect();removeEventListener('scroll',onScroll);cancelAnimationFrame(raf)};
  },[]);
+ useEffect(()=>{if(route==='#/contacts')requestAnimationFrame(()=>document.getElementById('contacts')?.scrollIntoView())},[route]);
  const copyAddress=async()=>{
   const address='Алтайский край, Завьяловский район, село Светлое';
   try{await navigator.clipboard.writeText(address);setCopied(true)}catch{setCopied(false)}
