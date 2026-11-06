@@ -1,9 +1,10 @@
 import sharp from 'sharp';
-import {readdir,stat,mkdir,rm} from 'node:fs/promises';
+import {readdir,rm} from 'node:fs/promises';
 import path from 'node:path';
 const folder=path.resolve('public/images');
 const files=process.argv.includes('--clean-dist')?[]:(await readdir(folder)).filter(name=>/\.(png|jpe?g)$/i.test(name));
-await Promise.all(files.map(async name=>{
+for(let offset=0;offset<files.length;offset+=2){
+ await Promise.all(files.slice(offset,offset+2).map(async name=>{
  const source=path.join(folder,name),base=name.replace(/\.(png|jpe?g)$/i,'');
  const info=await sharp(source).metadata();
  const width=Math.min(info.width||1600,1600);
@@ -14,6 +15,7 @@ await Promise.all(files.map(async name=>{
  ]);
  console.log('Optimized',name,'->',base+'.webp',base+'-mobile.webp');
 }));
+}
 if(process.argv.includes('--clean-dist')){
  const out=path.resolve('dist/images');
  try{
