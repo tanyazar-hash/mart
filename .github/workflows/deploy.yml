@@ -24,6 +24,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Cache npm downloads
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-${{ runner.os }}-node22-${{ hashFiles('package.json') }}
+          restore-keys: |
+            npm-${{ runner.os }}-node22-
+      - name: Cache generated WebP images
+        uses: actions/cache@v4
+        with:
+          path: public/images/*.webp
+          key: webp-v2-${{ hashFiles('public/images/*.png', 'public/images/*.jpg', 'public/images/*.jpeg') }}
       - name: Install dependencies
         run: npm install --no-audit --no-fund
       - name: Build Vite site
