@@ -106,8 +106,9 @@ test('products matches full-bleed reference with a photo-free hero', async ({ pa
   for (const [slug, file] of [['wheat','psen1.webp'],['sunflower','sem2.webp'],['flax','len2.webp']]) {
     const art=page.locator('#culture-'+slug+' .reference-story-photo');
     await art.scrollIntoViewIfNeeded();
-    await expect(art).toHaveCSS('background-image',new RegExp(file.replace('.','\\.')));
-    const response=await page.request.get('/images/'+file);
+    const displayedFile = await page.evaluate(filename => window.matchMedia('(max-width: 760px)').matches ? filename.replace(/\.webp$/, '-mobile.webp') : filename, file);
+    await expect(art).toHaveCSS('background-image',new RegExp(displayedFile.replace('.', '\\.')));
+    const response=await page.request.get('/images/'+displayedFile);
     expect(response.ok()).toBeTruthy();
   }
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
@@ -127,7 +128,9 @@ test('home sections remain visible after returning from products', async ({ page
  await page.goto('/');
  await page.getByRole('link',{name:'Продукция'}).first().click();
  await expect(page).toHaveURL(/#\/products$/);
- await page.getByRole('link',{name:'Главная'}).first().click();
+ const mobileMenu=page.locator('.product-page .hamburger');
+ if(await mobileMenu.isVisible())await mobileMenu.click();
+ await page.locator('.product-page nav').getByRole('link',{name:'Главная'}).click();
  for(const selector of ['#about','#products','.land','#contacts']){
   const section=page.locator(selector);
   await section.scrollIntoViewIfNeeded();
