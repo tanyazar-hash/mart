@@ -43,16 +43,12 @@ test('scrolling works and capture desktop/mobile reference screenshot', async ({
   }
 });
 
-test('product cards open real details and can be collapsed', async ({ page }) => {
+test('product previews do not open an inline detail panel', async ({ page }) => {
   await page.goto('/');
-  const wheat=page.getByRole('button',{name:'Подробнее: Пшеница'});
-  await wheat.scrollIntoViewIfNeeded();
-  await wheat.click();
-  await expect(wheat).toHaveAttribute('aria-expanded','true');
-  await expect(page.locator('.crop-detail')).toContainText('Пшеница');
-  await wheat.click();
-  await expect(wheat).toHaveAttribute('aria-expanded','false');
+  const cards=page.locator('#products article.crop');
+  await expect(cards).toHaveCount(3);
   await expect(page.locator('.crop-detail')).toHaveCount(0);
+  await expect(page.locator('#products button.crop')).toHaveCount(0);
 });
 
 test('contacts have a usable address and mobile menu works', async ({ page }, testInfo) => {
