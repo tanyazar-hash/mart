@@ -24,3 +24,41 @@
 
 /* Second section: uploaded panoramic landscape with subtle edge shading. */
 .about-photo{background:linear-gradient(90deg,rgba(55,58,56,.79) 0%,rgba(75,76,72,.57) 39%,rgba(75,72,67,.17) 72%,rgba(58,58,54,.23) 100%),url('/images/about-fields.png') center 53%/cover;filter:saturate(.72)}
+
+/* Reference-matched warm slate / taupe art direction, with readable edges */
+:root{background:#514943;color:#fff7ed}
+.site{background:#514943}
+.site:after{z-index:9;background:linear-gradient(90deg,rgba(27,26,26,.15) 0%,transparent 17%,transparent 84%,rgba(32,29,28,.13) 100%);mix-blend-mode:normal}
+.hero{
+ background-image:linear-gradient(90deg,rgba(35,34,34,.91) 0%,rgba(48,46,45,.74) 23%,rgba(57,52,48,.40) 41%,rgba(55,48,41,.08) 65%,rgba(40,35,32,0) 100%),url('/images/combine-hero.png');
+ background-position:center,center 53%;
+ background-size:cover;
+}
+.hero-shade{background:linear-gradient(180deg,rgba(25,27,28,.33),transparent 25%,transparent 77%,rgba(73,50,32,.12)),radial-gradient(ellipse at 6% 50%,rgba(35,35,35,.38),transparent 52%)}
+.hero:after{background:linear-gradient(90deg,rgba(30,31,32,.17),transparent 25%,transparent 90%,rgba(37,33,31,.05))}
+.about{background:#5a504a}
+.about-photo{
+ background-image:linear-gradient(90deg,rgba(42,40,40,.94) 0%,rgba(56,50,47,.85) 21%,rgba(75,63,53,.48) 49%,rgba(80,66,52,.15) 76%,rgba(44,39,36,.30) 100%),linear-gradient(180deg,rgba(50,45,42,.35),transparent 32%,rgba(54,43,35,.16)),url('/images/about-fields.png');
+ background-position:center,center,center 53%;
+ background-size:cover;
+ filter:saturate(.9);
+}
+.products{background:radial-gradient(ellipse at 45% 12%,rgba(181,143,107,.31),transparent 56%),radial-gradient(ellipse at 12% 85%,rgba(185,132,92,.23),transparent 52%),linear-gradient(125deg,#66554d 0%,#827166 47%,#62564f 100%)}
+.land{background:linear-gradient(90deg,rgba(46,42,41,.92),rgba(69,57,48,.62) 52%,rgba(57,49,44,.34)),url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=2100&q=85') center/cover}
+.footer{background:radial-gradient(ellipse at 45% 0%,rgba(177,129,90,.23),transparent 58%),linear-gradient(115deg,#65544d,#847064 52%,#5b504b)}
+.bottom{background:#51453f}
+.crop{border:1px solid rgba(255,207,144,.42);box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),0 12px 38px rgba(33,27,24,.19),0 0 20px rgba(240,177,104,.10)}
+.crop:hover{box-shadow:0 14px 50px rgba(27,23,21,.28),0 0 28px rgba(250,187,105,.23);transform:translateY(-5px)}
+.wave-glow{position:absolute;inset:0;width:100%;height:100%;z-index:5;pointer-events:none;overflow:visible}
+.wave-glow path{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.wave-halo{stroke:#ffc78b;stroke-width:13px;opacity:.68;filter:blur(10px)}
+.wave-line{stroke:#ffddab;stroke-width:1.8px;opacity:.92;filter:drop-shadow(0 0 5px #ffbc69)}
+.about-copy,.section-head,.crop-grid,.land-inner,.footer>div{position:relative;z-index:6}
+.seeds{z-index:12;opacity:.8}
+@media(max-width:700px){
+ .hero{background-position:center,62% center;background-image:linear-gradient(90deg,rgba(34,33,32,.89),rgba(52,46,41,.62) 64%,rgba(44,38,33,.22)),url('/images/combine-hero.png')}
+ .about-photo{background-image:linear-gradient(90deg,rgba(44,40,38,.93),rgba(60,52,47,.70) 66%,rgba(57,50,46,.38)),url('/images/about-fields.png');background-position:center,58% center}
+ .wave-halo{stroke-width:8px}
+ .wave-line{stroke-width:1.2px}
+ .seeds{opacity:.66}
+}
