@@ -9,6 +9,7 @@ const crops=[
 function LazyBackground({src,className='',children,style={},gradient='',...props}){
  const ref=useRef(null);
  const [visible,setVisible]=useState(false);
+ const imageSrc=(typeof window!=='undefined'&&window.matchMedia('(max-width: 760px)').matches)?src.replace(/\.webp$/, '-mobile.webp'):src;
  useEffect(()=>{
   const el=ref.current;
   if(!el||!('IntersectionObserver' in window)){setVisible(true);return}
@@ -16,7 +17,7 @@ function LazyBackground({src,className='',children,style={},gradient='',...props
   observer.observe(el);
   return()=>observer.disconnect();
  },[]);
- return <div ref={ref} className={className} style={{...style,...(visible?{backgroundImage:gradient?gradient+',url("'+src+'")':'url("'+src+'")'}:{})}} {...props}>{children}</div>;
+ return <div ref={ref} className={className} style={{...style,...(visible?{backgroundImage:gradient?gradient+',url("'+imageSrc+'")':'url("'+imageSrc+'")'}:{})}} {...props}>{children}</div>;
 }
 function Seeds(){
  const host=useRef(null);
