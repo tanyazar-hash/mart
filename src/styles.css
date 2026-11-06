@@ -21,3 +21,6 @@
  .land{margin-top:-85px!important;min-height:650px;padding-top:140px!important}
  .footer{margin-top:-85px!important;padding-top:140px!important}
 }
+
+/* Second section: uploaded panoramic landscape with subtle edge shading. */
+.about-photo{background:linear-gradient(90deg,rgba(55,58,56,.79) 0%,rgba(75,76,72,.57) 39%,rgba(75,72,67,.17) 72%,rgba(58,58,54,.23) 100%),url('/images/about-fields.png') center 53%/cover;filter:saturate(.72)}
