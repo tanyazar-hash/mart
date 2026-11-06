@@ -78,16 +78,16 @@ function Seeds(){
      p.mesh.scale.setScalar((.16+p.size*.14)*(innerWidth<720?.78:1));
      p.mesh.visible=scroll>18&&f>0&&y>-.22*h&&x>-.15*w;
     }
-    if(scroll>18&&fade>0)renderer.render(scene,camera);else renderer.clear();
+    if(document.visibilityState==='visible'&&scroll>18&&fade>0)renderer.render(scene,camera);else renderer.clear();
     raf=requestAnimationFrame(tick);
    }
    tick();
   }
   let idleId=0,delayId=0;
-  if('requestIdleCallback' in window)idleId=window.requestIdleCallback(()=>{if(!dead)init()},{timeout:2500});
-  else delayId=setTimeout(()=>{if(!dead)init()},1200);
+  const schedule3D=()=>{if(dead)return;removeEventListener('scroll',schedule3D);if('requestIdleCallback' in window)idleId=window.requestIdleCallback(()=>{if(!dead)init()},{timeout:4000});else delayId=setTimeout(()=>{if(!dead)init()},1800)};
+  addEventListener('scroll',schedule3D,{passive:true,once:true});
   addEventListener('resize',resize);addEventListener('scroll',onScroll,{passive:true});
-  return()=>{dead=true;if(idleId)window.cancelIdleCallback?.(idleId);clearTimeout(delayId);cancelAnimationFrame(raf);removeEventListener('resize',resize);removeEventListener('scroll',onScroll);renderer?.dispose();renderer?.domElement.remove();geometry?.dispose();material?.dispose()};
+  return()=>{dead=true;if(idleId)window.cancelIdleCallback?.(idleId);clearTimeout(delayId);removeEventListener('scroll',schedule3D);cancelAnimationFrame(raf);removeEventListener('resize',resize);removeEventListener('scroll',onScroll);renderer?.dispose();renderer?.domElement.remove();geometry?.dispose();material?.dispose()};
  },[]);
  return <div ref={host} className="seeds" aria-hidden="true"/>;
 }
