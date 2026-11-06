@@ -584,3 +584,13 @@
 .product-reference .reference-story.wheat{margin-top:-165px;z-index:3}
 .product-reference .reference-hero{z-index:1}
 @media(max-width:700px){.product-reference .reference-story.wheat{margin-top:-155px}}
+
+/* Fix stacking order: every following masked band must cover the previous
+   rectangular bottom; preserve visible hero scroll CTA above the overlap. */
+.product-reference .reference-story.wheat{z-index:3}
+.product-reference .reference-story.sunflower{z-index:4}
+.product-reference .reference-story.flax{z-index:5}
+.product-reference .product-end{z-index:6}
+.product-reference .reference-hero-inner{transform:translateY(-78px)}
+.product-reference .reference-hero .product-scroll{position:relative;z-index:8}
+@media(max-width:700px){.product-reference .reference-hero-inner{transform:translateY(-65px)}}
