@@ -45,6 +45,13 @@ function Seeds(){
     // trajectories keep the grains together at first, then disperse slowly.
     const travel=Math.max(1800,Math.min(3400,max*.94));
     const progress=Math.max(0,Math.min(1.42,(scroll-18)/travel));
+    // Fade the falling grains out before the contacts/footer area.
+    // Never leave floating grains over the final screen.
+    const contactsTop=document.getElementById('contacts')?.offsetTop??max;
+    const fadeStart=contactsTop-innerHeight*1.5;
+    const fadeEnd=contactsTop-innerHeight*.72;
+    const fade=Math.max(0,Math.min(1,(fadeEnd-scroll)/Math.max(1,fadeEnd-fadeStart)));
+    renderer.domElement.style.opacity=String(fade);
     const h=2*Math.tan(T.MathUtils.degToRad(camera.fov/2))*camera.position.z,w=h*camera.aspect;
     for(const p of items){
      const f=Math.max(0,progress-p.delay);
@@ -57,7 +64,7 @@ function Seeds(){
      p.mesh.scale.setScalar((.16+p.size*.14)*(innerWidth<720?.78:1));
      p.mesh.visible=scroll>18&&f>0&&y>-.22*h&&x>-.15*w;
     }
-    if(scroll>18)renderer.render(scene,camera);else renderer.clear();
+    if(scroll>18&&fade>0)renderer.render(scene,camera);else renderer.clear();
     raf=requestAnimationFrame(tick);
    }
    tick();
