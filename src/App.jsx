@@ -103,11 +103,40 @@ function ProductPage({slug}){
   return()=>observer.disconnect();
  },[slug]);
  if(current)return <div className="site product-page"><header className="top product-top"><a href="#/" className="brand"><span className="mark">✳</span><span>КФХ Март</span></a><nav className="product-nav"><a href="#/">Главная</a><a href="#/products">Продукция</a><a href="#/contacts">Контакты</a></nav><a className="contact-link" href="#/products">Все культуры <ArrowUpRight size={15}/></a></header><main><section className={'product-detail-hero '+current.tone}><div className="product-detail-inner reveal"><a className="product-back" href="#/products">← К продукции</a><div className="eyebrow">{current.type} / {current.number}</div><h1>{current.name}</h1><p>{current.desc}</p><a className="btn ghost" href="#/contacts">Обсудить сотрудничество <ArrowUpRight size={16}/></a></div><div className="product-art product-art-detail has-photo" style={{backgroundImage:`linear-gradient(0deg,rgba(29,29,28,.25),rgba(29,29,28,.05)),url("${current.photo}")`}} role="img" aria-label={"Фотография культуры: "+current.name}/></section><section className="product-detail-bottom"><div className="eyebrow dark">КФХ «МАРТ»</div><h2>Земля. Труд. Урожай.</h2><p>Алтайский край, Завьяловский район, село Светлое.</p><a href="#/products">← Вернуться к продукции</a></section></main><div className="bottom"><span>© {new Date().getFullYear()} КФХ Март</span><span>Сайт в разработке</span></div></div>;
- return <div className="site product-page"><header className="top product-top"><a href="#/" className="brand"><span className="mark">✳</span><span>КФХ Март</span></a><nav className="product-nav"><a href="#/">Главная</a><a className="active" href="#/products">Продукция</a><a href="#/contacts">Контакты</a></nav><a className="contact-link" href="#/contacts">Связаться <ArrowUpRight size={15}/></a></header><main>
- <section className="product-hero"><div className="product-hero-glow" aria-hidden="true"/><div className="product-hero-content reveal"><div className="product-breadcrumb">КФХ «МАРТ» <span>/</span> ПРОДУКЦИЯ</div><div className="eyebrow">НАША ПРОДУКЦИЯ</div><h1>Выращено<br/><em>с уважением</em><br/>к земле.</h1><p>Пшеница. Подсолнечник. Лён.<br/>Три культуры, за которыми стоит труд каждого сезона.</p><a href="#product-intro" className="product-scroll"> <span>↓</span> Листайте, чтобы узнать больше</a></div><div className="product-hero-outline" aria-hidden="true">МАРТ</div><svg className="product-edge" viewBox="0 0 1000 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0 50 C200 5 340 105 530 57 S800 18 1000 55" /></svg></section>
- <section id="product-intro" className="product-intro"><div className="product-intro-number reveal">03<span>КУЛЬТУРЫ</span></div><div className="product-intro-copy reveal"><div className="eyebrow">ОТ ЗЕМЛИ ДО УРОЖАЯ</div><h2>Каждая культура —<br/>своя история.</h2><p>Мы работаем с зерновыми и масличными культурами в Алтайском крае. Ниже — три направления нашего хозяйства.</p><div className="product-intro-tags"><span>01 / Пшеница</span><span>02 / Подсолнечник</span><span>03 / Лён</span></div></div></section>
- {productStories.map((item,i)=><section key={item.slug} className={'product-story '+item.tone+(i%2?' reverse':'')} id={'culture-'+item.slug}><div className="product-story-art reveal"><div className="product-art has-photo" style={{backgroundImage:`linear-gradient(0deg,rgba(28,27,26,.28),rgba(28,27,26,0) 65%),url("${item.photo}")`}} role="img" aria-label={"Фотография культуры: "+item.name}/></div><div className="product-story-copy reveal"><div className="product-story-index">{item.number} / {item.name.toUpperCase()}</div><div className="eyebrow">{item.type}</div><h2>{item.title}</h2><p>{item.desc}</p><div className="product-story-bottom"><span>КФХ МАРТ · АЛТАЙСКИЙ КРАЙ</span><a className="product-story-link" href={'#/products/'+item.slug}>Подробнее <ArrowUpRight size={18}/></a></div></div><svg className="product-story-wave" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path d={i===0?'M0 46 C220 10 370 86 550 47 S830 10 1000 58':i===1?'M0 57 C200 86 370 14 540 50 S840 82 1000 37':'M0 42 C200 12 370 84 560 52 S850 25 1000 58'}/></svg></section>)}
- <section className="product-end"><div className="eyebrow">СОТРУДНИЧЕСТВО</div><h2>Интересует наша<br/>продукция?</h2><p>Свяжитесь с хозяйством, чтобы обсудить вопросы сотрудничества.</p><a className="btn primary" href="#/contacts">Перейти к контактам <ArrowUpRight size={17}/></a></section>
+ return <div className="site product-page product-reference">
+ <header className="top product-top product-reference-header">
+  <a href="#/" className="brand"><span className="product-brand-icon">❧</span><span className="product-brand-text"><small>КФХ</small>Март</span></a>
+  <nav className="product-nav"><a href="#/">Главная</a><a className="active" href="#/products">Продукция</a><a href="#/about">О хозяйстве</a><a href="#/machinery">Техника</a><a href="#/contacts">Контакты</a></nav>
+  <a className="contact-link" href="#/contacts">Связаться <ArrowUpRight size={15}/></a>
+ </header>
+ <main>
+  <section className="product-hero reference-hero">
+   <div className="reference-hero-shade" aria-hidden="true"/>
+   <div className="reference-hero-inner reveal">
+    <div className="product-breadcrumb">КФХ «МАРТ» <span>/</span> ПРОДУКЦИЯ</div>
+    <div className="eyebrow">НАША ПРОДУКЦИЯ</div>
+    <h1><span>Выращено</span><br/>с уважением к земле.</h1>
+    <p>Пшеница. Подсолнечник. Лён.<br/>Три культуры, за которыми стоит труд каждого сезона.</p>
+    <a href="#culture-wheat" className="product-scroll"><span>↓</span>Листайте, чтобы узнать больше</a>
+   </div>
+   <div className="reference-hero-grains" aria-hidden="true"><span>✧</span><span>✧</span><span>✧</span></div>
+   <svg className="reference-wave reference-wave-hero" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path className="reference-wave-halo" d="M0 38 C170 92 290 66 420 56 C560 40 640 104 795 59 C895 27 942 15 1000 18"/><path className="reference-wave-line" d="M0 38 C170 92 290 66 420 56 C560 40 640 104 795 59 C895 27 942 15 1000 18"/></svg>
+  </section>
+  {productStories.map((item,i)=><section key={item.slug} className={'product-story reference-story '+item.tone+(i%2?' reverse':'')} id={'culture-'+item.slug}>
+   <div className="reference-story-photo" style={{backgroundImage:`url("${item.photo}")`}} role="img" aria-label={"Фотография культуры: "+item.name}/>
+   <div className="reference-story-shade" aria-hidden="true"/>
+   <div className="reference-story-inner reveal">
+    <div className="product-story-index">{item.number} / {item.name.toUpperCase()}</div>
+    <h2>{item.title}</h2>
+    <p>{i===0?'Основная культура хозяйства. Выращиваем пшеницу на полях Алтайского края, внимательно относясь к каждому этапу работы.':i===1?'Масличная культура, которую выращиваем с заботой о почве и соблюдением агротехнологий.':'Лён — ценная масличная культура. Его выращивание требует внимательного отношения к земле и каждому сезону.'}</p>
+    <div className="reference-story-footer">
+     <div className="reference-story-features">{(i===0?['Качество урожая','Работа в поле','Забота о земле']:i===1?['Масличная культура','Внимание к почве','Опыт хозяйства']:['Масличная культура','Бережный подход','Алтайский край']).map((feature,j)=><div className="reference-story-feature" key={feature}><span className="reference-feature-symbol" aria-hidden="true">{['✳','◇','♧'][j]}</span><span>{feature}</span></div>)}</div>
+     <a className="product-story-link" href={'#/products/'+item.slug}>Подробнее <ArrowUpRight size={17}/></a>
+    </div>
+   </div>
+   <svg className="reference-wave reference-wave-story" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path className="reference-wave-halo" d={i===0?'M0 48 C160 10 295 92 430 59 C585 21 695 77 835 50 C915 35 960 31 1000 20':i===1?'M0 46 C140 68 245 16 385 43 C535 79 655 19 805 51 C900 73 951 70 1000 44':'M0 48 C180 25 310 78 475 47 C615 22 750 71 870 46 C930 35 975 29 1000 40'}/><path className="reference-wave-line" d={i===0?'M0 48 C160 10 295 92 430 59 C585 21 695 77 835 50 C915 35 960 31 1000 20':i===1?'M0 46 C140 68 245 16 385 43 C535 79 655 19 805 51 C900 73 951 70 1000 44':'M0 48 C180 25 310 78 475 47 C615 22 750 71 870 46 C930 35 975 29 1000 40'}/></svg>
+  </section>)}
+  <section className="product-end"><div className="eyebrow">СОТРУДНИЧЕСТВО</div><h2>Интересует наша<br/>продукция?</h2><p>Свяжитесь с хозяйством, чтобы обсудить вопросы сотрудничества.</p><a className="btn primary" href="#/contacts">Перейти к контактам <ArrowUpRight size={17}/></a></section>
  </main><div className="bottom"><span>© {new Date().getFullYear()} КФХ Март</span><span>Сайт в разработке</span></div></div>;
 }
 function App(){
