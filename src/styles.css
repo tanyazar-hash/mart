@@ -299,3 +299,16 @@
  .footer{padding-top:112px!important}
  .wave-halo{stroke-width:6px}
 }
+
+/* Mobile seam fix: the outgoing landscape must continue behind the entire
+   incoming products wave, including its lowest dip. The former 56px overlap
+   exposed the flat site background on tall mobile sections. */
+@media(max-width:700px){
+ #products.products{
+   margin-top:-132px!important;
+   padding-top:194px!important;
+ }
+}
+@media(max-width:380px){
+ #products.products{padding-top:184px!important}
+}
