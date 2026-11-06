@@ -312,3 +312,10 @@
 @media(max-width:380px){
  #products.products{padding-top:184px!important}
 }
+
+/* Product cards are previews only until dedicated product pages are ready. */
+.crop{cursor:default}
+.crop.reveal.is-visible:hover,.crop.reveal.is-visible:focus-visible{transform:translate3d(0,0,0)}
+.crop:hover:before{opacity:0}
+.crop:hover .crop-arrow{transform:none;border-color:rgba(255,255,255,.35)}
+.crop-more,.crop-detail{display:none}
