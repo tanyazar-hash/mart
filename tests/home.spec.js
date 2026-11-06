@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('main page displays real farm content and navigation', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: 'МАРТЫНОВ', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'МАРТ', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'О хозяйстве' })).toBeAttached();
   await expect(page.getByRole('heading', { name: 'Что мы выращиваем' })).toBeAttached();
   for (const name of ['Пшеница', 'Подсолнечник', 'Лён']) {
