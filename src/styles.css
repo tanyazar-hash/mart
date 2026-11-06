@@ -785,3 +785,32 @@ button,a{-webkit-tap-highlight-color:transparent}
 .crop:focus-within .crop-arrow{transform:translate(2px,-2px)}
 @media(hover:hover){.crop:hover .crop-arrow{transform:translate(2px,-2px)}}
 @media(max-width:600px){.crop .crop-hit{min-height:44px}}
+
+/* Visual refinement: editorial rhythm without changing the established layout. */
+.site{--content-gutter:clamp(20px,5.5vw,88px);--accent-warm:#e5b778}
+.site h1,.site h2,.site h3{text-wrap:balance}
+.site p{text-wrap:pretty}
+.site .eyebrow{letter-spacing:.16em}
+.site .brand,.site .btn,.site .product-story-link{text-decoration:none}
+.site .btn,.site .contact-link,.site .product-story-link{min-height:44px}
+.site .crop{background-color:#393831;box-shadow:0 12px 32px rgba(20,19,17,.09)}
+.site .crop-info{position:relative;z-index:2;pointer-events:none}
+.site .crop-arrow{position:relative;z-index:2;pointer-events:none;transition:transform .24s ease}
+.site .product-reference .reference-story-inner{max-width:min(100%,1240px)}
+.site .product-reference .reference-story-inner p{max-width:640px;line-height:1.7}
+.site .product-reference .reference-story-features{row-gap:12px}
+.site .product-detail-page .product-detail-inner p{line-height:1.72}
+.site .product-detail-page .product-art-detail{background-color:#383530}
+.site .product-detail-page .product-detail-bottom p{line-height:1.7}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ .site .crop{transition:box-shadow .3s ease,transform .3s ease}
+ .site .crop:hover{box-shadow:0 22px 46px rgba(20,19,17,.19);transform:translateY(-3px)}
+}
+@media(max-width:700px){
+ .site .crop{height:clamp(275px,85vw,360px);border-radius:18px}
+ .site .crop-info{max-width:100%}
+ .site .product-reference .reference-story-inner p{line-height:1.65}
+ .site .product-detail-page .product-detail-inner p{line-height:1.65}
+ .site .bottom{line-height:1.5}
+}
+@media(prefers-reduced-motion:reduce){.site .crop{transition:none!important;transform:none!important}}
