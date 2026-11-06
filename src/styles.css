@@ -661,7 +661,7 @@
 @media(max-width:700px){.product-detail-page .product-reference-header{padding:0 5%;gap:10px}.product-detail-page .product-nav{gap:10px}.product-detail-page .product-nav a{font-size:10px}.product-detail-page .product-nav a:nth-child(3),.product-detail-page .product-nav a:nth-child(4),.product-detail-page .product-nav a:nth-child(5){display:none}.product-detail-page .product-reference-header .contact-link{padding:9px 12px}.product-detail-page .product-detail-bottom{padding:65px 18px}}
 
 /* Crop detail pages share the same clean, transparent navigation as Products. */
-.product-detail-page .product-reference-header{position:absolute;top:0;left:0;right:0;z-index:100;background:linear-gradient(180deg,rgba(25,24,23,.55),rgba(25,24,23,0));box-shadow:none;filter:none}
+.product-detail-page .product-reference-header{position:absolute;top:0;left:0;right:0;z-index:100;background:transparent;box-shadow:none;filter:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .product-detail-page .product-detail-hero{position:relative;overflow:hidden;min-height:100svh;padding-bottom:135px}
 /* The filled SVG masks the former straight seam; the white stroke follows its edge. */
 .product-detail-page .reference-wave{bottom:-1px;height:96px;z-index:20;overflow:hidden}
