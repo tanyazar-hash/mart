@@ -319,3 +319,10 @@
 .crop:hover:before{opacity:0}
 .crop:hover .crop-arrow{transform:none;border-color:rgba(255,255,255,.35)}
 .crop-more,.crop-detail{display:none}
+
+/* Keep gentle hover animation, but cards do not respond to clicks. */
+@media(hover:hover) and (pointer:fine){
+ .crop.reveal.is-visible:hover{transform:translate3d(0,-6px,0)}
+ .crop:hover:before{opacity:1}
+ .crop:hover .crop-arrow{transform:rotate(45deg);border-color:#fff}
+}
