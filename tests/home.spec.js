@@ -90,3 +90,14 @@ test('mobile waves are shallow, glowing and do not overlap section headings', as
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
   expect(overflow).toBeLessThanOrEqual(2);
 });
+
+test('mobile about landscape extends behind the full products wave', async ({ page }, testInfo) => {
+  if(testInfo.project.name!=='mobile-chromium')return;
+  await page.goto('/');
+  const geometry=await page.evaluate(()=>{
+    const about=document.querySelector('#about').getBoundingClientRect();
+    const products=document.querySelector('#products').getBoundingClientRect();
+    return {overlap:about.bottom-products.top,required:products.height*.075};
+  });
+  expect(geometry.overlap).toBeGreaterThan(geometry.required);
+});
