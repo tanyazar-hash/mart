@@ -90,9 +90,9 @@ function WaveGlow({shape}) {
  return <><svg className="wave-glow wave-desktop" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"><path className="wave-halo" d={curves[shape]}/><path className="wave-line" d={curves[shape]}/></svg><svg className="wave-glow wave-mobile" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"><path className="wave-halo" d={mobileCurves[shape]}/><path className="wave-line" d={mobileCurves[shape]}/></svg></>;
 }
 const productStories=[
- {slug:'wheat',number:'01',name:'Пшеница',title:'Золото наших полей',type:'ЗЕРНОВАЯ КУЛЬТУРА',desc:'Пшеница — одна из основных культур нашего хозяйства. Каждый сезон за урожаем стоят подготовка почвы, уход за посевами и работа в поле.',note:'Поля Алтайского края',tone:'wheat',photo:import.meta.env.BASE_URL+'psen1.png'},
- {slug:'sunflower',number:'02',name:'Подсолнечник',title:'Солнце в каждом семени',type:'МАСЛИЧНАЯ КУЛЬТУРА',desc:'Подсолнечник — важное направление растениеводства КФХ «Март». Внимание к каждому этапу выращивания помогает нам работать на результат.',note:'Труд каждого сезона',tone:'sunflower',photo:import.meta.env.BASE_URL+'sem2.png'},
- {slug:'flax',number:'03',name:'Лён',title:'Сила в каждой детали',type:'МАСЛИЧНАЯ КУЛЬТУРА',desc:'Лён — культура, требующая внимательного подхода. Мы выращиваем его в условиях Алтайского края наряду с другими полевыми культурами.',note:'Выращено на нашей земле',tone:'flax',photo:import.meta.env.BASE_URL+'len2.png'}
+ {slug:'wheat',number:'01',name:'Пшеница',title:'Золото наших полей',type:'ЗЕРНОВАЯ КУЛЬТУРА',desc:'Пшеница — одна из основных культур нашего хозяйства. Каждый сезон за урожаем стоят подготовка почвы, уход за посевами и работа в поле.',note:'Поля Алтайского края',tone:'wheat',photo:import.meta.env.BASE_URL+'images/psen1.png'},
+ {slug:'sunflower',number:'02',name:'Подсолнечник',title:'Солнце в каждом семени',type:'МАСЛИЧНАЯ КУЛЬТУРА',desc:'Подсолнечник — важное направление растениеводства КФХ «Март». Внимание к каждому этапу выращивания помогает нам работать на результат.',note:'Труд каждого сезона',tone:'sunflower',photo:import.meta.env.BASE_URL+'images/sem2.png'},
+ {slug:'flax',number:'03',name:'Лён',title:'Сила в каждой детали',type:'МАСЛИЧНАЯ КУЛЬТУРА',desc:'Лён — культура, требующая внимательного подхода. Мы выращиваем его в условиях Алтайского края наряду с другими полевыми культурами.',note:'Выращено на нашей земле',tone:'flax',photo:import.meta.env.BASE_URL+'images/len2.png'}
 ];
 function ProductPage({slug}){
  const current=productStories.find(item=>item.slug===slug);
