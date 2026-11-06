@@ -73,12 +73,10 @@ function Seeds(){
           const copy=model.clone(true);
           copy.position.sub(center);
           copy.scale.setScalar(.75/max);
-          s.mesh.geometry=undefined;
-          s.mesh.material=undefined;
+          s.mesh.material=new THREE.MeshBasicMaterial({visible:false});
           s.mesh.add(copy);
         });
-        geometry.dispose();material.dispose();
-      }catch{ /* GLB not yet in repository: use procedural kernels. */ }
+        }catch{ /* GLB not yet in repository: use procedural kernels. */ }
     };
     start();
     window.addEventListener('resize',onResize);
