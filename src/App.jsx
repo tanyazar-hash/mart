@@ -119,6 +119,7 @@ function ProductPage({slug}){
     <p>Пшеница. Подсолнечник. Лён.<br/>Три культуры, за которыми стоит труд каждого сезона.</p>
     <a href="#culture-wheat" className="product-scroll"><span>↓</span>Листайте, чтобы узнать больше</a>
    </div>
+   <div className="reference-hero-aside" aria-hidden="true"><div className="reference-aside-ring"><span>МАРТ</span><span className="reference-aside-seed">✳</span><span>ЗЕМЛЯ · ТРУД · УРОЖАЙ</span></div><div className="reference-aside-caption"><span>АЛТАЙСКИЙ КРАЙ</span><strong>03</strong><span>КУЛЬТУРЫ<br/>ОДНА ЗЕМЛЯ</span></div></div>
    <div className="reference-hero-grains" aria-hidden="true"><span>✧</span><span>✧</span><span>✧</span></div>
    <svg className="reference-wave reference-wave-hero" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path className="reference-wave-halo" d="M0 38 C170 92 290 66 420 56 C560 40 640 104 795 59 C895 27 942 15 1000 18"/><path className="reference-wave-line" d="M0 38 C170 92 290 66 420 56 C560 40 640 104 795 59 C895 27 942 15 1000 18"/></svg>
   </section>
