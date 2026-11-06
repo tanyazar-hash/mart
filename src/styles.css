@@ -594,3 +594,7 @@
 .product-reference .reference-hero-inner{transform:translateY(-78px)}
 .product-reference .reference-hero .product-scroll{position:relative;z-index:8}
 @media(max-width:700px){.product-reference .reference-hero-inner{transform:translateY(-65px)}}
+
+/* Compact cooperation CTA: ~30% less vertical space, preserve wave mask. */
+@media(min-width:701px){.product-reference .product-end{padding-top:130px;padding-bottom:72px}}
+@media(max-width:700px){.product-reference .product-end{padding-top:125px;padding-bottom:65px}}
