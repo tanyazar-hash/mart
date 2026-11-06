@@ -814,3 +814,19 @@ button,a{-webkit-tap-highlight-color:transparent}
  .site .bottom{line-height:1.5}
 }
 @media(prefers-reduced-motion:reduce){.site .crop{transition:none!important;transform:none!important}}
+
+/* Final visual consistency: wave seams, photo framing, type and touch targets. */
+.product-detail-page .product-detail-hero{background-color:#292825}
+.product-detail-page .reference-wave .detail-wave-fill{fill:#514c47!important;stroke:none!important;filter:none!important}
+.product-detail-page .reference-wave .reference-wave-line{stroke-width:1.7px}
+.product-detail-page .product-detail-bottom{background:linear-gradient(180deg,#514c47 0%,#48443f 22%,#373532 100%)}
+.product-reference .reference-story .reference-story-photo{background-repeat:no-repeat;background-size:cover}
+.product-reference .reference-story .reference-story-inner p{max-width:56ch}
+.product-reference .reference-story .product-story-link{min-height:44px}
+.product-reference .product-scroll:focus-visible,.product-detail-page .product-back:focus-visible,.product-reference .product-story-link:focus-visible{outline:2px solid #e5b778;outline-offset:5px}
+@media(max-width:700px){
+ .product-detail-page .product-detail-hero{padding-inline:max(20px,6vw)}
+ .product-detail-page .product-detail-inner h1{letter-spacing:-.045em}
+ .product-reference .reference-story .reference-story-inner p{max-width:100%}
+ .product-reference .reference-story .product-story-link{max-width:100%}
+}
