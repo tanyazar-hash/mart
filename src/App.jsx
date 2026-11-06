@@ -81,7 +81,13 @@ function WaveGlow({shape}) {
   c:"M0 120 C200 15 400 70 570 40 C740 -15 870 -20 1000 55",
   d:"M0 80 C170 160 370 20 550 60 C720 110 870 200 1000 95"
  };
- return <svg className="wave-glow" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"><path className="wave-halo" d={curves[shape]}/><path className="wave-line" d={curves[shape]}/></svg>;
+ const mobileCurves={
+  a:"M0 48 C180 18 320 38 500 56 C690 74 830 45 1000 35",
+  b:"M0 40 C170 58 360 66 540 47 C730 28 860 32 1000 51",
+  c:"M0 49 C170 29 330 31 510 48 C690 65 830 58 1000 39",
+  d:"M0 41 C190 61 330 58 510 43 C690 28 850 39 1000 54"
+ };
+ return <><svg className="wave-glow wave-desktop" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"><path className="wave-halo" d={curves[shape]}/><path className="wave-line" d={curves[shape]}/></svg><svg className="wave-glow wave-mobile" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"><path className="wave-halo" d={mobileCurves[shape]}/><path className="wave-line" d={mobileCurves[shape]}/></svg></>;
 }
 function App(){
  const[menu,setMenu]=useState(false);
@@ -113,6 +119,10 @@ function App(){
 <clipPath id="wave-b" clipPathUnits="objectBoundingBox"><path d="M0,.085 C.19,-.015 .34,.025 .52,.13 C.70,.21 .85,.15 1,.025 L1,1 L0,1 Z"/></clipPath>
 <clipPath id="wave-c" clipPathUnits="objectBoundingBox"><path d="M0,.12 C.20,.015 .40,.07 .57,.04 C.74,-.015 .87,-.02 1,.055 L1,1 L0,1 Z"/></clipPath>
 <clipPath id="wave-d" clipPathUnits="objectBoundingBox"><path d="M0,.08 C.17,.16 .37,.02 .55,.06 C.72,.11 .87,.20 1,.095 L1,1 L0,1 Z"/></clipPath>
+<clipPath id="wave-a-mobile" clipPathUnits="objectBoundingBox"><path d="M0,.048 C.18,.018 .32,.038 .50,.056 C.69,.074 .83,.045 1,.035 L1,1 L0,1 Z"/></clipPath>
+<clipPath id="wave-b-mobile" clipPathUnits="objectBoundingBox"><path d="M0,.040 C.17,.058 .36,.066 .54,.047 C.73,.028 .86,.032 1,.051 L1,1 L0,1 Z"/></clipPath>
+<clipPath id="wave-c-mobile" clipPathUnits="objectBoundingBox"><path d="M0,.049 C.17,.029 .33,.031 .51,.048 C.69,.065 .83,.058 1,.039 L1,1 L0,1 Z"/></clipPath>
+<clipPath id="wave-d-mobile" clipPathUnits="objectBoundingBox"><path d="M0,.041 C.19,.061 .33,.058 .51,.043 C.69,.028 .85,.039 1,.054 L1,1 L0,1 Z"/></clipPath>
 </defs></svg><Seeds/><header className="top"><a href="#home" className="brand"><span className="mark">✳</span><span>КФХ Март</span></a><span className="location"><MapPin size={13}/> Алтайский край, Завьяловский район, с. Светлое</span><nav className={menu?'active':''}><a href="#home" onClick={()=>setMenu(false)}>Главная</a><a href="#about" onClick={()=>setMenu(false)}>О хозяйстве</a><a href="#products" onClick={()=>setMenu(false)}>Продукция</a><a href="#contacts" onClick={()=>setMenu(false)}>Контакты</a></nav><a className="contact-link" href="#contacts">Связаться <ArrowUpRight size={15}/></a><button className="hamburger" onClick={()=>setMenu(!menu)} aria-label="Открыть меню">{menu?<X/>:<Menu/>}</button></header>
 <main><section id="home" className="hero"><div className="hero-shade"/><div className="hero-dust" aria-hidden="true"/><div className="hero-copy reveal"><div className="eyebrow">РАСТЕНИЕВОДЧЕСКОЕ ХОЗЯЙСТВО</div><h1>МАРТ</h1><p className="tagline">Земля. Труд. Урожай.</p><p className="lead">Выращиваем пшеницу, подсолнечник<br/> и лён в Алтайском крае.</p><div className="actions"><a className="btn primary" href="#products">Наша продукция <ArrowRight size={16}/></a><a className="btn ghost" href="#about">О хозяйстве</a></div><div className="scroll-hint">ЛИСТАЙТЕ ВНИЗ <span>↓</span></div></div></section>
 <section id="about" className="about"><WaveGlow shape="a"/><div className="about-photo"/><div className="about-copy reveal"><div className="eyebrow dark">О НАС</div><h2>О хозяйстве</h2><p>КФХ Март — сельскохозяйственное хозяйство в Завьяловском районе Алтайского края, село Светлое.</p><p>Выращиваем зерновые и масличные культуры, работаем на земле и развиваем производство.</p><a className="text-link" href="#products">Что мы выращиваем <ArrowRight size={18}/></a></div></section>
