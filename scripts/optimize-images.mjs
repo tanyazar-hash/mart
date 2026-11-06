@@ -7,11 +7,11 @@ for(let offset=0;offset<files.length;offset+=2){
  await Promise.all(files.slice(offset,offset+2).map(async name=>{
  const source=path.join(folder,name),base=name.replace(/\.(png|jpe?g)$/i,'');
  const info=await sharp(source).metadata();
- const width=Math.min(info.width||1600,1600);
- const mobileWidth=Math.min(info.width||760,760);
+ const width=Math.min(info.width||1280,1280);
+ const mobileWidth=Math.min(info.width||640,640);
  await Promise.all([
-  sharp(source).rotate().resize({width,withoutEnlargement:true}).webp({quality:74,effort:5}).toFile(path.join(folder,base+'.webp')),
-  sharp(source).rotate().resize({width:mobileWidth,withoutEnlargement:true}).webp({quality:68,effort:5}).toFile(path.join(folder,base+'-mobile.webp'))
+  sharp(source).rotate().resize({width,withoutEnlargement:true}).webp({quality:68,effort:4}).toFile(path.join(folder,base+'.webp')),
+  sharp(source).rotate().resize({width:mobileWidth,withoutEnlargement:true}).webp({quality:60,effort:4}).toFile(path.join(folder,base+'-mobile.webp'))
  ]);
  console.log('Optimized',name,'->',base+'.webp',base+'-mobile.webp');
 }));
