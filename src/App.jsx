@@ -1,4 +1,4 @@
-import React,{useEffect,useRef,useState} from 'react';
+import React,{useEffect,useLayoutEffect,useRef,useState} from 'react';
 import{ArrowUpRight,ArrowRight,MapPin,Menu,X}from'lucide-react';
 const crops=[
 {name:'Пшеница',desc:'Зерновая культура • выращиваем в Алтайском крае',image:import.meta.env.BASE_URL+'images/wheat-card.webp'},
