@@ -42,3 +42,27 @@ test('scrolling works and capture desktop/mobile reference screenshot', async ({
     await expect(page.locator('.seeds canvas')).toHaveCount(1, { timeout: 15000 });
   }
 });
+
+test('product cards open real details and can be collapsed', async ({ page }) => {
+  await page.goto('/');
+  const wheat=page.getByRole('button',{name:'Подробнее: Пшеница'});
+  await wheat.scrollIntoViewIfNeeded();
+  await wheat.click();
+  await expect(wheat).toHaveAttribute('aria-expanded','true');
+  await expect(page.locator('.crop-detail')).toContainText('Пшеница');
+  await wheat.click();
+  await expect(wheat).toHaveAttribute('aria-expanded','false');
+  await expect(page.locator('.crop-detail')).toHaveCount(0);
+});
+
+test('contacts have a usable address and mobile menu works', async ({ page }, testInfo) => {
+  await page.goto('/');
+  await expect(page.getByRole('button',{name:/Скопировать адрес/})).toBeAttached();
+  await expect(page.locator('#contacts')).toContainText('село Светлое');
+  if(testInfo.project.name==='mobile-chromium'){
+    await page.getByRole('button',{name:'Открыть меню'}).click();
+    await expect(page.locator('header nav')).toHaveClass(/active/);
+    await page.locator('header nav').getByRole('link',{name:'Продукция'}).click();
+    await expect(page.locator('header nav')).not.toHaveClass(/active/);
+  }
+});
