@@ -40,9 +40,9 @@ const productStories=[
  {slug:'flax',number:'03',name:'Лён',title:'Сила в каждой детали',type:'МАСЛИЧНАЯ КУЛЬТУРА',desc:'Лён — культура, требующая внимательного подхода. Мы выращиваем его в условиях Алтайского края наряду с другими полевыми культурами.',note:'Выращено на нашей земле',tone:'flax',photo:import.meta.env.BASE_URL+'images/len2.webp'}
 ];
 function ProductPage({slug}){
+ useLayoutEffect(()=>{window.scrollTo({top:0,left:0,behavior:'instant'});const id=requestAnimationFrame(()=>window.scrollTo(0,0));return()=>cancelAnimationFrame(id)},[slug]);
  const current=productStories.find(item=>item.slug===slug);
  useEffect(()=>{
-  window.scrollTo({top:0,behavior:'instant'});
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:.08});
   document.querySelectorAll('.product-page .reveal').forEach(el=>observer.observe(el));
   return()=>observer.disconnect();
@@ -86,6 +86,7 @@ function ProductPage({slug}){
  </main><div className="bottom"><span>© {new Date().getFullYear()} КФХ Март</span><span>Сайт в разработке</span></div></div>;
 }
 function App(){
+ useEffect(()=>{if('scrollRestoration' in history)history.scrollRestoration='manual'},[]);
  const[menu,setMenu]=useState(false);
  const[route,setRoute]=useState(()=>window.location.hash);
  const[copied,setCopied]=useState(false);
