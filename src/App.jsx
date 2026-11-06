@@ -23,8 +23,8 @@ function Seeds(){
     if(dead)return;
     const raw=gltf.scene,bounds=new T.Box3().setFromObject(raw),size=new T.Vector3(),center=new T.Vector3();
     bounds.getSize(size);bounds.getCenter(center);
-    raw.position.sub(center);raw.scale.setScalar(1/(Math.max(size.x,size.y,size.z)||1));
-    model=new T.Group();model.add(raw);
+    raw.position.sub(center);
+    model=new T.Group();model.scale.setScalar(1/(Math.max(size.x,size.y,size.z)||1));model.add(raw);
    }catch(err){console.warn('Wheat GLB could not load',err)}
    if(!model){geometry=new T.SphereGeometry(1,12,9);geometry.scale(.22,.46,.19);material=new T.MeshStandardMaterial({color:0xc7a16a,roughness:.82})}
    const count=innerWidth<720?13:30;
@@ -41,7 +41,7 @@ function Seeds(){
     const h=2*Math.tan(T.MathUtils.degToRad(camera.fov/2))*camera.position.z,w=h*camera.aspect;
     for(const p of items){
      const f=Math.max(0,(progress-p.delay)/(1-p.delay)),e=f*f*(3-2*f);
-     const x=w*(.55+p.start*.17)-w*(.24+p.drift*.54)*(1-Math.exp(-f*5))+Math.sin(t*.55+p.turn*7)*w*.006*f;
+     const x=w*(1.04+p.start*.13)-w*(.43+p.drift*.67)*(1-Math.exp(-f*5))+Math.sin(t*.55+p.turn*7)*w*.006*f;
      const y=h*(.62+p.start*.13)-h*(1.85+p.depth*.52)*e;
      p.mesh.position.set(x-w*.5,y-h*.5,p.depth*1.3-.6);
      p.mesh.rotation.set(p.turn*4+f*7,t*.15+p.turn*5+f*8,p.start*3+f*5);
