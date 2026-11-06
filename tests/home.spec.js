@@ -66,3 +66,27 @@ test('contacts have a usable address and mobile menu works', async ({ page }, te
     await expect(page.locator('header nav')).not.toHaveClass(/active/);
   }
 });
+
+test('mobile waves are shallow, glowing and do not overlap section headings', async ({ page }, testInfo) => {
+  if(testInfo.project.name!=='mobile-chromium')return;
+  await page.goto('/');
+  const sections=['#about','#products','.land','#contacts'];
+  const clips=['wave-a-mobile','wave-b-mobile','wave-c-mobile','wave-d-mobile'];
+  for(let i=0;i<sections.length;i++){
+    const section=page.locator(sections[i]);
+    await section.scrollIntoViewIfNeeded();
+    const clip=await section.evaluate(el=>getComputedStyle(el).clipPath);
+    expect(clip).toContain(clips[i]);
+    const heading=section.getByRole('heading').first();
+    await expect(heading).toBeVisible();
+    const safe=await heading.evaluate(el=>{
+      const h=el.getBoundingClientRect(),s=el.closest('section').getBoundingClientRect();
+      return h.top-s.top>60 && h.width>0 && h.right<=window.innerWidth+2;
+    });
+    expect(safe).toBeTruthy();
+    await expect(section.locator('.wave-mobile')).toBeVisible();
+    await expect(section.locator('.wave-desktop')).toBeHidden();
+  }
+  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
+  expect(overflow).toBeLessThanOrEqual(2);
+});
