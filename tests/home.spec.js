@@ -24,12 +24,9 @@ test('organic SVG waves are applied and layout has no horizontal overflow', asyn
   expect(width.scroll).toBeLessThanOrEqual(width.viewport + 2);
 });
 
-test('wheat GLB asset is available', async ({ request }) => {
-  const response = await request.get('/models/wheat-seed.glb');
-  expect(response.ok()).toBeTruthy();
-  const data = await response.body();
-  expect(data.byteLength).toBeGreaterThan(1000);
-  expect(data.subarray(0,4).toString()).toBe('glTF');
+test('heavy 3D seed animation is removed', async ({ page }) => {
+ await page.goto('/');
+ await expect(page.locator('.seeds, .seeds canvas')).toHaveCount(0);
 });
 
 test('scrolling works and capture desktop/mobile reference screenshot', async ({ page }, testInfo) => {
@@ -38,14 +35,12 @@ test('scrolling works and capture desktop/mobile reference screenshot', async ({
   await page.locator('#products').scrollIntoViewIfNeeded();
   await expect(page.getByRole('heading', { name: 'Что мы выращиваем' })).toBeVisible();
   await page.screenshot({ path: testInfo.outputPath('products.png'), fullPage: false });
-  if (testInfo.project.name === 'desktop-chromium') {
-    await expect(page.locator('.seeds canvas')).toHaveCount(1, { timeout: 15000 });
-  }
+  await expect(page.locator('.seeds canvas')).toHaveCount(0);
 });
 
 test('product previews do not open an inline detail panel', async ({ page }) => {
   await page.goto('/');
-  const cards=page.locator('#products article.crop');
+  const cards=page.locator('#products .crop');
   await expect(cards).toHaveCount(3);
   await expect(page.locator('.crop-detail')).toHaveCount(0);
   await expect(page.locator('#products button.crop')).toHaveCount(0);
@@ -108,8 +103,9 @@ test('products matches full-bleed reference with a photo-free hero', async ({ pa
   await expect(page.locator('.product-story')).toHaveCount(3);
   await expect(page.locator('.reference-story-photo')).toHaveCount(3);
   await expect(page.locator('.product-story img')).toHaveCount(0);
-  for (const [slug, file] of [['wheat','psen1.png'],['sunflower','sem2.png'],['flax','len2.png']]) {
+  for (const [slug, file] of [['wheat','psen1.webp'],['sunflower','sem2.webp'],['flax','len2.webp']]) {
     const art=page.locator('#culture-'+slug+' .reference-story-photo');
+    await art.scrollIntoViewIfNeeded();
     await expect(art).toHaveCSS('background-image',new RegExp(file.replace('.','\\.')));
     const response=await page.request.get('/images/'+file);
     expect(response.ok()).toBeTruthy();
