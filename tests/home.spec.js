@@ -99,15 +99,17 @@ test('mobile about landscape extends behind the full products wave', async ({ pa
 });
 
 
-test('products is a separate responsive page with graphic-only first two sections', async ({ page }) => {
+test('products matches full-bleed reference with a photo-free hero', async ({ page }) => {
   await page.goto('/#/products');
   await expect(page.getByRole('heading',{name:/Выращено/})).toBeVisible();
   await expect(page.locator('.product-hero img, .product-intro img')).toHaveCount(0);
+  await expect(page.locator('.product-intro')).toHaveCount(0);
+  await expect(page.locator('.reference-wave')).toHaveCount(4);
   await expect(page.locator('.product-story')).toHaveCount(3);
-  await expect(page.locator('.product-art')).toHaveCount(3);
+  await expect(page.locator('.reference-story-photo')).toHaveCount(3);
   await expect(page.locator('.product-story img')).toHaveCount(0);
   for (const [slug, file] of [['wheat','psen1.png'],['sunflower','sem2.png'],['flax','len2.png']]) {
-    const art=page.locator('#culture-'+slug+' .product-art');
+    const art=page.locator('#culture-'+slug+' .reference-story-photo');
     await expect(art).toHaveCSS('background-image',new RegExp(file.replace('.','\\.')));
     const response=await page.request.get('/images/'+file);
     expect(response.ok()).toBeTruthy();
