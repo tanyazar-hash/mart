@@ -171,3 +171,15 @@
  .wave-halo{stroke-width:8px;opacity:.6;filter:blur(5px)}
  .wave-line{stroke-width:1.35px;opacity:.95}
 }
+
+/* Contacts: details on the left, main collaboration copy on the right. */
+@media(min-width:901px){
+ .footer{display:grid;grid-template-columns:minmax(220px, .7fr) minmax(0,1.3fr);column-gap:clamp(45px,6vw,130px);align-items:start;justify-content:initial}
+ .footer>.contact-note{grid-column:1;grid-row:1;width:100%;max-width:320px;padding-top:125px;margin:0}
+ .footer>div:first-child{grid-column:2;grid-row:1;width:100%;max-width:640px;margin:0;justify-self:end}
+}
+@media(max-width:900px){
+ .footer{display:flex;flex-direction:column;align-items:stretch}
+ .footer>.contact-note{order:2;max-width:570px;width:100%;padding-top:24px;margin:0}
+ .footer>div:first-child{order:1;width:100%;max-width:570px;margin:0}
+}
