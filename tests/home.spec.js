@@ -122,3 +122,15 @@ test('culture details open as pages and navigate back', async ({ page }) => {
   await expect(page).toHaveURL(/#\/products$/);
   await expect(page.locator('.product-story')).toHaveCount(3);
 });
+
+test('home sections remain visible after returning from products', async ({ page }) => {
+ await page.goto('/');
+ await page.getByRole('link',{name:'Продукция'}).first().click();
+ await expect(page).toHaveURL(/#\/products$/);
+ await page.getByRole('link',{name:'Главная'}).first().click();
+ for(const selector of ['#about','#products','.land','#contacts']){
+  const section=page.locator(selector);
+  await section.scrollIntoViewIfNeeded();
+  await expect(section.locator('.reveal').first()).toHaveClass(/is-visible/);
+ }
+});
