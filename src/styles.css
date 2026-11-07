@@ -1271,3 +1271,21 @@ button,a{-webkit-tap-highlight-color:transparent}
 .site.contacts-page .contacts-footer a{display:inline-flex;align-items:center;gap:9px;color:#e9d6be;text-decoration:none}
 @media(max-width:850px){.site.contacts-page .contacts-intro{padding-top:75px;padding-bottom:75px}.site.contacts-page .contacts-hero-layout{display:block;margin-bottom:65px}.site.contacts-page .contacts-hero-lead{margin-top:34px;max-width:480px}.site.contacts-page .contacts-intro-bottom{grid-template-columns:1fr 1fr}.site.contacts-page .contacts-cta{grid-column:1/-1;justify-self:start}.site.contacts-page .contacts-map-section{padding-top:70px;padding-bottom:75px}}
 @media(max-width:550px){.site.contacts-page .contacts-header{height:74px}.site.contacts-page .contacts-intro{padding:68px 22px 65px}.site.contacts-page .contacts-intro h1{font-size:clamp(65px,16vw,90px)}.site.contacts-page .contacts-intro-bottom{grid-template-columns:1fr;gap:28px}.site.contacts-page .contacts-cta{grid-column:auto}.site.contacts-page .contacts-map-section{padding:65px 18px 75px}.site.contacts-page .contacts-map-heading{display:block}.site.contacts-page .contacts-map-heading>span{display:block;margin-top:18px}.site.contacts-page .contacts-map-frame,.site.contacts-page .contacts-map-frame iframe{height:450px}.site.contacts-page .contacts-footer{padding:30px 22px;flex-wrap:wrap}}
+
+/* Contacts visual parity: same header and exact crop-section gradient */
+.site.contacts-page{background:#96938d}
+.site.contacts-page .contacts-header{position:absolute;top:0;left:0;right:0;z-index:50;height:82px;background:transparent;box-shadow:none}
+.site.contacts-page .contacts-intro{position:relative;max-width:none;width:100%;min-height:830px;margin:0;padding:170px max(clamp(28px,6vw,110px),calc((100vw - 1450px)/2)) 210px;background:radial-gradient(ellipse at 50% 5%,#aaa9a0,#9a9991 62%,#858780 100%);color:#fff}
+.site.contacts-page .contacts-intro>.contacts-kicker,.site.contacts-page .contacts-hero-layout,.site.contacts-page .contacts-intro-bottom{max-width:1450px;margin-left:auto;margin-right:auto}
+.site.contacts-page .contacts-intro h1,.site.contacts-page .contacts-intro h1 span{color:#f4f0e9}
+.site.contacts-page .contacts-hero-lead{color:#f4f0e9}
+.site.contacts-page .contacts-intro-bottom p{color:#f4f0e9}
+.site.contacts-page .contacts-cta{color:#fff;border-color:rgba(255,255,255,.7)}
+.site.contacts-page .contacts-wave{position:absolute;bottom:-1px;left:0;width:100%;height:140px;pointer-events:none;z-index:3}
+.site.contacts-page .contacts-wave svg{display:block;width:100%;height:100%;overflow:visible}
+.site.contacts-page .contacts-wave-fill{fill:#e8e2d9}
+.site.contacts-page .contacts-wave-halo{fill:none;stroke:#fff;stroke-width:11;opacity:.56;filter:blur(8px);vector-effect:non-scaling-stroke}
+.site.contacts-page .contacts-wave-line{fill:none;stroke:#fff;stroke-width:1.9;opacity:.98;filter:drop-shadow(0 0 5px #fff);vector-effect:non-scaling-stroke}
+.site.contacts-page .contacts-map-section{position:relative;padding-top:105px}
+@media(max-width:850px){.site.contacts-page .contacts-intro{min-height:0;padding:155px 28px 175px}.site.contacts-page .contacts-wave{height:95px}.site.contacts-page .contacts-map-section{padding-top:85px}}
+@media(max-width:550px){.site.contacts-page .contacts-header{height:74px}.site.contacts-page .contacts-intro{padding:130px 22px 135px}.site.contacts-page .contacts-wave{height:70px}.site.contacts-page .contacts-map-section{padding-top:70px}}
