@@ -1149,3 +1149,57 @@ button,a{-webkit-tap-highlight-color:transparent}
   .product-reference .reference-hero-inner.reveal,
   .about-page .about-hero-content.reveal{animation:none!important;opacity:1!important;transform:none!important}
 }
+
+/* About-page final refinement: balanced rhythm, readable contrast and touch targets. */
+.about-page{overflow-x:clip}
+.about-page .about-hero-content{width:min(100%,650px)}
+.about-page .about-hero h1{max-width:650px;text-wrap:balance}
+.about-page .about-hero p{max-width:470px;text-wrap:pretty}
+.about-page .about-history,
+.about-page .about-people{column-gap:clamp(34px,5.2vw,90px)}
+.about-page .about-history-copy h2,
+.about-page .about-people-copy h2{text-wrap:balance}
+.about-page .about-history-copy p,
+.about-page .about-people-copy p{line-height:1.75}
+.about-page .about-history-image,
+.about-page .about-people-photo{background-repeat:no-repeat;background-color:#6b6861}
+.about-page .about-history-image{aspect-ratio:1.5;min-height:0;height:auto;max-height:530px;box-shadow:0 25px 65px rgba(21,19,17,.19)}
+.about-page .about-history-facts{gap:clamp(8px,1.4vw,20px)}
+.about-page .about-history-facts>div{min-width:0}
+.about-page .about-value-grid article{display:flex;flex-direction:column;align-items:flex-start;transition:transform .3s ease,background-color .3s ease,border-color .3s ease}
+.about-page .about-value-grid article:hover{border-color:rgba(255,255,255,.55);background:rgba(51,57,54,.43)}
+.about-page .about-value-grid p{line-height:1.65}
+.about-page .about-outline-button:focus-visible,
+.about-page .about-scroll:focus-visible,
+.about-page .top a:focus-visible,
+.about-page .hamburger:focus-visible{outline:2px solid #f4cb8c;outline-offset:5px}
+.about-page .about-people-photos{isolation:isolate}
+.about-page .about-people-photo{background-position:center;will-change:auto}
+.about-page .about-products-cta .about-cta-inner{position:relative;z-index:2}
+@media(max-width:850px){
+ .about-page .about-history-image{width:100%;aspect-ratio:1.6;max-height:480px}
+ .about-page .about-people-photos{width:100%;max-width:680px;margin-inline:auto}
+ .about-page .about-value-grid{gap:14px}
+ .about-page .about-value-grid article{padding:23px;min-height:210px}
+}
+@media(max-width:600px){
+ .about-page .about-hero{min-height:650px}
+ .about-page .about-hero h1{font-size:clamp(46px,10.5vw,66px)}
+ .about-page .about-history,.about-page .about-people{gap:28px}
+ .about-page .about-history-image{aspect-ratio:1.23;border-radius:18px}
+ .about-page .about-history-facts{gap:7px;margin-top:28px}
+ .about-page .about-history-facts>div{padding-left:9px}
+ .about-page .about-history-facts strong{font-size:clamp(21px,6vw,29px)}
+ .about-page .about-history-facts span{font-size:10px;line-height:1.4}
+ .about-page .about-value-grid{grid-template-columns:1fr}
+ .about-page .about-value-grid article{min-height:0;padding:24px;border-radius:20px}
+ .about-page .about-value-grid h3{margin:10px 0 5px}
+ .about-page .about-people-photos{height:265px}
+ .about-page .about-people-photo{border-radius:17px}
+ .about-page .about-cta-inner{gap:24px}
+}
+@media(prefers-reduced-motion:reduce){
+ .about-page .about-value-grid article,
+ .about-page .about-outline-button,
+ .about-page .about-scroll{transition:none!important}
+}
