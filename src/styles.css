@@ -1300,3 +1300,49 @@ button,a{-webkit-tap-highlight-color:transparent}
 .site .site-footer{position:relative;z-index:5;box-sizing:border-box;width:100%;min-height:76px;padding:24px 5.7%;display:flex;align-items:center;justify-content:space-between;gap:20px;background:#383633;color:#eee5d7;font-size:12px;line-height:1.5;letter-spacing:.01em;border-top:1px solid rgba(255,255,255,.12)}
 .site .site-footer span{color:inherit}
 @media(max-width:700px){.site .site-footer{min-height:76px;padding:22px 6%;font-size:11px;flex-wrap:wrap;gap:8px 18px}}
+
+
+/* Machinery landing page — same editorial visual system as the approved reference */
+.site.machinery-page{background:#302b28;color:#f3ece4;overflow:hidden}
+.machinery-page .machinery-header{position:absolute;inset:0 0 auto;z-index:50}
+.machinery-hero{position:relative;min-height:clamp(700px,77vh,900px);display:flex;align-items:center;background-image:url("https://raw.githubusercontent.com/tanyazar-hash/mart/main/tract2.png");background-size:cover;background-position:center 54%;isolation:isolate}
+.machinery-hero-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(28,27,26,.93) 0%,rgba(34,31,29,.83) 23%,rgba(37,31,27,.40) 48%,rgba(27,24,21,.04) 83%),linear-gradient(180deg,rgba(21,20,19,.45),transparent 32%,rgba(29,25,21,.18))}
+.machinery-hero-inner{width:min(100% - 12%,1450px);margin:0 auto;padding:135px 0 135px;position:relative;z-index:2}
+.machinery-hero .product-breadcrumb{font-size:11px;letter-spacing:.08em;color:#d4c7b9;margin-bottom:24px}
+.machinery-hero .product-breadcrumb span{padding:0 18px;color:#d0aa78}
+.machinery-hero h1{font-size:clamp(55px,5.3vw,94px);font-weight:400;line-height:.99;letter-spacing:-.067em;color:#f3eee8;margin:0 0 26px;max-width:730px}
+.machinery-hero h1 span{color:#d4b28d}
+.machinery-hero-inner>p{max-width:390px;font-size:clamp(15px,1.1vw,18px);line-height:1.55;color:#e5dcd3;margin:0 0 28px}
+.machinery-scroll{display:inline-flex;align-items:center;gap:13px;color:#e7d8c8;text-decoration:none;font-size:13px}
+.machinery-scroll>span{display:grid;place-items:center;border:1px solid #d7b482;border-radius:50%;width:42px;height:42px;font-size:22px;transition:transform .25s}
+.machinery-scroll:hover>span{transform:translateY(5px)}
+.machinery-wave{position:absolute;bottom:-1px;left:0;width:100%;height:105px;z-index:3;pointer-events:none}
+.machinery-wave-fill{fill:#39312c}
+.machinery-wave-halo{fill:none;stroke:rgba(255,255,255,.85);stroke-width:11;filter:blur(8px);vector-effect:non-scaling-stroke}
+.machinery-wave-line{fill:none;stroke:#fff3e3;stroke-width:1.6;filter:drop-shadow(0 0 6px #fff);vector-effect:non-scaling-stroke}
+.machinery-fleet{position:relative;background:radial-gradient(ellipse at 45% 2%,#55473e 0%,#39312c 55%,#292725 100%);padding:45px 0 105px}
+.machinery-container{width:min(100% - 12%,1450px);margin:auto}
+.machinery-section-heading{display:grid;grid-template-columns:1fr .9fr;align-items:end;gap:60px;margin-bottom:42px}
+.machinery-kicker{font-size:12px;letter-spacing:.08em;color:#e5bd8c;font-weight:600;margin-bottom:16px}
+.machinery-section-heading h2{font-size:clamp(39px,4vw,64px);line-height:1.06;font-weight:400;letter-spacing:-.055em;color:#eee1d3;margin:0}
+.machinery-section-heading>p{max-width:445px;border-left:1px solid #bc9771;padding:6px 0 6px 34px;font-size:clamp(15px,1.1vw,18px);line-height:1.5;color:#d7ccc1;margin:0 0 4px}
+.machinery-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.machinery-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;text-align:left;min-height:190px;padding:26px 27px 28px;background:linear-gradient(150deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid rgba(226,195,158,.21);border-radius:20px;color:#f3eee8;font:inherit;cursor:pointer;transition:background .3s,border-color .3s,transform .3s}
+.machinery-card:hover,.machinery-card.selected{transform:translateY(-5px);border-color:rgba(230,187,134,.7);background:rgba(215,173,123,.11)}
+.machinery-card-icon{display:block;height:51px;font-size:41px;line-height:1;color:#e0af74}
+.machinery-card-name{font-size:clamp(17px,1.35vw,21px);margin:6px 36px 4px 0}
+.machinery-card-desc{font-size:14px;line-height:1.4;color:#c8beb5;max-width:185px}
+.machinery-card-arrow{position:absolute;right:22px;bottom:28px;display:grid;place-items:center;width:38px;height:38px;border:1px solid rgba(226,182,128,.55);border-radius:50%;color:#dfb27e}
+.machinery-detail{margin-top:18px;border:1px solid rgba(226,195,158,.27);border-radius:16px;padding:20px 26px;display:flex;gap:24px;align-items:center;color:#e6d8c9;background:rgba(0,0,0,.13)}
+.machinery-detail strong{font-size:18px;font-weight:500}
+.machinery-detail span{font-size:14px}
+.machinery-summary{position:relative;isolation:isolate;overflow:hidden;margin-top:38px;min-height:165px;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;padding:24px 35px 24px 34%;border:1px solid rgba(223,177,124,.55);border-radius:21px;background:linear-gradient(90deg,#3e3026,#423730 60%,#342c27)}
+.machinery-summary-land{position:absolute;z-index:-1;inset:0 65% 0 0;background:linear-gradient(90deg,rgba(51,36,24,.05),#42352c),url("/images/wheat-card.webp") center/cover}
+.machinery-summary-cell{padding:0 25px;border-left:1px solid rgba(226,200,172,.25);display:flex;flex-direction:column;gap:8px}
+.machinery-summary-cell:first-of-type{border-left:0}
+.machinery-summary-cell strong{font-size:clamp(19px,1.6vw,28px);font-weight:400;letter-spacing:-.035em;line-height:1.1}
+.machinery-summary-cell span{font-size:14px;line-height:1.4;color:#d1c5ba}
+@media(max-width:1050px){.machinery-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.machinery-summary{padding-left:24%;}.machinery-summary-land{right:76%}}
+@media(max-width:700px){.machinery-hero{min-height:760px;background-position:61% center}.machinery-hero-shade{background:linear-gradient(90deg,rgba(25,24,23,.9),rgba(25,24,23,.55) 65%,rgba(25,24,23,.18)),linear-gradient(0deg,rgba(25,24,23,.42),transparent 45%)}.machinery-hero-inner,.machinery-container{width:calc(100% - 44px)}.machinery-hero-inner{padding:140px 0 120px}.machinery-hero h1{font-size:clamp(48px,10vw,72px)}.machinery-wave{height:65px}.machinery-fleet{padding:55px 0 70px}.machinery-section-heading{grid-template-columns:1fr;gap:24px}.machinery-section-heading>p{padding-left:20px}.machinery-cards{gap:12px}.machinery-card{padding:19px;min-height:180px}.machinery-card-desc{font-size:12px}.machinery-card-arrow{right:15px;bottom:17px;width:31px;height:31px}.machinery-summary{grid-template-columns:1fr;padding:130px 22px 22px;gap:20px}.machinery-summary-land{inset:0 0 auto;height:125px;background-position:center 48%}.machinery-summary-cell{padding:0 0 0 16px}.machinery-summary-cell:first-of-type{border-left:1px solid rgba(226,200,172,.25)}}
+@media(max-width:410px){.machinery-cards{grid-template-columns:1fr}.machinery-card{min-height:155px}.machinery-hero h1{font-size:45px}}
+@media(prefers-reduced-motion:reduce){.machinery-card,.machinery-scroll>span{transition:none}}
