@@ -88,6 +88,35 @@ function ProductPage({slug}){
   <section className="product-end"><div className="eyebrow">СОТРУДНИЧЕСТВО</div><h2>Интересует наша<br/>продукция?</h2><p>Свяжитесь с хозяйством, чтобы обсудить вопросы сотрудничества.</p><a className="btn primary" href="#/contacts">Перейти к контактам <ArrowUpRight size={17}/></a></section>
  </main><div className="bottom"><span>© {new Date().getFullYear()} КФХ Март</span><span>Алтайский край · Россия</span></div></div>;
 }
+
+const aboutWavePaths=[
+ 'M0 43 C170 4 315 83 500 62 C675 43 795 10 1000 39',
+ 'M0 53 C160 13 320 30 500 61 C670 90 825 24 1000 46',
+ 'M0 48 C200 78 315 20 500 45 C710 73 830 15 1000 50',
+ 'M0 57 C175 19 310 70 505 49 C720 23 855 81 1000 42'
+];
+function AboutWave({index=0}){const d=aboutWavePaths[index];return <svg className="about-wave" viewBox="0 0 1000 110" preserveAspectRatio="none" aria-hidden="true"><path className="about-wave-faint" d={d}/><path className="about-wave-glow" d={d}/><path className="about-wave-core" d={d}/></svg>}
+function AboutPage(){
+ const[menu,setMenu]=useState(false);
+ useLayoutEffect(()=>{window.scrollTo(0,0)},[]);
+ useEffect(()=>{
+  const nodes=document.querySelectorAll('.about-page .reveal');
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)){nodes.forEach(el=>el.classList.add('is-visible'));return}
+  const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');observer.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px 80px 0px'});
+  nodes.forEach(el=>observer.observe(el));return()=>observer.disconnect();
+ },[]);
+ return <div className="site about-page">
+  <header className="top product-top product-reference-header home-reference-header about-header"><a className="brand" href="#/" onClick={()=>setMenu(false)}><span className="product-brand-icon">❧</span><span className="product-brand-text"><small>КФХ</small>Март</span></a><nav id="about-mobile-navigation" className={menu?'product-nav active':'product-nav'} aria-label="Основная навигация"><a href="#/" onClick={()=>setMenu(false)}>Главная</a><a href="#/products" onClick={()=>setMenu(false)}>Продукция</a><a href="#/about" className="active" aria-current="page" onClick={()=>setMenu(false)}>О хозяйстве</a><a href="#/machinery" onClick={()=>setMenu(false)}>Техника</a><a href="#/contacts" onClick={()=>setMenu(false)}>Контакты</a></nav><a href="#/contacts" className="contact-link">Связаться <ArrowUpRight size={15}/></a><button type="button" className="hamburger" aria-expanded={menu} aria-controls="about-mobile-navigation" aria-label={menu?'Закрыть меню':'Открыть меню'} onClick={()=>setMenu(v=>!v)}>{menu?<X/>:<Menu/>}</button></header>
+  <main>
+   <section className="about-hero"><div className="about-hero-content reveal"><div className="about-kicker">О ХОЗЯЙСТВЕ</div><h1>Земля, которой<br/>мы верны</h1><p>Крестьянско-фермерское хозяйство «Март» — сельскохозяйственное производство в Алтайском крае, основанное на труде и уважении к земле.</p><a className="about-scroll" href="#about-history" onClick={e=>{e.preventDefault();document.getElementById('about-history')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}} aria-label="К истории хозяйства">↓</a></div><AboutWave index={0}/></section>
+   <section className="about-history about-section" id="about-history"><div className="about-history-image reveal" role="img" aria-label="Пейзаж сельскохозяйственных полей"/><div className="about-history-copy reveal"><div className="about-kicker">НАША ИСТОРИЯ</div><h2>Развиваем хозяйство<br/>с заботой о будущем</h2><p>КФХ «Март» работает в Завьяловском районе Алтайского края, в селе Светлое. Выращиваем зерновые и масличные культуры, уделяя внимание каждому сезону и качеству работы.</p><p>Для нас сельское хозяйство — это ответственность за землю, надёжный труд и постоянное развитие.</p><div className="about-history-facts"><div><strong>Алтай</strong><span>родной край</span></div><div><strong>03</strong><span>основные культуры</span></div><div><strong>Март</strong><span>наше хозяйство</span></div></div></div><AboutWave index={1}/></section>
+   <section className="about-values about-section"><div className="about-values-inner reveal"><div className="about-kicker">НАШИ ЦЕННОСТИ</div><div className="about-value-grid"><article><span className="about-value-symbol">♧</span><h3>Ответственность</h3><p>Бережно относимся к земле и природным ресурсам.</p></article><article><span className="about-value-symbol">✧</span><h3>Качество</h3><p>Внимание к каждому этапу выращивания.</p></article><article><span className="about-value-symbol">◎</span><h3>Развитие</h3><p>Совершенствуем подход к работе и производству.</p></article></div></div><AboutWave index={2}/></section>
+   <section className="about-people about-section"><div className="about-people-copy reveal"><div className="about-kicker">ЛЮДИ И ТЕХНИКА</div><h2>Сила хозяйства —<br/>в людях и их труде</h2><p>За каждым урожаем стоит ежедневная работа, опыт и надёжная техника, которые помогают добиваться результата.</p><a className="about-outline-button" href="#/machinery">Наша техника <ArrowUpRight size={17}/></a></div><div className="about-people-photos reveal"><div className="about-people-photo about-people-photo-one" role="img" aria-label="Поля Алтайского края"/><div className="about-people-photo about-people-photo-two" role="img" aria-label="Сельскохозяйственная техника в поле"/></div><AboutWave index={3}/></section>
+   <section className="about-products-cta"><div className="about-cta-inner reveal"><div><div className="about-kicker">ВЫРАЩЕНО НА НАШЕЙ ЗЕМЛЕ</div><h2>Наша продукция</h2><p>Пшеница, подсолнечник и лён — результат труда каждого сезона.</p></div><a className="about-outline-button" href="#/products">Перейти в продукцию <ArrowUpRight size={17}/></a></div></section>
+  </main><div className="bottom"><span>© {new Date().getFullYear()} КФХ Март</span><span>Алтайский край · Россия</span></div>
+ </div>;
+}
+
 function App(){
  useEffect(()=>{
   const updateMetadata=()=>{
@@ -128,12 +157,13 @@ function App(){
   addEventListener('scroll',onScroll,{passive:true});update();
   return()=>{observer?.disconnect();removeEventListener('scroll',onScroll);cancelAnimationFrame(raf)};
  },[route]);
- useEffect(()=>{if(!['#/contacts','#/about','#/machinery'].includes(route))return;let raf1=0,raf2=0;raf1=requestAnimationFrame(()=>{raf2=requestAnimationFrame(()=>document.getElementById(route==='#/machinery'?'land':route.slice(2))?.scrollIntoView({behavior:'instant',block:'start'}))});return()=>{cancelAnimationFrame(raf1);cancelAnimationFrame(raf2)}},[route]);
+ useEffect(()=>{if(!['#/contacts','#/machinery'].includes(route))return;let raf1=0,raf2=0;raf1=requestAnimationFrame(()=>{raf2=requestAnimationFrame(()=>document.getElementById(route==='#/machinery'?'land':route.slice(2))?.scrollIntoView({behavior:'instant',block:'start'}))});return()=>{cancelAnimationFrame(raf1);cancelAnimationFrame(raf2)}},[route]);
  const copyAddress=async()=>{
   const address='Алтайский край, Завьяловский район, село Светлое';
   try{await navigator.clipboard.writeText(address);setCopied(true)}catch{setCopied(false)}
  };
  if(route==='#/products'||route.startsWith('#/products/'))return <ProductPage slug={route.split('/')[2]}/>;
+ if(route==='#/about')return <AboutPage/>;
  return <div className="site"><svg className="wave-defs" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs>
 <clipPath id="wave-a" clipPathUnits="objectBoundingBox"><path d="M0,.105 C.16,-.04 .33,.20 .55,.17 C.73,.15 .85,.035 1,.055 L1,1 L0,1 Z"/></clipPath>
 <clipPath id="wave-b" clipPathUnits="objectBoundingBox"><path d="M0,.085 C.19,-.015 .34,.025 .52,.13 C.70,.21 .85,.15 1,.025 L1,1 L0,1 Z"/></clipPath>
