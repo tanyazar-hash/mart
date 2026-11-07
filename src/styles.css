@@ -1565,3 +1565,12 @@ button,a{-webkit-tap-highlight-color:transparent}
  background-color:var(--mart-section-top);
 }
 /* Keep the homepage's field photograph and the farm's photo-led sections intact. */
+
+/* Restore the machinery hero photograph. Keep a local fallback if the remote
+   tractor image is temporarily unavailable; never show a blank hero. */
+.site.machinery-page .machinery-hero{
+ background-image:url("https://cdn.jsdelivr.net/gh/tanyazar-hash/mart@main/tract2.png"),url("/images/combine-hero.webp")!important;
+ background-position:center 54%,center 54%!important;
+ background-size:cover,cover!important;
+ background-repeat:no-repeat!important;
+}
