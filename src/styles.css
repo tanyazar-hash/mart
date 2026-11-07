@@ -993,3 +993,10 @@ button,a{-webkit-tap-highlight-color:transparent}
   );
  }
 }
+
+/* Stronger, crisp white wave glow above the overlapping clipped sections. */
+.about-page .about-hero,.about-page .about-history,.about-page .about-values,.about-page .about-people{isolation:auto}
+.about-page .about-wave{z-index:25;overflow:visible}
+.about-page .about-wave-faint{stroke-width:32px;opacity:.4;filter:blur(11px)}
+.about-page .about-wave-glow{stroke-width:13px;opacity:1;filter:blur(4px)}
+.about-page .about-wave-core{stroke-width:3px;opacity:1;filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 12px rgba(255,255,255,.8))}
