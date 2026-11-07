@@ -921,3 +921,26 @@ button,a{-webkit-tap-highlight-color:transparent}
 .about-values{background:linear-gradient(180deg,#292622 0%,rgba(25,25,23,.78) 24%,rgba(29,26,22,.4) 100%),url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1900&q=85') center/cover}
 .about-people{background:linear-gradient(110deg,#39312e,#5d4940 55%,#3b3431)}
 .about-products-cta{background:linear-gradient(180deg,#292521 0%,rgba(29,27,24,.84) 20%,rgba(30,27,24,.26) 100%),url('/images/wheat-card.webp') center 55%/cover}
+
+/* Final seam correction: shared edge color removes horizontal rectangular joins.
+   Photo/gradient intensity is concentrated inside each section, while wave edges stay luminous. */
+.about-page{--about-seam:#302d2b;background:var(--about-seam)}
+.about-page .about-wave .about-wave-fill{fill:var(--about-seam)!important}
+.about-page .about-history{
+ background:radial-gradient(ellipse at 68% 49%,#62534b 0%,#413935 44%,var(--about-seam) 89%);
+}
+.about-page .about-values{
+ background:
+ linear-gradient(180deg,var(--about-seam) 0%,rgba(39,35,32,.82) 20%,rgba(35,32,29,.63) 48%,rgba(39,35,32,.82) 80%,var(--about-seam) 100%),
+ url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1900&q=85') center/cover;
+}
+.about-page .about-people{
+ background:radial-gradient(ellipse at 60% 50%,#635047 0%,#453a35 52%,var(--about-seam) 96%);
+}
+.about-page .about-products-cta{
+ background:
+ linear-gradient(180deg,var(--about-seam) 0%,rgba(42,35,29,.65) 28%,rgba(42,35,29,.5) 66%,var(--about-seam) 100%),
+ url('/images/wheat-card.webp') center 55%/cover;
+}
+.about-page .about-wave{height:110px;bottom:-1px}
+@media(max-width:600px){.about-page .about-wave{height:65px}}
