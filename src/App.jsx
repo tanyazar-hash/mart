@@ -90,12 +90,12 @@ function ProductPage({slug}){
 }
 
 const aboutWavePaths=[
- 'M0 48 C170 12 330 85 500 55 C690 18 835 72 1000 48',
- 'M0 48 C170 12 330 85 500 55 C690 18 835 72 1000 48',
- 'M0 48 C170 12 330 85 500 55 C690 18 835 72 1000 48',
- 'M0 48 C170 12 330 85 500 55 C690 18 835 72 1000 48'
+ 'M0 48 L50 39 L100 36 L150 36 L200 39 L250 44 L300 50 L350 55 L400 58 L450 58 L500 55 L550 49 L600 43 L650 39 L700 37 L750 38 L800 40 L850 43 L900 46 L950 48 L1000 48',
+ 'M0 48 L50 39 L100 36 L150 36 L200 39 L250 44 L300 50 L350 55 L400 58 L450 58 L500 55 L550 49 L600 43 L650 39 L700 37 L750 38 L800 40 L850 43 L900 46 L950 48 L1000 48',
+ 'M0 48 L50 39 L100 36 L150 36 L200 39 L250 44 L300 50 L350 55 L400 58 L450 58 L500 55 L550 49 L600 43 L650 39 L700 37 L750 38 L800 40 L850 43 L900 46 L950 48 L1000 48',
+ 'M0 48 L50 39 L100 36 L150 36 L200 39 L250 44 L300 50 L350 55 L400 58 L450 58 L500 55 L550 49 L600 43 L650 39 L700 37 L750 38 L800 40 L850 43 L900 46 L950 48 L1000 48'
 ];
-function AboutWave({index=0}){const d=aboutWavePaths[index];return <svg className={"about-wave about-wave-"+index} viewBox="0 0 1000 110" preserveAspectRatio="none" aria-hidden="true"><path className="about-wave-fill" d={d+" L1000 110 L0 110 Z"}/><path className="about-wave-faint" d={d}/><path className="about-wave-glow" d={d}/><path className="about-wave-core" d={d}/></svg>}
+function AboutWave({index=0}){const d=aboutWavePaths[index];return <svg className={"about-wave about-wave-"+index} viewBox="0 0 1000 110" preserveAspectRatio="none" aria-hidden="true"><path className="about-wave-halo" d={d}/><path className="about-wave-line" d={d}/></svg>}
 function AboutPage(){
  const[menu,setMenu]=useState(false);
  useLayoutEffect(()=>{window.scrollTo(0,0)},[]);
