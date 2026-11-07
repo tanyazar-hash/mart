@@ -848,8 +848,8 @@ button,a{-webkit-tap-highlight-color:transparent}
 .about-hero p{font-size:clamp(14px,1.25vw,17px);max-width:480px;color:#f2ebe4}
 .about-scroll{display:grid;place-items:center;border:1px solid rgba(255,255,255,.8);border-radius:50%;width:52px;height:52px;margin-top:45px;font-size:25px;transition:background .3s,transform .3s}
 .about-scroll:hover{background:rgba(255,255,255,.15);transform:translateY(4px)}
-.about-wave{position:absolute;z-index:7;bottom:-54px;left:0;width:100%;height:110px;pointer-events:none;overflow:visible}
-.about-wave path{fill:none;stroke:#fff;vector-effect:non-scaling-stroke}
+.about-wave{position:absolute;z-index:7;bottom:-1px;left:0;width:100%;height:110px;pointer-events:none;overflow:hidden}
+.about-wave path{fill:none;stroke:#fff;vector-effect:non-scaling-stroke}\n.about-wave .about-wave-fill{stroke:none;filter:none;opacity:1}\n.about-wave-0 .about-wave-fill{fill:#51443f}\n.about-wave-1 .about-wave-fill{fill:#292622}\n.about-wave-2 .about-wave-fill{fill:#39312e}\n.about-wave-3 .about-wave-fill{fill:#292521}
 .about-wave-faint{stroke-width:26px;opacity:.18;filter:blur(14px)}
 .about-wave-glow{stroke-width:10px;opacity:.72;filter:blur(5px)}
 .about-wave-core{stroke-width:2.1px;opacity:1;filter:drop-shadow(0 0 7px #fff)}
@@ -897,7 +897,7 @@ button,a{-webkit-tap-highlight-color:transparent}
  .about-hero{height:min(810px,100svh);min-height:650px;padding:105px 22px 115px;background-position:65% center}
  .about-hero h1{font-size:clamp(46px,11vw,66px)}
  .about-hero p{font-size:14px}
- .about-wave{height:65px;bottom:-31px}
+ .about-wave{height:65px;bottom:-1px}
  .about-history,.about-people{padding:78px 22px 100px}
  .about-history-image{height:260px;border-radius:18px}
  .about-history h2,.about-people h2{font-size:clamp(32px,8.5vw,44px)}
@@ -915,3 +915,9 @@ button,a{-webkit-tap-highlight-color:transparent}
  .about-cta-inner{align-items:flex-start;flex-direction:column}
 }
 @media(prefers-reduced-motion:reduce){.about-value-grid article,.about-scroll,.about-outline-button{transition:none!important}}
+
+/* Seamless filled section waves: continue the next surface behind the white glowing contour. */
+.about-history{background:radial-gradient(ellipse at 75% 45%,#66544a,#393331 65%,#302e2d)}
+.about-values{background:linear-gradient(180deg,#292622 0%,rgba(25,25,23,.78) 24%,rgba(29,26,22,.4) 100%),url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1900&q=85') center/cover}
+.about-people{background:linear-gradient(110deg,#39312e,#5d4940 55%,#3b3431)}
+.about-products-cta{background:linear-gradient(180deg,#292521 0%,rgba(29,27,24,.84) 20%,rgba(30,27,24,.26) 100%),url('/images/wheat-card.webp') center 55%/cover}
