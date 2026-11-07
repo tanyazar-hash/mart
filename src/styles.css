@@ -1107,5 +1107,5 @@ button,a{-webkit-tap-highlight-color:transparent}
    Use the identical gradient, not an approximate solid color. */
 .about-page .about-history,
 .about-page .about-people{
- background:radial-gradient(ellipse at 50% 5%,#aaa9a0,#9a9991 62%,#858780 100%);
+ background:radial-gradient(ellipse at 48% 14%,rgba(156,149,139,.36),transparent 63%),radial-gradient(ellipse at 14% 91%,rgba(148,135,125,.24),transparent 60%),linear-gradient(130deg,#66625f 0%,#77716b 49%,#625f5b 100%);
 }
