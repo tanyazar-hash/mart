@@ -1512,3 +1512,27 @@ button,a{-webkit-tap-highlight-color:transparent}
  .site .wave-line,.about-page .about-wave-line,.product-detail-page .reference-wave-line,
  .site.contacts-page .contacts-wave-line,.machinery-page .machinery-wave-line{stroke-width:1.4px}
 }
+
+/* Photo consistency pass: neutral warm grading, preserve detail in highlights.
+   Product editorial story photos and their approved dark overlays stay unchanged. */
+:root{--mart-photo-tone:brightness(.94) contrast(1.055) saturate(.96)}
+.about-page .about-history-image,
+.about-page .about-people-photo-one,
+.about-page .about-people-photo-two,
+.site #about.about .about-photo,
+.about-people-photo,
+.product-art.has-photo{
+ filter:var(--mart-photo-tone)!important;
+}
+.about-page .about-history-image{background-image:linear-gradient(0deg,rgba(22,20,17,.08),transparent),url('/images/about-fields.webp')!important}
+.about-page .about-values{background-image:linear-gradient(90deg,rgba(32,30,28,.78),rgba(40,37,33,.55) 55%,rgba(38,35,31,.44)),url('/images/about-fields.webp')!important}
+.site #about.about .about-photo{
+ background-image:linear-gradient(90deg,rgba(36,35,33,.73) 0%,rgba(38,36,33,.40) 45%,rgba(38,35,31,.13) 100%),url('/images/about-fields.webp')!important;
+ background-position:center,center 55%!important;background-size:cover!important;
+}
+@media(max-width:700px){
+ .site #about.about .about-photo{background-image:linear-gradient(90deg,rgba(36,35,33,.75),rgba(38,36,33,.36)),url('/images/about-fields.webp')!important}
+}
+/* The about hero already has its vignette in background-image; avoid another
+   overlay from inherited styles, keeping its brightness in line with machinery. */
+.about-page .about-hero::before{opacity:0}
