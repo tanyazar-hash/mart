@@ -1292,3 +1292,6 @@ button,a{-webkit-tap-highlight-color:transparent}
 
 /* Slightly darker contacts hero, preserving layout and wave */
 .site.contacts-page .contacts-intro{background:radial-gradient(ellipse at 50% 5%,#94928b 0%,#86847e 62%,#777974 100%)}
+
+/* Contacts hero: identical background layers to Products hero */
+.site.contacts-page .contacts-intro{background:radial-gradient(ellipse at 75% 62%,#706760 0%,transparent 47%),radial-gradient(ellipse at 26% 56%,#625e5a 0%,transparent 49%),linear-gradient(110deg,#292928,#474440 58%,#383532)}
