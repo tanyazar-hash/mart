@@ -1347,10 +1347,13 @@ button,a{-webkit-tap-highlight-color:transparent}
 @media(max-width:410px){.machinery-cards{grid-template-columns:1fr}.machinery-card{min-height:155px}.machinery-hero h1{font-size:45px}}
 @media(prefers-reduced-motion:reduce){.machinery-card,.machinery-scroll>span{transition:none}}
 
-/* Seamless hero-to-fleet transition: no dark horizontal band below the wave */
-.site.machinery-page .machinery-hero{margin-bottom:0}
-.site.machinery-page .machinery-wave{bottom:-2px;height:110px}
-.site.machinery-page .machinery-wave-fill{fill:#453a33}
-.site.machinery-page .machinery-fleet{background:radial-gradient(ellipse at 48% 0%,#51443b 0%,#453a33 35%,#352e2a 76%,#292725 100%);padding-top:45px}
-.site.machinery-page .machinery-hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:110px;z-index:1;pointer-events:none;background:linear-gradient(to bottom,transparent 0%,rgba(69,58,51,.22) 65%,#453a33 100%);opacity:.7}
-@media(max-width:700px){.site.machinery-page .machinery-wave{height:70px}.site.machinery-page .machinery-hero::after{height:70px}}
+/* Machinery: continuous glowing wave, same treatment as the other pages.
+   The wave's fill and the next section share exactly the same base colour. */
+.machinery-page .machinery-hero{margin-bottom:0}
+.machinery-page .machinery-wave{bottom:-1px;height:110px;z-index:5;overflow:visible}
+.machinery-page .machinery-wave-fill{fill:#39312c}
+.machinery-page .machinery-wave-halo{stroke:rgba(255,240,219,.43);stroke-width:9;filter:blur(9px)}
+.machinery-page .machinery-wave-line{stroke:#fff0d9;stroke-width:1.5;filter:drop-shadow(0 0 5px rgba(255,233,201,.85))}
+.machinery-page .machinery-hero::after{content:none}
+.machinery-page .machinery-fleet{background:linear-gradient(180deg,#39312c 0%,#39312c 12%,#332d29 48%,#292725 100%);padding-top:32px}
+@media(max-width:700px){.machinery-page .machinery-wave{height:70px}.machinery-page .machinery-fleet{padding-top:42px}}
