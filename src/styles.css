@@ -1476,3 +1476,11 @@ button,a{-webkit-tap-highlight-color:transparent}
 /* Keep the machinery hero's left-side text vignette visibly above its photo. */
 .machinery-page .machinery-hero-shade{z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(28,27,26,.93) 0%,rgba(34,31,29,.83) 23%,rgba(37,31,27,.40) 48%,rgba(27,24,21,.04) 83%),linear-gradient(180deg,rgba(21,20,19,.45),transparent 32%,rgba(29,25,21,.18))}
 @media(max-width:700px){.machinery-page .machinery-hero-shade{background:linear-gradient(90deg,rgba(25,24,23,.9),rgba(25,24,23,.18)),linear-gradient(0deg,rgba(25,24,23,.42),transparent 45%)}}
+
+/* Farm story panels use exactly the same palette as homepage "Что мы выращиваем". */
+.site.about-page .about-history,
+.site.about-page .about-people{
+ background:#39312c!important;
+ background-image:linear-gradient(180deg,#39312c 0%,#39312c 12%,#332d29 48%,#292725 100%)!important;
+ background-color:#39312c!important;
+}
