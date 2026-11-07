@@ -1346,3 +1346,11 @@ button,a{-webkit-tap-highlight-color:transparent}
 @media(max-width:700px){.machinery-hero{min-height:760px;background-position:61% center}.machinery-hero-shade{background:linear-gradient(90deg,rgba(25,24,23,.9),rgba(25,24,23,.55) 65%,rgba(25,24,23,.18)),linear-gradient(0deg,rgba(25,24,23,.42),transparent 45%)}.machinery-hero-inner,.machinery-container{width:calc(100% - 44px)}.machinery-hero-inner{padding:140px 0 120px}.machinery-hero h1{font-size:clamp(48px,10vw,72px)}.machinery-wave{height:65px}.machinery-fleet{padding:55px 0 70px}.machinery-section-heading{grid-template-columns:1fr;gap:24px}.machinery-section-heading>p{padding-left:20px}.machinery-cards{gap:12px}.machinery-card{padding:19px;min-height:180px}.machinery-card-desc{font-size:12px}.machinery-card-arrow{right:15px;bottom:17px;width:31px;height:31px}.machinery-summary{grid-template-columns:1fr;padding:130px 22px 22px;gap:20px}.machinery-summary-land{inset:0 0 auto;height:125px;background-position:center 48%}.machinery-summary-cell{padding:0 0 0 16px}.machinery-summary-cell:first-of-type{border-left:1px solid rgba(226,200,172,.25)}}
 @media(max-width:410px){.machinery-cards{grid-template-columns:1fr}.machinery-card{min-height:155px}.machinery-hero h1{font-size:45px}}
 @media(prefers-reduced-motion:reduce){.machinery-card,.machinery-scroll>span{transition:none}}
+
+/* Seamless hero-to-fleet transition: no dark horizontal band below the wave */
+.site.machinery-page .machinery-hero{margin-bottom:0}
+.site.machinery-page .machinery-wave{bottom:-2px;height:110px}
+.site.machinery-page .machinery-wave-fill{fill:#453a33}
+.site.machinery-page .machinery-fleet{background:radial-gradient(ellipse at 48% 0%,#51443b 0%,#453a33 35%,#352e2a 76%,#292725 100%);padding-top:45px}
+.site.machinery-page .machinery-hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:110px;z-index:1;pointer-events:none;background:linear-gradient(to bottom,transparent 0%,rgba(69,58,51,.22) 65%,#453a33 100%);opacity:.7}
+@media(max-width:700px){.site.machinery-page .machinery-wave{height:70px}.site.machinery-page .machinery-hero::after{height:70px}}
