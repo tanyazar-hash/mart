@@ -1012,3 +1012,19 @@ button,a{-webkit-tap-highlight-color:transparent}
  .about-page .about-wave-glow{stroke-width:2.5px;opacity:.4}
  .about-page .about-wave-core{stroke-width:1.35px}
 }
+
+/* Definitive seam stacking: each earlier panel sits above the next panel,
+   so the contour cannot disappear underneath the next section. */
+.about-page .about-hero{z-index:6}
+.about-page .about-history{z-index:5}
+.about-page .about-values{z-index:4}
+.about-page .about-people{z-index:3}
+.about-page .about-products-cta{z-index:2}
+.about-page .about-wave{z-index:10;overflow:visible;pointer-events:none}
+.about-page .about-wave path{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.about-page .about-wave-halo{stroke:#fff;stroke-width:12px;opacity:.65;filter:blur(7px)}
+.about-page .about-wave-line{stroke:#fff;stroke-width:1.8px;opacity:1;filter:none}
+@media(max-width:600px){
+ .about-page .about-wave-halo{stroke-width:8px;opacity:.6;filter:blur(5px)}
+ .about-page .about-wave-line{stroke-width:1.4px}
+}
