@@ -842,7 +842,7 @@ button,a{-webkit-tap-highlight-color:transparent}
 .about-page .about-kicker{font-size:11px;letter-spacing:.19em;font-weight:700;color:#e9c29a;margin-bottom:18px}
 .about-page h1,.about-page h2,.about-page h3{font-weight:500;letter-spacing:-.055em}
 .about-page p{line-height:1.72}
-.about-hero{min-height:740px;height:100svh;max-height:1020px;display:flex;align-items:center;padding:125px max(6%,calc((100vw - 1360px)/2)) 145px;background:linear-gradient(90deg,rgba(27,27,27,.76),rgba(39,35,32,.34) 55%,rgba(40,32,23,.12)),url('/images/combine-hero.webp') center 55%/cover}
+.about-hero{height:min(810px,100svh);min-height:650px;max-height:none;display:flex;align-items:center;padding:125px max(6%,calc((100vw - 1360px)/2)) 145px;background:linear-gradient(90deg,rgba(27,27,27,.76),rgba(39,35,32,.34) 55%,rgba(40,32,23,.12)),url('/images/combine-hero.webp') center 55%/cover}
 .about-hero-content{position:relative;z-index:2;max-width:690px}
 .about-hero h1{font-size:clamp(55px,6.2vw,104px);line-height:1.05;margin:0 0 24px}
 .about-hero p{font-size:clamp(14px,1.25vw,17px);max-width:480px;color:#f2ebe4}
@@ -885,7 +885,7 @@ button,a{-webkit-tap-highlight-color:transparent}
 .about-products-cta p{max-width:420px;margin:0;color:#eee3d8}
 .about-page .bottom{background:#272523}
 @media(max-width:850px){
- .about-hero{min-height:640px;height:88svh;padding:130px 6% 130px;background-position:63% center}
+ .about-hero{min-height:650px;height:min(810px,100svh);padding:130px 6% 130px;background-position:63% center}
  .about-history,.about-people{grid-template-columns:1fr;gap:36px;padding:100px 6% 125px}
  .about-history-image{height:380px}
  .about-people-photos{height:340px}
@@ -894,7 +894,7 @@ button,a{-webkit-tap-highlight-color:transparent}
 }
 @media(max-width:600px){
  .about-page .about-header{height:68px}
- .about-hero{height:86svh;min-height:590px;padding:105px 22px 115px;background-position:65% center}
+ .about-hero{height:min(810px,100svh);min-height:650px;padding:105px 22px 115px;background-position:65% center}
  .about-hero h1{font-size:clamp(46px,11vw,66px)}
  .about-hero p{font-size:14px}
  .about-wave{height:65px;bottom:-31px}
