@@ -1459,3 +1459,10 @@ button,a{-webkit-tap-highlight-color:transparent}
 
 /* Match machinery hero text's left edge to the About hero (site-wide 6% gutter). */
 @media(min-width:701px){.machinery-page .machinery-hero-inner{width:88%;max-width:none;margin-left:6%;margin-right:6%}}
+
+/* Consistent warm editorial image toning. Product crop-story photography and its shade are intentionally untouched. */
+.hero-shade{background:linear-gradient(90deg,rgba(33,30,27,.60) 0%,rgba(33,30,27,.34) 38%,rgba(33,30,27,.12) 78%,rgba(33,30,27,.08) 100%),linear-gradient(180deg,rgba(27,25,24,.22),transparent 35%,rgba(27,25,24,.18))!important}
+.about-hero{background-image:linear-gradient(90deg,rgba(33,30,27,.60) 0%,rgba(33,30,27,.34) 38%,rgba(33,30,27,.12) 78%,rgba(33,30,27,.08) 100%),url('/images/combine-hero.webp')!important}
+.machinery-hero-shade{background:linear-gradient(90deg,rgba(33,30,27,.60) 0%,rgba(33,30,27,.34) 38%,rgba(33,30,27,.12) 78%,rgba(33,30,27,.08) 100%),linear-gradient(180deg,rgba(27,25,24,.22),transparent 35%,rgba(27,25,24,.18))!important}
+.about-photo,.about-history-image,.about-people-photo,.product-art.has-photo{filter:brightness(.88) saturate(1.03)}
+@media(max-width:760px){.hero{background-image:url('/images/combine-hero-mobile.webp')!important}}
