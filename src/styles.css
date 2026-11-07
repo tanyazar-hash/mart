@@ -1068,11 +1068,11 @@ button,a{-webkit-tap-highlight-color:transparent}
 
 /* Locally hosted Altai farmland replaces the unrelated mountain stock photo. */
 .about-page .about-history-image{
- background:linear-gradient(0deg,rgba(22,20,17,.12),transparent),url('/images/about-fields.png') center/cover;
+ background:linear-gradient(0deg,rgba(22,20,17,.12),transparent),url('/images/about-fields.webp') center/cover;
 }
 .about-page .about-people-photo-one{
- background-image:url('/images/about-fields.png');
+ background-image:url('/images/about-fields.webp');
 }
 .about-page .about-values{
- background:linear-gradient(180deg,rgba(30,29,27,.72),rgba(30,29,27,.60) 52%,rgba(30,29,27,.72)),url('/images/about-fields.png') center/cover;
+ background:linear-gradient(180deg,rgba(30,29,27,.72),rgba(30,29,27,.60) 52%,rgba(30,29,27,.72)),url('/images/about-fields.webp') center/cover;
 }
