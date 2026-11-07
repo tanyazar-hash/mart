@@ -1109,3 +1109,43 @@ button,a{-webkit-tap-highlight-color:transparent}
 .about-page .about-people{
  background:radial-gradient(ellipse at 48% 14%,rgba(156,149,139,.36),transparent 63%),radial-gradient(ellipse at 14% 91%,rgba(148,135,125,.24),transparent 60%),linear-gradient(130deg,#66625f 0%,#77716b 49%,#625f5b 100%);
 }
+
+/* Shared first-screen layout: homepage, products and farm story.
+   One horizontal inset and one entrance motion for all hero copy. */
+:root{--mart-hero-inset:5.7%;--mart-hero-enter-duration:.95s}
+.site .hero,
+.product-reference .reference-hero,
+.about-page .about-hero{
+  padding-left:var(--mart-hero-inset);
+  padding-right:var(--mart-hero-inset);
+}
+.site .hero-copy.reveal,
+.product-reference .reference-hero-inner.reveal,
+.about-page .about-hero-content.reveal{
+  animation:martHeroCopyEnter var(--mart-hero-enter-duration) cubic-bezier(.2,.7,.2,1) both;
+  opacity:1;
+  transform:none;
+}
+@keyframes martHeroCopyEnter{
+  from{opacity:0;transform:translate3d(0,24px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+@media(min-width:851px){
+  .site .hero,
+  .product-reference .reference-hero,
+  .about-page .about-hero{min-height:710px;height:min(810px,100svh);align-items:center}
+  .site .hero-copy,
+  .product-reference .reference-hero-inner,
+  .about-page .about-hero-content{margin-top:0;align-self:auto}
+}
+@media(max-width:850px){
+  :root{--mart-hero-inset:6%}
+}
+@media(max-width:600px){
+  :root{--mart-hero-inset:22px}
+}
+@media(prefers-reduced-motion:reduce){
+  .site .hero-copy.reveal,
+  .product-reference .reference-hero-inner.reveal,
+  .about-page .about-hero-content.reveal{animation:none!important;opacity:1!important;transform:none!important}
+}
