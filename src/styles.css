@@ -1456,3 +1456,6 @@ button,a{-webkit-tap-highlight-color:transparent}
 .machinery-page .machinery-hero-inner.reveal>.machinery-scroll{animation-delay:.52s}
 @keyframes machineryHeroEnter{from{opacity:0;transform:translate3d(0,24px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 @media(prefers-reduced-motion:reduce){.machinery-page .machinery-hero-inner.reveal>*{animation:none!important}}
+
+/* Match machinery hero text's left edge to the About hero (site-wide 6% gutter). */
+@media(min-width:701px){.machinery-page .machinery-hero-inner{width:88%;max-width:none;margin-left:6%;margin-right:6%}}
