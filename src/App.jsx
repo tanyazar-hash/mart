@@ -65,7 +65,7 @@ function ProductPage({slug}){
     <div className="eyebrow">НАША ПРОДУКЦИЯ</div>
     <h1><span>Выращено</span><br/>с уважением к земле.</h1>
     <p>Пшеница. Подсолнечник. Лён.<br/>Три культуры, за которыми стоит труд каждого сезона.</p>
-    <a href="#culture-wheat" className="product-scroll"><span>↓</span>Листайте, чтобы узнать больше</a>
+    <a href="#culture-wheat" onClick={e=>{e.preventDefault();document.getElementById("culture-wheat")?.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}} className="product-scroll"><span>↓</span>Листайте, чтобы узнать больше</a>
    </div>
    
    
