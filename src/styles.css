@@ -958,10 +958,10 @@ button,a{-webkit-tap-highlight-color:transparent}
  margin-top:calc(-1 * var(--about-wave-height));
  padding-top:calc(110px + var(--about-wave-height));
  clip-path:polygon(
-  0 48px,5% 39px,10% 36px,15% 36px,20% 39px,25% 44px,
-  30% 50px,35% 55px,40% 58px,45% 58px,50% 55px,
-  55% 49px,60% 43px,65% 39px,70% 37px,75% 38px,
-  80% 40px,85% 43px,90% 46px,95% 48px,100% 48px,
+  0 52px,5% 35px,10% 20px,15% 15px,20% 21px,25% 38px,
+  30% 59px,35% 77px,40% 88px,45% 91px,50% 85px,
+  55% 71px,60% 53px,65% 36px,70% 24px,75% 19px,
+  80% 24px,85% 37px,90% 49px,95% 54px,100% 48px,
   100% 100%,0 100%
  );
 }
@@ -985,10 +985,10 @@ button,a{-webkit-tap-highlight-color:transparent}
  .about-page .about-people,
  .about-page .about-products-cta{
   clip-path:polygon(
-   0 28.4px,5% 23px,10% 21.3px,15% 21.3px,20% 23px,25% 26px,
-   30% 29.5px,35% 32.5px,40% 34.3px,45% 34.3px,50% 32.5px,
-   55% 29px,60% 25.4px,65% 23px,70% 21.9px,75% 22.5px,
-   80% 23.6px,85% 25.4px,90% 27.2px,95% 28.4px,100% 28.4px,
+   0 30.7px,5% 20.7px,10% 11.8px,15% 8.9px,20% 12.4px,25% 22.5px,
+   30% 34.9px,35% 45.5px,40% 52px,45% 53.8px,50% 50.2px,
+   55% 42px,60% 31.3px,65% 21.3px,70% 14.2px,75% 11.2px,
+   80% 14.2px,85% 21.9px,90% 29px,95% 31.9px,100% 28.4px,
    100% 100%,0 100%
   );
  }
@@ -1028,3 +1028,15 @@ button,a{-webkit-tap-highlight-color:transparent}
  .about-page .about-wave-halo{stroke-width:8px;opacity:.6;filter:blur(5px)}
  .about-page .about-wave-line{stroke-width:1.4px}
 }
+
+/* Home-style transitions: the next section begins at the luminous sculpted edge,
+   with no separate dark horizontal strip below it. */
+.about-page .about-history,
+.about-page .about-values,
+.about-page .about-people,
+.about-page .about-products-cta{background-clip:border-box}
+.about-page .about-values{
+ background:linear-gradient(180deg,rgba(30,29,27,.72),rgba(30,29,27,.60) 52%,rgba(30,29,27,.72)),url('/images/combine-hero.webp') center/cover;
+}
+.about-page .about-wave-halo{stroke-width:9px;opacity:.55;filter:blur(5px)}
+.about-page .about-wave-line{stroke-width:1.8px;opacity:1;filter:none}
