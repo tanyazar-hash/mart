@@ -1435,3 +1435,10 @@ button,a{-webkit-tap-highlight-color:transparent}
  opacity:1!important;
 }
 @media(max-width:700px){.site #about.about .about-photo{background:linear-gradient(90deg,rgba(43,44,43,.69),rgba(65,60,53,.24)),url('/images/about-fields.webp') center 53%/cover no-repeat!important}}
+
+/* Match the fifth home section to the dark cocoa tone of 'Что мы выращиваем'. */
+.site #contacts.footer{
+ background:#39312c!important;
+ background-image:linear-gradient(180deg,#39312c 0%,#39312c 12%,#332d29 48%,#292725 100%)!important;
+ background-color:#39312c!important;
+}
