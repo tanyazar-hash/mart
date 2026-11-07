@@ -1103,9 +1103,9 @@ button,a{-webkit-tap-highlight-color:transparent}
 .about-page .about-people,
 .about-page .about-products-cta{transition:background-color .4s ease}
 
-/* Match the solid warm-grey base of the homepage's third section (#8f9089).
-   About blocks 2 (history) and 4 (people) share one identical color. */
+/* Exact background copied from the homepage "Что мы выращиваем" section.
+   Use the identical gradient, not an approximate solid color. */
 .about-page .about-history,
 .about-page .about-people{
- background:#8f9089;
+ background:radial-gradient(ellipse at 50% 5%,#aaa9a0,#9a9991 62%,#858780 100%);
 }
