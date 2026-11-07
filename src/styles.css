@@ -1076,3 +1076,29 @@ button,a{-webkit-tap-highlight-color:transparent}
 .about-page .about-values{
  background:linear-gradient(180deg,rgba(30,29,27,.72),rgba(30,29,27,.60) 52%,rgba(30,29,27,.72)),url('/images/about-fields.webp') center/cover;
 }
+
+/* About-page palette aligned with the homepage: muted warm stone, sage-grey
+   and softly sunlit field imagery instead of heavy brown blocks. */
+.about-page{background:#777b76}
+.about-page .about-history{
+ background:radial-gradient(ellipse at 72% 24%,#92938b 0%,#777b77 46%,#656c69 100%);
+}
+.about-page .about-history-copy p{color:#f3eee7}
+.about-page .about-values{
+ background:linear-gradient(90deg,rgba(75,79,76,.85),rgba(105,106,98,.68) 52%,rgba(90,90,82,.75)),url('/images/about-fields.webp') center/cover;
+}
+.about-page .about-value-grid article{
+ background:rgba(51,57,54,.32);
+ border-color:rgba(255,255,255,.36);
+}
+.about-page .about-people{
+ background:linear-gradient(110deg,#797e79 0%,#96948a 52%,#747a75 100%);
+}
+.about-page .about-people-copy p{color:#f5eee5}
+.about-page .about-products-cta{
+ background:linear-gradient(90deg,rgba(65,70,67,.82),rgba(80,82,76,.3)),url('/images/wheat-card.webp') center 55%/cover;
+}
+.about-page .about-history,
+.about-page .about-values,
+.about-page .about-people,
+.about-page .about-products-cta{transition:background-color .4s ease}
