@@ -1380,3 +1380,31 @@ button,a{-webkit-tap-highlight-color:transparent}
 @media(max-width:700px){.machinery-page .machinery-cards{gap:12px}.machinery-page .machinery-detail{padding:24px 20px}.machinery-detail-grid{grid-template-columns:1fr}.machinery-detail-top{padding-bottom:18px}.machinery-detail-item{padding:20px 0}}
 @media(max-width:410px){.machinery-page .machinery-cards{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.machinery-page .machinery-detail{animation:none}}
+
+/* Unified dark earth palette: same base as “Техника, которой мы доверяем”.
+   Only section backgrounds change; image cards and decorative waves remain. */
+.site #about.about,
+.site #products.products,
+.site #land.land,
+.site.product-reference .reference-hero,
+.site.product-reference .product-end,
+.site.contacts-page .contacts-intro{
+ background:#39312c!important;
+ background-image:linear-gradient(180deg,#39312c 0%,#39312c 12%,#332d29 48%,#292725 100%)!important;
+ background-color:#39312c!important;
+}
+.site #about.about .about-photo{
+ background:none!important;
+ background-image:none!important;
+ opacity:0!important;
+}
+.site #land.land::before,
+.site #land.land::after{
+ background-image:none!important;
+}
+.site.product-reference .reference-hero::before,
+.site.product-reference .reference-hero::after,
+.site.product-reference .product-end::before,
+.site.product-reference .product-end::after{
+ background-image:none!important;
+}
