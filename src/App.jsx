@@ -95,7 +95,7 @@ const aboutWavePaths=[
  'M0 48 C200 78 315 20 500 45 C710 73 830 15 1000 50',
  'M0 57 C175 19 310 70 505 49 C720 23 855 81 1000 42'
 ];
-function AboutWave({index=0}){const d=aboutWavePaths[index];return <svg className="about-wave" viewBox="0 0 1000 110" preserveAspectRatio="none" aria-hidden="true"><path className="about-wave-faint" d={d}/><path className="about-wave-glow" d={d}/><path className="about-wave-core" d={d}/></svg>}
+function AboutWave({index=0}){const d=aboutWavePaths[index];return <svg className={"about-wave about-wave-"+index} viewBox="0 0 1000 110" preserveAspectRatio="none" aria-hidden="true"><path className="about-wave-fill" d={d+" L1000 110 L0 110 Z"}/><path className="about-wave-faint" d={d}/><path className="about-wave-glow" d={d}/><path className="about-wave-core" d={d}/></svg>}
 function AboutPage(){
  const[menu,setMenu]=useState(false);
  useLayoutEffect(()=>{window.scrollTo(0,0)},[]);
