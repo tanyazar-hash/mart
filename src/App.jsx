@@ -90,10 +90,10 @@ function ProductPage({slug}){
 }
 
 const aboutWavePaths=[
- 'M0 43 C170 4 315 83 500 62 C675 43 795 10 1000 39',
- 'M0 53 C160 13 320 30 500 61 C670 90 825 24 1000 46',
- 'M0 48 C200 78 315 20 500 45 C710 73 830 15 1000 50',
- 'M0 57 C175 19 310 70 505 49 C720 23 855 81 1000 42'
+ 'M0 48 C170 12 330 85 500 55 C690 18 835 72 1000 48',
+ 'M0 48 C170 12 330 85 500 55 C690 18 835 72 1000 48',
+ 'M0 48 C170 12 330 85 500 55 C690 18 835 72 1000 48',
+ 'M0 48 C170 12 330 85 500 55 C690 18 835 72 1000 48'
 ];
 function AboutWave({index=0}){const d=aboutWavePaths[index];return <svg className={"about-wave about-wave-"+index} viewBox="0 0 1000 110" preserveAspectRatio="none" aria-hidden="true"><path className="about-wave-fill" d={d+" L1000 110 L0 110 Z"}/><path className="about-wave-faint" d={d}/><path className="about-wave-glow" d={d}/><path className="about-wave-core" d={d}/></svg>}
 function AboutPage(){
