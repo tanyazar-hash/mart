@@ -1040,3 +1040,28 @@ button,a{-webkit-tap-highlight-color:transparent}
 }
 .about-page .about-wave-halo{stroke-width:9px;opacity:.55;filter:blur(5px)}
 .about-page .about-wave-line{stroke-width:1.8px;opacity:1;filter:none}
+
+/* Structural seam fix: waves live at the TOP of the incoming clipped section.
+   The incoming panel must paint ABOVE the outgoing panel, otherwise its
+   wavy top is covered and the outgoing panel's straight bottom is exposed. */
+.about-page .about-hero{z-index:1}
+.about-page .about-history{z-index:2}
+.about-page .about-values{z-index:3}
+.about-page .about-people{z-index:4}
+.about-page .about-products-cta{z-index:5;position:relative}
+.about-page .about-history,
+.about-page .about-values,
+.about-page .about-people,
+.about-page .about-products-cta{isolation:auto}
+.about-page .about-wave{
+ position:absolute;top:0;bottom:auto;left:0;width:100%;
+ height:var(--about-wave-height);z-index:20;pointer-events:none;
+ overflow:visible;
+}
+.about-page .about-wave-halo{stroke:#fff;stroke-width:10px;opacity:.65;filter:blur(5px)}
+.about-page .about-wave-line{stroke:#fff;stroke-width:2px;opacity:1;filter:none}
+@media(max-width:600px){
+ .about-page .about-wave{height:var(--about-wave-height)}
+ .about-page .about-wave-halo{stroke-width:7px;filter:blur(4px)}
+ .about-page .about-wave-line{stroke-width:1.5px}
+}
