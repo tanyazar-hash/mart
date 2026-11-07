@@ -1442,3 +1442,17 @@ button,a{-webkit-tap-highlight-color:transparent}
  background-image:linear-gradient(180deg,#39312c 0%,#39312c 12%,#332d29 48%,#292725 100%)!important;
  background-color:#39312c!important;
 }
+
+/* Machinery hero: shared inner gutter and staggered entrance used on other page heroes. */
+@media(min-width:701px){.machinery-page .machinery-hero-inner{width:min(calc(100% - 12%),1450px);padding-left:0;padding-right:0}}
+.machinery-page .machinery-hero-inner.reveal{opacity:1!important;transform:none!important;animation:none!important}
+.machinery-page .machinery-hero-inner.reveal>.product-breadcrumb,
+.machinery-page .machinery-hero-inner.reveal>h1,
+.machinery-page .machinery-hero-inner.reveal>p,
+.machinery-page .machinery-hero-inner.reveal>.machinery-scroll{animation:machineryHeroEnter .9s cubic-bezier(.2,.7,.2,1) both}
+.machinery-page .machinery-hero-inner.reveal>.product-breadcrumb{animation-delay:.12s}
+.machinery-page .machinery-hero-inner.reveal>h1{animation-delay:.23s}
+.machinery-page .machinery-hero-inner.reveal>p{animation-delay:.38s}
+.machinery-page .machinery-hero-inner.reveal>.machinery-scroll{animation-delay:.52s}
+@keyframes machineryHeroEnter{from{opacity:0;transform:translate3d(0,24px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@media(prefers-reduced-motion:reduce){.machinery-page .machinery-hero-inner.reveal>*{animation:none!important}}
