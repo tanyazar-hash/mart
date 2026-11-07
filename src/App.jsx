@@ -142,6 +142,18 @@ function ContactModal(){
   </form></section></div>
 }
 
+
+function ContactsPage(){
+ const[menu,setMenu]=useState(false);
+ useLayoutEffect(()=>{window.scrollTo(0,0)},[]);
+ return <div className="site contacts-page">
+  <header className="top product-top product-reference-header home-reference-header contacts-header"><a className="brand" href="#/" onClick={()=>setMenu(false)}><span className="product-brand-icon">❧</span><span className="product-brand-text"><small>КФХ</small>Март</span></a><nav id="contacts-mobile-navigation" className={menu?'product-nav active':'product-nav'} aria-label="Основная навигация"><a href="#/" onClick={()=>setMenu(false)}>Главная</a><a href="#/products" onClick={()=>setMenu(false)}>Продукция</a><a href="#/about" onClick={()=>setMenu(false)}>О хозяйстве</a><a href="#/machinery" onClick={()=>setMenu(false)}>Техника</a><a href="#/contacts" className="active" aria-current="page" onClick={()=>setMenu(false)}>Контакты</a></nav><a href="#/contacts" className="contact-link">Связаться <ArrowUpRight size={15}/></a><button type="button" className="hamburger" aria-expanded={menu} aria-controls="contacts-mobile-navigation" aria-label={menu?'Закрыть меню':'Открыть меню'} onClick={()=>setMenu(v=>!v)}>{menu?<X/>:<Menu/>}</button></header>
+  <main><section className="contacts-intro"><div className="contacts-kicker">КФХ «МАРТ» / КОНТАКТЫ</div><h1>Давайте будем<br/><span>на связи.</span></h1><div className="contacts-intro-bottom"><div><span className="contacts-label">МЕСТОНАХОЖДЕНИЕ</span><p>Алтайский край, Завьяловский район,<br/>село Светлое</p></div><div><span className="contacts-label">СОТРУДНИЧЕСТВО</span><p>По вопросам продукции<br/>и совместной работы</p></div><a href="#/contacts" className="contact-link contacts-cta">Связаться <ArrowUpRight size={18}/></a></div></section>
+  <section className="contacts-map-section" aria-label="Расположение хозяйства"><div className="contacts-map-heading"><h2>Мы на карте</h2><span>Алтайский край · Россия</span></div><div className="contacts-map-frame"><iframe title="Карта расположения КФХ Март — 2ГИС" loading="lazy" referrerPolicy="no-referrer-when-downgrade" src="https://makemap.2gis.ru/widget?data=eJw1jsFuhDAMRP_FvUarhBDI8gFb9ba3Sq32gIjbRgo4Cl6pW8S_10Drk-UZv5kFqAQsGJ6RRuQScYbufQF-ZIQOLtjzvSAoyIUyFt71BQZKVER_0pU3H5XoHDltH7IGnIcSM0eajsPPyxTwGzqj_2dV8HkEPjbcX9qV4sTiH0hKxannvYy3p9Z7Y2rl7MnWzp_tTf5jEKD3br0pGPt8pTkeiQuknqHbzZVrKqsbq93ZKkibvOHaylnXWq1r46Qe0SisRqBSnFJ6_UJMb_uVyx3XX8EDWRY" sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation" allowFullScreen/></div></section></main>
+  <footer className="contacts-footer"><span>© {new Date().getFullYear()} КФХ «Март»</span><a href="#/">На главную <ArrowUpRight size={15}/></a></footer>
+ </div>
+}
+
 function AppContent(){
  useEffect(()=>{
   const updateMetadata=()=>{
@@ -182,13 +194,14 @@ function AppContent(){
   addEventListener('scroll',onScroll,{passive:true});update();
   return()=>{observer?.disconnect();removeEventListener('scroll',onScroll);cancelAnimationFrame(raf)};
  },[route]);
- useEffect(()=>{if(!['#/contacts','#/machinery'].includes(route))return;let raf1=0,raf2=0;raf1=requestAnimationFrame(()=>{raf2=requestAnimationFrame(()=>document.getElementById(route==='#/machinery'?'land':route.slice(2))?.scrollIntoView({behavior:'instant',block:'start'}))});return()=>{cancelAnimationFrame(raf1);cancelAnimationFrame(raf2)}},[route]);
+ useEffect(()=>{if(route!=='#/machinery')return;let raf1=0,raf2=0;raf1=requestAnimationFrame(()=>{raf2=requestAnimationFrame(()=>document.getElementById(route==='#/machinery'?'land':route.slice(2))?.scrollIntoView({behavior:'instant',block:'start'}))});return()=>{cancelAnimationFrame(raf1);cancelAnimationFrame(raf2)}},[route]);
  const copyAddress=async()=>{
   const address='Алтайский край, Завьяловский район, село Светлое';
   try{await navigator.clipboard.writeText(address);setCopied(true)}catch{setCopied(false)}
  };
  if(route==='#/products'||route.startsWith('#/products/'))return <ProductPage slug={route.split('/')[2]}/>;
  if(route==='#/about')return <AboutPage/>;
+ if(route==='#/contacts')return <ContactsPage/>;
  return <div className="site"><svg className="wave-defs" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs>
 <clipPath id="wave-a" clipPathUnits="objectBoundingBox"><path d="M0,.105 C.16,-.04 .33,.20 .55,.17 C.73,.15 .85,.035 1,.055 L1,1 L0,1 Z"/></clipPath>
 <clipPath id="wave-b" clipPathUnits="objectBoundingBox"><path d="M0,.085 C.19,-.015 .34,.025 .52,.13 C.70,.21 .85,.15 1,.025 L1,1 L0,1 Z"/></clipPath>
