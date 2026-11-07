@@ -1289,3 +1289,6 @@ button,a{-webkit-tap-highlight-color:transparent}
 .site.contacts-page .contacts-map-section{position:relative;padding-top:105px}
 @media(max-width:850px){.site.contacts-page .contacts-intro{min-height:0;padding:155px 28px 175px}.site.contacts-page .contacts-wave{height:95px}.site.contacts-page .contacts-map-section{padding-top:85px}}
 @media(max-width:550px){.site.contacts-page .contacts-header{height:74px}.site.contacts-page .contacts-intro{padding:130px 22px 135px}.site.contacts-page .contacts-wave{height:70px}.site.contacts-page .contacts-map-section{padding-top:70px}}
+
+/* Slightly darker contacts hero, preserving layout and wave */
+.site.contacts-page .contacts-intro{background:radial-gradient(ellipse at 50% 5%,#94928b 0%,#86847e 62%,#777974 100%)}
