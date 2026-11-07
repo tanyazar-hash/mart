@@ -143,6 +143,32 @@ function ContactModal(){
 }
 
 
+
+function MachineryPage(){
+ const[menu,setMenu]=useState(false);
+ const[selected,setSelected]=useState(null);
+ const types=[
+  {icon:'♧',name:'Тракторы',desc:'Обработка почвы, посев, уход',detail:'Техника для подготовки почвы, посевных работ и ухода за полями.'},
+  {icon:'▤',name:'Комбайны',desc:'Уборка зерновых и масличных культур',detail:'Уборочная техника помогает организовать сбор урожая в сезон.'},
+  {icon:'≋',name:'Посевные комплексы',desc:'Точный и равномерный посев',detail:'Оборудование для посевных работ и равномерного распределения семян.'},
+  {icon:'▱',name:'Транспорт',desc:'Перевозка и логистика продукции',detail:'Транспорт для решения хозяйственных и логистических задач.'}
+ ];
+ useLayoutEffect(()=>{window.scrollTo(0,0)},[]);
+ useEffect(()=>{
+  const nodes=document.querySelectorAll('.machinery-page .reveal');
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)){nodes.forEach(el=>el.classList.add('is-visible'));return}
+  const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');observer.unobserve(e.target)}}),{threshold:.06,rootMargin:'0px 0px 100px 0px'});
+  nodes.forEach(el=>observer.observe(el));return()=>observer.disconnect();
+ },[]);
+ return <div className="site machinery-page">
+  <header className="top product-top product-reference-header home-reference-header machinery-header"><a href="#/" className="brand" onClick={()=>setMenu(false)}><span className="product-brand-icon">❧</span><span className="product-brand-text"><small>КФХ</small>Март</span></a><nav id="machinery-mobile-navigation" className={menu?'product-nav active':'product-nav'} aria-label="Основная навигация"><a href="#/" onClick={()=>setMenu(false)}>Главная</a><a href="#/products" onClick={()=>setMenu(false)}>Продукция</a><a href="#/about" onClick={()=>setMenu(false)}>О хозяйстве</a><a className="active" aria-current="page" href="#/machinery" onClick={()=>setMenu(false)}>Техника</a><a href="#/contacts" onClick={()=>setMenu(false)}>Контакты</a></nav><a className="contact-link" href="#/contacts">Связаться <ArrowUpRight size={15}/></a><button className="hamburger" type="button" aria-label={menu?'Закрыть меню':'Открыть меню'} aria-expanded={menu} aria-controls="machinery-mobile-navigation" onClick={()=>setMenu(v=>!v)}>{menu?<X/>:<Menu/>}</button></header>
+  <main>
+   <section className="machinery-hero"><div className="machinery-hero-shade"/><div className="machinery-hero-inner reveal"><div className="product-breadcrumb">КФХ «МАРТ» <span>/</span> ТЕХНИКА</div><h1>Современная<br/>техника<br/><span>для стабильного<br/>урожая.</span></h1><p>Надёжные машины, которые помогают нам эффективно работать на земле круглый год.</p><a className="machinery-scroll" href="#machinery-fleet" onClick={e=>{e.preventDefault();document.getElementById('machinery-fleet')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}}><span>↓</span>Листайте, чтобы узнать больше</a></div><svg className="machinery-wave" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true"><path className="machinery-wave-fill" d="M0 64 C200 12 340 28 490 71 S780 95 930 56 S1190 12 1440 63 L1440 110 L0 110Z"/><path className="machinery-wave-halo" d="M0 64 C200 12 340 28 490 71 S780 95 930 56 S1190 12 1440 63"/><path className="machinery-wave-line" d="M0 64 C200 12 340 28 490 71 S780 95 930 56 S1190 12 1440 63"/></svg></section>
+   <section className="machinery-fleet" id="machinery-fleet"><div className="machinery-container"><div className="machinery-section-heading reveal"><div><div className="machinery-kicker">НАШ ПАРК ТЕХНИКИ</div><h2>Техника, которой<br/>мы доверяем</h2></div><p>Используем проверенную сельскохозяйственную технику для качественной работы и бережного отношения к земле.</p></div><div className="machinery-cards">{types.map((item,i)=><button type="button" className={'machinery-card reveal'+(selected===i?' selected':'')} key={item.name} onClick={()=>setSelected(selected===i?null:i)} aria-expanded={selected===i}><span className="machinery-card-icon" aria-hidden="true">{item.icon}</span><span className="machinery-card-name">{item.name}</span><span className="machinery-card-desc">{item.desc}</span><span className="machinery-card-arrow"><ArrowUpRight size={18}/></span></button>)}</div>{selected!==null&&<div className="machinery-detail" role="status"><strong>{types[selected].name}</strong><span>{types[selected].detail}</span></div>}<div className="machinery-summary reveal"><div className="machinery-summary-land" aria-hidden="true"/><div className="machinery-summary-cell"><strong>Надёжность</strong><span>в каждом сезоне</span></div><div className="machinery-summary-cell"><strong>Современный подход</strong><span>обслуживание и внимание к технике</span></div><div className="machinery-summary-cell"><strong>Сезонная готовность</strong><span>планируем работу без лишних простоев</span></div></div></div></section>
+  </main><SiteFooter/>
+ </div>;
+}
+
 function ContactsPage(){
  const[menu,setMenu]=useState(false);
  useLayoutEffect(()=>{window.scrollTo(0,0)},[]);
@@ -159,7 +185,7 @@ function AppContent(){
   const updateMetadata=()=>{
    const hash=window.location.hash;
    const product=productStories.find(item=>hash==='#/products/'+item.slug);
-   const title=product?'КФХ «Март» — '+product.name:hash==='#/products'?'Продукция — КФХ «Март»':hash==='#/about'?'О хозяйстве — КФХ «Март»':hash==='#/machinery'?'Наш подход — КФХ «Март»':hash==='#/contacts'?'Контакты — КФХ «Март»':'КФХ «Март» — Земля. Труд. Урожай.';
+   const title=product?'КФХ «Март» — '+product.name:hash==='#/products'?'Продукция — КФХ «Март»':hash==='#/about'?'О хозяйстве — КФХ «Март»':hash==='#/machinery'?'Техника — КФХ «Март»':hash==='#/contacts'?'Контакты — КФХ «Март»':'КФХ «Март» — Земля. Труд. Урожай.';
    const description=product?product.desc:hash==='#/products'?'Пшеница, подсолнечник и лён — продукция КФХ «Март» в Алтайском крае.':'КФХ «Март» — выращиваем пшеницу, подсолнечник и лён в Завьяловском районе Алтайского края.';
    document.title=title;
    document.querySelector('meta[name="description"]')?.setAttribute('content',description);
@@ -201,6 +227,7 @@ function AppContent(){
  };
  if(route==='#/products'||route.startsWith('#/products/'))return <ProductPage slug={route.split('/')[2]}/>;
  if(route==='#/about')return <AboutPage/>;
+ if(route==='#/machinery')return <MachineryPage/>;
  if(route==='#/contacts')return <ContactsPage/>;
  return <div className="site"><svg className="wave-defs" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs>
 <clipPath id="wave-a" clipPathUnits="objectBoundingBox"><path d="M0,.105 C.16,-.04 .33,.20 .55,.17 C.73,.15 .85,.035 1,.055 L1,1 L0,1 Z"/></clipPath>
