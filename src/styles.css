@@ -1243,3 +1243,31 @@ button,a{-webkit-tap-highlight-color:transparent}
 .contacts-footer{padding:30px clamp(24px,6vw,110px);display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:13px;color:#d4ccc3}
 .contacts-footer a{display:flex;align-items:center;gap:8px;color:inherit;text-decoration:none}
 @media(max-width:760px){.contacts-intro{padding-top:100px;padding-bottom:55px}.contacts-intro h1{margin-bottom:65px}.contacts-intro-bottom{grid-template-columns:1fr;gap:28px}.contacts-page .contacts-cta{justify-self:start}.contacts-map-section{padding-top:55px;padding-bottom:60px}.contacts-map-heading{align-items:start;flex-direction:column}.contacts-map-frame{min-height:430px;border-radius:14px}.contacts-map-frame iframe{height:430px}.contacts-footer{flex-wrap:wrap}}
+
+/* Contacts: premium editorial layout. Specificity isolates it from generic section styles. */
+.site.contacts-page{width:100%;max-width:none;min-height:100vh;overflow:hidden;background:#302e2c;color:#f5f0e9}
+.site.contacts-page .contacts-header{position:relative;inset:auto;width:100%;height:82px;background:#282624;box-shadow:none}
+.site.contacts-page main{display:block;width:100%;overflow:visible}
+.site.contacts-page .contacts-intro{display:block;max-width:1640px;width:100%;margin:0 auto;padding:100px clamp(28px,7vw,130px) 115px;background:transparent;min-height:0}
+.site.contacts-page .contacts-kicker{display:block;font-size:12px;font-weight:700;letter-spacing:.18em;color:#d4a76c;margin-bottom:40px}
+.site.contacts-page .contacts-kicker span{padding:0 10px;color:#7f7770}
+.site.contacts-page .contacts-hero-layout{display:flex;align-items:end;justify-content:space-between;gap:70px;margin-bottom:110px}
+.site.contacts-page .contacts-intro h1{font-family:inherit;font-size:clamp(80px,10.2vw,174px);font-weight:400;letter-spacing:-.08em;line-height:.94;color:#f4eee8;margin:0}
+.site.contacts-page .contacts-intro h1 span{color:#c9a478}
+.site.contacts-page .contacts-hero-lead{max-width:340px;font-size:clamp(16px,1.2vw,20px);line-height:1.65;color:#c9c0b6;margin:0 0 13px}
+.site.contacts-page .contacts-intro-bottom{display:grid;grid-template-columns:1.2fr 1fr auto;align-items:center;gap:35px;border-top:1px solid rgba(255,255,255,.23);padding-top:35px}
+.site.contacts-page .contacts-label{display:block;font-size:11px;font-weight:700;letter-spacing:.16em;color:#c9a478}
+.site.contacts-page .contacts-intro-bottom p{font-size:clamp(15px,1.2vw,18px);line-height:1.6;margin:14px 0 0;color:#eee7df}
+.site.contacts-page .contacts-cta{display:inline-flex;width:auto;min-width:245px;align-items:center;justify-content:space-between;gap:25px;padding:18px 24px;border:1px solid #c9a478;border-radius:40px;color:#e9d0ad;background:transparent;text-decoration:none;font-size:14px;transition:background .2s,color .2s}
+.site.contacts-page .contacts-cta:hover{background:#c9a478;color:#27231f}
+.site.contacts-page .contacts-map-section{display:block;background:#e8e2d9;color:#292825;padding:100px clamp(28px,7vw,130px) 115px}
+.site.contacts-page .contacts-map-heading{max-width:1380px;margin:0 auto 36px;display:flex;justify-content:space-between;align-items:end;gap:24px}
+.site.contacts-page .contacts-map-heading h2{font-size:clamp(45px,5.3vw,85px);line-height:1.08;font-weight:400;letter-spacing:-.065em;margin:18px 0 0;color:#292825}
+.site.contacts-page .contacts-map-heading h2 span{color:#bd9365}
+.site.contacts-page .contacts-map-heading>span{color:#70695f;font-size:14px;white-space:nowrap;padding-bottom:8px}
+.site.contacts-page .contacts-map-frame{display:block;width:100%;max-width:1380px;height:600px;margin:0 auto;border-radius:22px;overflow:hidden;background:#d1c9bf;box-shadow:0 24px 65px rgba(34,28,22,.12)}
+.site.contacts-page .contacts-map-frame iframe{display:block;width:100%;height:600px;border:0}
+.site.contacts-page .contacts-footer{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:35px clamp(28px,7vw,130px);background:#282624;color:#b9afa4;font-size:13px}
+.site.contacts-page .contacts-footer a{display:inline-flex;align-items:center;gap:9px;color:#e9d6be;text-decoration:none}
+@media(max-width:850px){.site.contacts-page .contacts-intro{padding-top:75px;padding-bottom:75px}.site.contacts-page .contacts-hero-layout{display:block;margin-bottom:65px}.site.contacts-page .contacts-hero-lead{margin-top:34px;max-width:480px}.site.contacts-page .contacts-intro-bottom{grid-template-columns:1fr 1fr}.site.contacts-page .contacts-cta{grid-column:1/-1;justify-self:start}.site.contacts-page .contacts-map-section{padding-top:70px;padding-bottom:75px}}
+@media(max-width:550px){.site.contacts-page .contacts-header{height:74px}.site.contacts-page .contacts-intro{padding:68px 22px 65px}.site.contacts-page .contacts-intro h1{font-size:clamp(65px,16vw,90px)}.site.contacts-page .contacts-intro-bottom{grid-template-columns:1fr;gap:28px}.site.contacts-page .contacts-cta{grid-column:auto}.site.contacts-page .contacts-map-section{padding:65px 18px 75px}.site.contacts-page .contacts-map-heading{display:block}.site.contacts-page .contacts-map-heading>span{display:block;margin-top:18px}.site.contacts-page .contacts-map-frame,.site.contacts-page .contacts-map-frame iframe{height:450px}.site.contacts-page .contacts-footer{padding:30px 22px;flex-wrap:wrap}}
