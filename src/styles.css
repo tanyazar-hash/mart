@@ -1000,3 +1000,15 @@ button,a{-webkit-tap-highlight-color:transparent}
 .about-page .about-wave-faint{stroke-width:32px;opacity:.4;filter:blur(11px)}
 .about-page .about-wave-glow{stroke-width:13px;opacity:1;filter:blur(4px)}
 .about-page .about-wave-core{stroke-width:3px;opacity:1;filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 12px rgba(255,255,255,.8))}
+
+/* About seams: match the main page's distinct white 1.65px contour and restrained glow. */
+.about-page .about-wave{z-index:80;overflow:visible}
+.about-page .about-wave path{stroke-linecap:round;stroke-linejoin:round}
+.about-page .about-wave-faint{stroke:#fff;stroke-width:12px;opacity:.68;filter:blur(7px)}
+.about-page .about-wave-glow{stroke:#fff;stroke-width:3px;opacity:.42;filter:blur(2px)}
+.about-page .about-wave-core{stroke:#fff;stroke-width:1.65px;opacity:1;filter:none}
+@media(max-width:600px){
+ .about-page .about-wave-faint{stroke-width:8px;opacity:.6;filter:blur(5px)}
+ .about-page .about-wave-glow{stroke-width:2.5px;opacity:.4}
+ .about-page .about-wave-core{stroke-width:1.35px}
+}
