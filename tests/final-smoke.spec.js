@@ -33,10 +33,38 @@ test('mobile menu opens and navigates', async ({ page, isMobile }) => {
 });
 
 test('no unexpected horizontal overflow', async ({ page }) => {
-  for(const route of ['/', '/#/products', '/#/products/wheat', '/#/products/sunflower', '/#/products/flax']){
+  for(const route of ['/', '/#/about', '/#/machinery', '/#/contacts', '/#/products', '/#/products/wheat', '/#/products/sunflower', '/#/products/flax']){
     await page.goto(route);
     await expect(page.locator('main')).toBeVisible();
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
     expect(overflow, 'overflow on '+route).toBeLessThanOrEqual(2);
   }
+});
+
+test('farm, machinery and contacts pages render with their intended content', async ({ page }) => {
+  await page.goto('/#/about');
+  await expect(page.locator('main h1').first()).toBeVisible();
+  await page.goto('/#/machinery');
+  await expect(page.locator('.machinery-hero h1')).toContainText('Современная');
+  await expect(page.locator('.machinery-card')).toHaveCount(4);
+  await page.locator('.machinery-card').first().click();
+  await expect(page.locator('.machinery-detail')).toBeVisible();
+  await expect(page.locator('.machinery-card')).toHaveCount(4);
+  await page.locator('.machinery-card').nth(1).click();
+  await expect(page.locator('.machinery-card')).toHaveCount(4);
+  await page.goto('/#/contacts');
+  await expect(page.locator('main')).toBeVisible();
+});
+
+test('products scroll cue keeps the route and scrolls to the first culture', async ({ page }) => {
+  await page.goto('/#/products');
+  await page.locator('.product-scroll').click();
+  await expect(page).toHaveURL(/#\/products$/);
+  await expect(page.locator('#culture-wheat')).toBeInViewport();
+});
+
+test('machinery hero background is configured and not replaced by a solid panel', async ({ page }) => {
+  await page.goto('/#/machinery');
+  const image=await page.locator('.machinery-hero').evaluate(el=>getComputedStyle(el).backgroundImage);
+  expect(image).toContain('tract2.png');
 });
