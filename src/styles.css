@@ -1491,3 +1491,24 @@ button,a{-webkit-tap-highlight-color:transparent}
  background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201000%20110%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M0%2048%20C180%2025%20310%2078%20475%2047%20C615%2022%20750%2071%20870%2046%20C930%2035%20975%2029%201000%2040%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%221.6%22%20vector-effect%3D%22non-scaling-stroke%22%2F%3E%3C%2Fsvg%3E") center/100% 100% no-repeat!important;
  filter:drop-shadow(0 0 3px rgba(255,255,255,.95)) drop-shadow(0 0 8px rgba(255,255,255,.35));
 }
+
+/* Unified wave lighting across every page; retain each section's wave geometry. */
+:root{--seam-light:#fff;--seam-halo-opacity:.56;--seam-halo-blur:6px;--seam-core-width:1.7px}
+.site .wave-halo,.about-page .about-wave-halo,.product-detail-page .reference-wave-halo,
+.site.contacts-page .contacts-wave-halo,.machinery-page .machinery-wave-halo{
+ stroke:var(--seam-light);stroke-width:10px;opacity:var(--seam-halo-opacity);filter:blur(var(--seam-halo-blur));
+}
+.site .wave-line,.about-page .about-wave-line,.product-detail-page .reference-wave-line,
+.site.contacts-page .contacts-wave-line,.machinery-page .machinery-wave-line{
+ stroke:var(--seam-light);stroke-width:var(--seam-core-width);opacity:1;
+ filter:drop-shadow(0 0 4px rgba(255,255,255,.65));
+}
+.product-reference .reference-story::before,.site.product-reference .product-end::before{
+ filter:drop-shadow(0 0 3px rgba(255,255,255,.95)) drop-shadow(0 0 8px rgba(255,255,255,.35))!important;
+}
+@media(max-width:700px){
+ .site .wave-halo,.about-page .about-wave-halo,.product-detail-page .reference-wave-halo,
+ .site.contacts-page .contacts-wave-halo,.machinery-page .machinery-wave-halo{stroke-width:7px;filter:blur(4px)}
+ .site .wave-line,.about-page .about-wave-line,.product-detail-page .reference-wave-line,
+ .site.contacts-page .contacts-wave-line,.machinery-page .machinery-wave-line{stroke-width:1.4px}
+}
