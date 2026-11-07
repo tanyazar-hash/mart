@@ -2,7 +2,7 @@ import sharp from 'sharp';
 import {readdir,rm,access,stat} from 'node:fs/promises';
 import path from 'node:path';
 const folder=path.resolve('public/images');
-const QUALITY_REVISION='2026-11-premium-v3';
+const QUALITY_REVISION='2026-11-premium-v4';
 const stamp=path.join(folder,'.webp-quality-version');
 let refresh=false;
 try{refresh=(await (await import('node:fs/promises')).readFile(stamp,'utf8')).trim()!==QUALITY_REVISION}catch{refresh=true}
@@ -15,11 +15,11 @@ for(let offset=0;offset<files.length;offset+=2){
   try{await Promise.all([access(desktop),access(mobile)]);const [original,large,small]=await Promise.all([stat(source),stat(desktop),stat(mobile)]);if(large.mtimeMs>=original.mtimeMs&&small.mtimeMs>=original.mtimeMs&&large.size>0&&small.size>0){console.log('Cached',name);return}}catch{}
  }
  const info=await sharp(source).metadata();
- const width=Math.min(info.width||1600,1600);
- const mobileWidth=Math.min(info.width||760,760);
+ const width=Math.min(info.width||2200,2200);
+ const mobileWidth=Math.min(info.width||960,960);
  await Promise.all([
-  sharp(source).rotate().resize({width,withoutEnlargement:true}).webp({quality:83,effort:5,smartSubsample:true}).toFile(path.join(folder,base+'.webp')),
-  sharp(source).rotate().resize({width:mobileWidth,withoutEnlargement:true}).webp({quality:76,effort:5,smartSubsample:true}).toFile(path.join(folder,base+'-mobile.webp'))
+  sharp(source).rotate().resize({width,withoutEnlargement:true}).webp({quality:92,effort:6,smartSubsample:true}).toFile(path.join(folder,base+'.webp')),
+  sharp(source).rotate().resize({width:mobileWidth,withoutEnlargement:true}).webp({quality:87,effort:6,smartSubsample:true}).toFile(path.join(folder,base+'-mobile.webp'))
  ]);
  console.log('Optimized',name,'->',base+'.webp',base+'-mobile.webp');
 }));
