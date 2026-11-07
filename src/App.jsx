@@ -117,7 +117,32 @@ function AboutPage(){
  </div>;
 }
 
-function App(){
+
+function ContactModal(){
+ const[open,setOpen]=useState(false),[type,setType]=useState('contact'),[copied,setCopied]=useState(false);
+ const[form,setForm]=useState({name:'',phone:'',email:'',company:'',message:''});
+ useEffect(()=>{
+  const handler=e=>{const a=e.target.closest?.('a');if(!a)return;const label=a.textContent?.trim()||'';if(label.includes('Обсудить сотрудничество')||(a.classList.contains('contact-link')&&label.includes('Связаться'))){e.preventDefault();setType(label.includes('Обсудить')?'cooperation':'contact');setCopied(false);setOpen(true)}};
+  document.addEventListener('click',handler);return()=>document.removeEventListener('click',handler);
+ },[]);
+ useEffect(()=>{if(!open)return;const old=document.body.style.overflow;document.body.style.overflow='hidden';const key=e=>{if(e.key==='Escape')setOpen(false)};document.addEventListener('keydown',key);return()=>{document.body.style.overflow=old;document.removeEventListener('keydown',key)}},[open]);
+ if(!open)return null;
+ const cooperation=type==='cooperation';
+ const update=e=>setForm(v=>({...v,[e.target.name]:e.target.value}));
+ const submit=async e=>{e.preventDefault();const message=['КФХ Март — '+(cooperation?'Запрос о сотрудничестве':'Обратная связь'),'Имя: '+form.name,'Телефон: '+form.phone,form.email&&'E-mail: '+form.email,form.company&&'Компания: '+form.company,'Сообщение: '+form.message].filter(Boolean).join('\n');try{await navigator.clipboard.writeText(message);setCopied(true)}catch{setCopied(false);window.prompt('Скопируйте текст заявки:',message)}};
+ return <div className="mart-modal-overlay" onMouseDown={e=>{if(e.target===e.currentTarget)setOpen(false)}}><section className="mart-contact-modal" role="dialog" aria-modal="true" aria-labelledby="mart-contact-title">
+  <button className="mart-modal-close" type="button" aria-label="Закрыть форму" onClick={()=>setOpen(false)}><X size={22}/></button>
+  <div className="mart-modal-kicker">КФХ «МАРТ» · ОБРАТНАЯ СВЯЗЬ</div><h2 id="mart-contact-title">{cooperation?'Обсудить сотрудничество':'Связаться с нами'}</h2><p className="mart-modal-intro">Оставьте ваши контакты и расскажите, что вас интересует.</p>
+  <form onSubmit={submit}><label>Ваше имя *<input name="name" value={form.name} onChange={update} placeholder="Как к вам обращаться" required maxLength={100}/></label><label>Телефон *<input name="phone" type="tel" value={form.phone} onChange={update} placeholder="+7 (999) 000-00-00" required maxLength={35}/></label>
+  <label>E-mail<input name="email" type="email" value={form.email} onChange={update} placeholder="name@example.ru" maxLength={150}/></label>
+  {cooperation&&<label>Компания<input name="company" value={form.company} onChange={update} placeholder="Название организации" maxLength={150}/></label>}
+  <label>Ваше сообщение *<textarea name="message" value={form.message} onChange={update} placeholder="Расскажите о вашем запросе" required maxLength={2000} rows={3}/></label>
+  <button className="mart-modal-submit" type="submit">{copied?'Заявка скопирована':'Скопировать заявку'} <ArrowUpRight size={18}/></button>
+  <p className="mart-modal-note" role="status">{copied?'Текст заявки скопирован. Его можно отправить хозяйству удобным способом.':'Пока не подключён адрес для приёма заявок: кнопка копирует заполненную форму, но не отправляет её.'}</p>
+  </form></section></div>
+}
+
+function AppContent(){
  useEffect(()=>{
   const updateMetadata=()=>{
    const hash=window.location.hash;
@@ -179,4 +204,5 @@ function App(){
 <section id="products" className="products"><WaveGlow shape="b"/><div className="section-head reveal"><div><div className="eyebrow dark">НАША ДЕЯТЕЛЬНОСТЬ</div><h2>Что мы выращиваем</h2></div><p>Три культуры — одно отношение<br/>к качеству и работе.</p></div><div className="crop-grid">{crops.map((c,i)=><LazyBackground className="crop reveal" key={c.name} src={c.image} gradient="linear-gradient(0deg,rgba(34,29,19,.82),transparent 67%)" style={{transitionDelay:(i*80)+'ms'}}><div className="crop-info"><h3 className="crop-title">{c.name}</h3><p className="crop-desc">{c.desc}</p></div><span className="crop-arrow" aria-hidden="true"><ArrowUpRight size={22}/></span><a className="crop-hit" href={"#/products/"+productStories[i].slug} aria-label={"Подробнее о культуре: "+c.name}><span className="sr-only">Подробнее: {c.name}</span></a></LazyBackground>)}</div></section>
 <section className="land" id="land"><div className="land-art" aria-hidden="true"/><WaveGlow shape="c"/><div className="land-inner reveal"><div className="eyebrow">НАШ ПОДХОД</div><h2>Забота о земле.<br/>Уважение к труду.</h2><p>Каждый сезон начинается с большой работы. Мы ценим опыт, надёжную технику и результат, который приносит земля.</p></div></section>
 <section id="contacts" className="footer"><WaveGlow shape="d"/><div className="reveal"><div className="eyebrow dark">СОТРУДНИЧЕСТВО</div><h2>Давайте работать<br/>вместе</h2><p>По вопросам покупки сельхозпродукции и сотрудничества свяжитесь с хозяйством.</p><p className="address"><MapPin size={18}/> Алтайский край, Завьяловский район, село Светлое</p><button type="button" className="copy-address" onClick={copyAddress}>{copied?"Адрес скопирован":"Скопировать адрес"} <ArrowUpRight size={15}/></button></div><div className="contact-note reveal"><span className="contact-note-label">КОНТАКТЫ ХОЗЯЙСТВА</span><p>Телефон и реквизиты появятся после согласования с хозяйством.</p><div className="contact-remark">Контакты уточняются</div></div></section></main><div className="bottom"><span>© {new Date().getFullYear()} КФХ Март</span><span>Алтайский край · Россия</span></div></div>}
+function App(){return <><AppContent/><ContactModal/></>}
 export default App;
