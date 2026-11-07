@@ -1536,3 +1536,32 @@ button,a{-webkit-tap-highlight-color:transparent}
 /* The about hero already has its vignette in background-image; avoid another
    overlay from inherited styles, keeping its brightness in line with machinery. */
 .about-page .about-hero::before{opacity:0}
+
+/* Shared palette for image-free editorial sections, across all routes.
+   Do not affect photographic heroes, image cards or glowing wave dividers. */
+:root{
+ --mart-section-top:#39312c;
+ --mart-section-mid:#332d29;
+ --mart-section-bottom:#292725;
+ --mart-section-gradient:linear-gradient(180deg,var(--mart-section-top) 0%,var(--mart-section-top) 12%,var(--mart-section-mid) 48%,var(--mart-section-bottom) 100%);
+}
+.site #products.products,
+.site #land.land,
+.site #contacts.footer,
+.site.product-reference .reference-hero,
+.site.product-reference .product-end,
+.site.contacts-page .contacts-intro,
+.site.about-page .about-history,
+.site.about-page .about-people{
+ background:var(--mart-section-top)!important;
+ background-image:var(--mart-section-gradient)!important;
+ background-color:var(--mart-section-top)!important;
+}
+/* Apply the same warm earth family to machinery's solid-background panels. */
+.machinery-page .machinery-intro,
+.machinery-page .machinery-showcase,
+.machinery-page .machinery-details,
+.machinery-page .machinery-outro{
+ background-color:var(--mart-section-top);
+}
+/* Keep the homepage's field photograph and the farm's photo-led sections intact. */
