@@ -834,10 +834,10 @@ button,a{-webkit-tap-highlight-color:transparent}
 
 /* Dedicated About page — cinematic editorial layout, shared header and luminous white wave seams. */
 .about-page{background:#292725;color:#f6f3ee}
-.about-page .about-header{background:linear-gradient(180deg,rgba(24,24,24,.84),rgba(24,24,24,.32));border-bottom:1px solid rgba(255,255,255,.13)}
-.about-page .about-header .product-nav .active{color:#fff}
-.about-page .about-header .product-nav .active:after{background:#fff;box-shadow:0 0 10px #fff,0 0 20px rgba(255,255,255,.55)}
-.about-page .about-header .contact-link{border-color:rgba(255,255,255,.6);color:#fff}
+.about-page .about-header{background:linear-gradient(180deg,rgba(25,24,23,.55),rgba(25,24,23,0));border-bottom:0}
+.about-page .about-header .product-nav .active{color:#e7bf87}
+.about-page .about-header .product-nav .active:after{background:#e5b778;box-shadow:none}
+.about-page .about-header .contact-link{border-color:rgba(255,255,255,.4);color:#f4ede4}
 .about-page .about-section,.about-page .about-hero{position:relative;isolation:isolate}
 .about-page .about-kicker{font-size:11px;letter-spacing:.19em;font-weight:700;color:#e9c29a;margin-bottom:18px}
 .about-page h1,.about-page h2,.about-page h3{font-weight:500;letter-spacing:-.055em}
