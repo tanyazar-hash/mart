@@ -1295,3 +1295,8 @@ button,a{-webkit-tap-highlight-color:transparent}
 
 /* Contacts hero: identical background layers to Products hero */
 .site.contacts-page .contacts-intro{background:radial-gradient(ellipse at 75% 62%,#706760 0%,transparent 47%),radial-gradient(ellipse at 26% 56%,#625e5a 0%,transparent 49%),linear-gradient(110deg,#292928,#474440 58%,#383532)}
+
+/* Unified footer across every route: identical dimensions and surface. */
+.site .site-footer{position:relative;z-index:5;box-sizing:border-box;width:100%;min-height:76px;padding:24px 5.7%;display:flex;align-items:center;justify-content:space-between;gap:20px;background:#383633;color:#eee5d7;font-size:12px;line-height:1.5;letter-spacing:.01em;border-top:1px solid rgba(255,255,255,.12)}
+.site .site-footer span{color:inherit}
+@media(max-width:700px){.site .site-footer{min-height:76px;padding:22px 6%;font-size:11px;flex-wrap:wrap;gap:8px 18px}}
