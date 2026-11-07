@@ -200,7 +200,7 @@ function AppContent(){
  const[menu,setMenu]=useState(false);
  const[route,setRoute]=useState(()=>window.location.hash);
  const[copied,setCopied]=useState(false);
- useEffect(()=>{const onHash=()=>{setRoute(window.location.hash);setMenu(false);if(window.location.hash.startsWith('#/products'))window.scrollTo(0,0)};window.addEventListener('hashchange',onHash);return()=>window.removeEventListener('hashchange',onHash)},[]);
+ useEffect(()=>{const onHash=()=>{setRoute(window.location.hash);setMenu(false);if(window.location.hash.startsWith('#/'))window.scrollTo({top:0,left:0,behavior:'instant'})};window.addEventListener('hashchange',onHash);return()=>window.removeEventListener('hashchange',onHash)},[]);
  useEffect(()=>{
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const observer=(!reduced&&'IntersectionObserver' in window)?new IntersectionObserver(entries=>{
@@ -220,7 +220,7 @@ function AppContent(){
   addEventListener('scroll',onScroll,{passive:true});update();
   return()=>{observer?.disconnect();removeEventListener('scroll',onScroll);cancelAnimationFrame(raf)};
  },[route]);
- useEffect(()=>{if(route!=='#/machinery')return;let raf1=0,raf2=0;raf1=requestAnimationFrame(()=>{raf2=requestAnimationFrame(()=>document.getElementById(route==='#/machinery'?'land':route.slice(2))?.scrollIntoView({behavior:'instant',block:'start'}))});return()=>{cancelAnimationFrame(raf1);cancelAnimationFrame(raf2)}},[route]);
+ /* Each hash route is a standalone page. Do not scroll machinery to a stale home-page anchor. */
  const copyAddress=async()=>{
   const address='Алтайский край, Завьяловский район, село Светлое';
   try{await navigator.clipboard.writeText(address);setCopied(true)}catch{setCopied(false)}
