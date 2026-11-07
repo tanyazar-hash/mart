@@ -1466,3 +1466,9 @@ button,a{-webkit-tap-highlight-color:transparent}
 .machinery-hero-shade{background:linear-gradient(90deg,rgba(33,30,27,.60) 0%,rgba(33,30,27,.34) 38%,rgba(33,30,27,.12) 78%,rgba(33,30,27,.08) 100%),linear-gradient(180deg,rgba(27,25,24,.22),transparent 35%,rgba(27,25,24,.18))!important}
 .about-photo,.about-history-image,.about-people-photo,.product-art.has-photo{filter:brightness(.88) saturate(1.03)}
 @media(max-width:760px){.hero{background-image:url('/images/combine-hero-mobile.webp')!important}}
+
+/* Match homepage and farm hero image tonality to machinery hero. */
+.hero{background-image:url('/images/combine-hero.webp')!important;background-size:cover!important}
+.hero-shade{background:linear-gradient(90deg,rgba(28,27,26,.93) 0%,rgba(34,31,29,.83) 23%,rgba(37,31,27,.40) 48%,rgba(27,24,21,.04) 83%),linear-gradient(180deg,rgba(21,20,19,.45),transparent 32%,rgba(29,25,21,.18))!important}
+.about-hero{background-image:linear-gradient(90deg,rgba(28,27,26,.93) 0%,rgba(34,31,29,.83) 23%,rgba(37,31,27,.40) 48%,rgba(27,24,21,.04) 83%),linear-gradient(180deg,rgba(21,20,19,.45),transparent 32%,rgba(29,25,21,.18)),url('/images/combine-hero.webp')!important;background-size:cover!important;background-position:center 55%!important}
+@media(max-width:760px){.hero{background-image:url('/images/combine-hero-mobile.webp')!important}.about-hero{background-image:linear-gradient(90deg,rgba(28,27,26,.88),rgba(34,31,29,.45)),url('/images/combine-hero-mobile.webp')!important}}
