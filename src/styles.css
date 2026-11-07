@@ -944,3 +944,52 @@ button,a{-webkit-tap-highlight-color:transparent}
 }
 .about-page .about-wave{height:110px;bottom:-1px}
 @media(max-width:600px){.about-page .about-wave{height:65px}}
+
+
+/* Actual interlocking section geometry, not an SVG drawn over a rectangular seam.
+   Each following section begins inside the previous one and its top is clipped
+   to the same contour as the white SVG stroke. */
+.about-page{--about-wave-height:110px}
+.about-page .about-history,
+.about-page .about-values,
+.about-page .about-people,
+.about-page .about-products-cta{
+ position:relative;
+ margin-top:calc(-1 * var(--about-wave-height));
+ padding-top:calc(110px + var(--about-wave-height));
+ clip-path:polygon(
+  0 48px,5% 39px,10% 36px,15% 36px,20% 39px,25% 44px,
+  30% 50px,35% 55px,40% 58px,45% 58px,50% 55px,
+  55% 49px,60% 43px,65% 39px,70% 37px,75% 38px,
+  80% 40px,85% 43px,90% 46px,95% 48px,100% 48px,
+  100% 100%,0 100%
+ );
+}
+.about-page .about-wave .about-wave-fill{display:none}
+.about-page .about-wave{bottom:0;height:var(--about-wave-height)}
+.about-page .about-history{padding-top:calc(120px + var(--about-wave-height))}
+.about-page .about-values{padding-top:calc(130px + var(--about-wave-height))}
+.about-page .about-people{padding-top:calc(125px + var(--about-wave-height))}
+.about-page .about-products-cta{padding-top:calc(100px + var(--about-wave-height))}
+@media(max-width:850px){
+ .about-page .about-history,.about-page .about-people{padding-top:calc(100px + var(--about-wave-height))}
+}
+@media(max-width:600px){
+ .about-page{--about-wave-height:65px}
+ .about-page .about-wave{height:65px}
+ .about-page .about-history,.about-page .about-people{padding-top:calc(78px + var(--about-wave-height))}
+ .about-page .about-values{padding-top:calc(88px + var(--about-wave-height))}
+ .about-page .about-products-cta{padding-top:calc(90px + var(--about-wave-height))}
+ .about-page .about-history,
+ .about-page .about-values,
+ .about-page .about-people,
+ .about-page .about-products-cta{
+  clip-path:polygon(
+   0 28.4px,5% 23px,10% 21.3px,15% 21.3px,20% 23px,25% 26px,
+   30% 29.5px,35% 32.5px,40% 34.3px,45% 34.3px,50% 32.5px,
+   55% 29px,60% 25.4px,65% 23px,70% 21.9px,75% 22.5px,
+   80% 23.6px,85% 25.4px,90% 27.2px,95% 28.4px,100% 28.4px,
+   100% 100%,0 100%
+  );
+ }
+}
